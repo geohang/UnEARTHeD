@@ -211,17 +211,17 @@ a:hover{text-decoration:underline}
 .ag-top{padding:26px 26px 22px;border-bottom:1px solid var(--hairline)}
 .ag-head{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:center}
 .ag-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr)}
-.ag-left{display:flex;flex-direction:column;gap:18px;padding:22px 26px 28px;border-right:1px solid var(--hairline);min-width:0}
+.ag-left{display:flex;flex-direction:column;gap:26px;padding:22px 26px 28px;border-right:1px solid var(--hairline);min-width:0}
 .ag-right{padding:22px 26px 24px;background:var(--surface-2);min-width:0}
-.ag-eyebrow{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--accent)}
+.ag-eyebrow{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--accent)}
 .ag-head h2{font:600 28px/1.15 var(--font-display);letter-spacing:-.022em;margin-top:6px;max-width:18em}
-.ag-sub{margin-top:8px;font-size:15px;line-height:1.45;color:var(--text-2);max-width:32em}
+.ag-sub{margin-top:8px;font-size:16px;line-height:1.45;color:var(--text-2);max-width:32em}
 .ag-map{display:block;width:100%;height:auto;border-radius:16px;background:var(--map-water);box-shadow:inset 0 0 0 1px var(--hairline)}
 .ag-map .am-o{fill:var(--text-3);opacity:.5}
 .ag-map .am{cursor:pointer}
 .ag-map .am-dot{fill:var(--surface);stroke:var(--text-2);stroke-width:2;vector-effect:non-scaling-stroke;transition:fill var(--dur) var(--ease),stroke var(--dur) var(--ease)}
 .ag-map .am-ring{fill:var(--accent-ring);opacity:0;transition:opacity var(--dur) var(--ease)}
-.ag-map .am-code{font:600 30px var(--font-text);fill:var(--text);paint-order:stroke;stroke:var(--map-land);stroke-width:7px;stroke-linejoin:round;opacity:0;transition:opacity var(--dur) var(--ease)}
+.ag-map .am-code{font:600 38px var(--font-text);fill:var(--text);paint-order:stroke;stroke:var(--map-land);stroke-width:7px;stroke-linejoin:round;opacity:0;transition:opacity var(--dur) var(--ease)}
 .ag-map .am:hover .am-dot{stroke:var(--accent)}
 .ag-map .am[aria-pressed=true] .am-dot{fill:var(--accent-fill);stroke:var(--map-halo)}
 .ag-map .am[aria-pressed=true] .am-ring,.ag-map .am[aria-pressed=true] .am-code{opacity:1}
@@ -229,66 +229,69 @@ a:hover{text-decoration:underline}
 .ag-extile{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0;padding:9px 14px 10px;border-radius:12px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);text-align:left;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
 .ag-extile:hover{background:var(--fill)}
 .ag-extile[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
-.ag-extile .x-c{font-size:11.5px;font-weight:600;color:var(--text-2)}
+.ag-extile .x-c{font-size:12.5px;font-weight:600;color:var(--text-2)}
 .ag-extile[aria-pressed=true] .x-c{color:var(--accent)}
-.ag-extile .x-t{font:600 15px/1.25 var(--font-display);letter-spacing:-.01em}
+.ag-extile .x-t{font:600 16px/1.25 var(--font-display);letter-spacing:-.01em}
 .ag-ask textarea{font-size:16px;min-height:96px;padding-right:56px}
 .ag-chips{display:flex;flex-wrap:wrap;gap:6px}
 .ag-list{border-radius:12px;border:1px solid var(--hairline);overflow:hidden}
 .ag-list > div{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:start;padding:8px 10px 8px 14px}
 .ag-list > div + div{border-top:1px solid var(--hairline)}
-.ag-list .sk-m{padding-top:4px;font-size:12.5px;font-weight:500;color:var(--text)}
-.ag-list .pillbtn{padding:4px 10px;font-size:12px}
-.ag-list .seg{justify-self:start}
-.pillbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);border-radius:999px;padding:5px 11px;font-size:12.5px;line-height:1.3;cursor:pointer;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
+.ag-list .sk-m{padding-top:4px;font-size:13.5px;font-weight:500;color:var(--text)}
+.ag-list .pillbtn{padding:4px 11px;font-size:13px}
+.pillbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);border-radius:999px;padding:5px 11px;font-size:13px;line-height:1.3;cursor:pointer;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
 .pillbtn:hover{background:var(--fill)}
 .pillbtn[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .pillbtn:disabled{opacity:.45;cursor:not-allowed}
-.pillbtn em{font-style:normal;color:var(--text-3);font-size:11px;font-variant-numeric:tabular-nums}
+.pillbtn em{font-style:normal;color:var(--text-3);font-size:12px;font-variant-numeric:tabular-nums}
 .pillbtn[aria-pressed=true] em{color:inherit;opacity:.75}
 .pillbtn.skill svg{width:0;height:11px;margin-left:-3px;opacity:0;transition:opacity var(--dur) var(--ease),width var(--dur) var(--ease),margin var(--dur) var(--ease)}
-.pillbtn.skill[aria-pressed=true] svg{opacity:1;width:11px;margin-left:-2px}
+.pillbtn.skill[aria-pressed=true] svg,.pillbtn.req svg{opacity:1;width:11px;margin-left:-2px}
+.pillbtn.req{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);cursor:default}
+.pillbtn.req em{color:inherit;opacity:.75}
 .ag-group{display:flex;flex-direction:column;gap:8px}
-.ag-label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;font-weight:600;color:var(--text-2)}
+.ag-label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:600;color:var(--text-2)}
 .ag-hint{font-weight:400;color:var(--text-3);text-align:right}
 .ag-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .ag-tier{position:relative;display:block;cursor:pointer}
 .ag-tier input{position:absolute;opacity:0;pointer-events:none}
-.ag-tier > span{display:flex;flex-direction:column;gap:1px;height:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--hairline-strong);background:var(--surface);font-size:11.5px;color:var(--text-2);line-height:1.35;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
-.ag-tier b{font-size:13px;color:var(--text);font-weight:600}
+.ag-tier > span{display:flex;flex-direction:column;gap:1px;height:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--hairline-strong);background:var(--surface);font-size:12.5px;color:var(--text-2);line-height:1.35;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.ag-tier b{font-size:14px;color:var(--text);font-weight:600}
 .ag-tier em{font-style:normal;color:var(--text-3);font-variant-numeric:tabular-nums}
 .ag-tier input:checked + span{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
 .ag-tier input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
-.ag-trace-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;margin-bottom:12px}
-.ag-trace-h .sub{flex:1;font-size:12px;color:var(--text-2)}
+.ag-trace-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;margin-bottom:12px}
+.ag-trace-h .sub{flex:1;font-size:13px;color:var(--text-2)}
 .live{width:8px;height:8px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 0 0 var(--accent-ring);animation:livePulse 2.4s var(--ease) infinite}
 @keyframes livePulse{0%{box-shadow:0 0 0 0 var(--accent-ring)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
 .trace{display:flex;flex-direction:column}
-.trace li{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding-bottom:11px}
+.trace li{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding-bottom:10px}
 .trace li::after{content:"";position:absolute;left:10.5px;top:26px;bottom:2px;width:1px;background:var(--hairline-strong)}
 .trace li:last-child::after{display:none}
 .tdot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff;background:var(--accent-fill)}
 .tdot svg{width:11px;height:11px}
 .t-warn .tdot{background:var(--surface);color:var(--text);box-shadow:inset 0 0 0 1.5px var(--text-2)}
 .tbody{min-width:0}
-.tt{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;font-weight:600;padding-top:2px}
-.tt em{font-style:normal;font-weight:400;font-size:11.5px;color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums}
-.tb{font-size:12.5px;color:var(--text-2);margin-top:3px;line-height:1.5;overflow-wrap:anywhere}
+.tt{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;font-weight:600;padding-top:2px}
+.tt em{font-style:normal;font-weight:400;font-size:12.5px;color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tb{font-size:13.5px;color:var(--text-2);margin-top:3px;line-height:1.5;overflow-wrap:anywhere}
 .tb b{color:var(--text);font-weight:600}
 .tnote{display:block;margin-top:4px;color:var(--text)}
 .tq{display:block;margin-top:6px;padding-left:10px;border-left:2px solid var(--accent-ring);color:var(--text);font-style:italic}
-.tsrc{display:block;margin-top:2px;font-family:var(--font-mono);font-size:10.5px;color:var(--text-3);word-break:break-all}
-.tskill{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:11.5px;font-weight:500}
+.tsrc{display:block;margin-top:2px;font-family:var(--font-mono);font-size:11.5px;color:var(--text-3);word-break:break-all}
+.tskill{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:500}
 .tchain{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
-.tchain i{font-style:normal;color:var(--text-3);font-size:11px}
-.tchip{font-family:var(--font-mono);font-size:10.5px;color:var(--text);background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:1px 6px;cursor:help}
+.tchain i{font-style:normal;color:var(--text-3);font-size:12px}
+.tchip{font-family:var(--font-mono);font-size:11.5px;color:var(--text);background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:1px 6px}
+a.tchip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 .t-deliver .tb{color:var(--text)}
 .tvals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:5px 0 8px}
 .tvals > span{display:flex;flex-direction:column;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--hairline)}
-.tvals em{font-style:normal;font-size:11.5px;color:var(--text-2)}
-.tvals b{font:600 20px/1.2 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:2px 0}
-.tvals b small{font-size:13px;font-weight:500;color:var(--text-2)}
-.tfoot{margin-top:2px;padding-top:10px;border-top:1px solid var(--hairline);font-size:11.5px;color:var(--text-2);font-variant-numeric:tabular-nums}
+.tvals em{font-style:normal;font-size:12.5px;color:var(--text-2)}
+.tvals b{font:600 22px/1.2 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:2px 0}
+.tvals b small{font-size:14px;font-weight:500;color:var(--text-2)}
+.tdep{display:block;margin:-2px 0 6px;font-size:13px;color:var(--text-2)}
+.tfoot{margin-top:2px;padding-top:10px;border-top:1px solid var(--hairline);font-size:12.5px;color:var(--text-2);font-variant-numeric:tabular-nums}
 .trace.play li,.trace.play + .tfoot{opacity:0;animation:stepIn 420ms var(--ease) forwards;animation-delay:calc(var(--i) * 280ms)}
 .trace.play li .tdot{animation:dotIn 420ms var(--ease) backwards;animation-delay:calc(var(--i) * 280ms + 120ms)}
 @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -709,7 +712,7 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
   <div class="dlg">
     <button class="dlg-close" data-close aria-label="Close"><svg viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8"/></svg></button>
     <h2 id="schema-h">Plan schema v1.2</h2>
-    <p class="lede">JSON Schema, draft 2020-12. The planner's output is produced by constrained decoding against this schema, so every plan it returns conforms: only registered tools, an origin for every parameter, citations for every inferred value, uncertainty that is always propagated, and a refusal that names the input when one is missing.</p>
+    <p class="lede">JSON Schema, draft 2020-12. The planner's output is produced by constrained decoding against this schema, so every plan it returns has this structure: only registered tools, an origin for every parameter, a citation for every inferred value, an uncertainty treatment for every product, and a refusal that names the input when one is missing. Structure is not correctness: whether a citation supports its value, or a parameter suits the site, is checked by the eval harness and by a curator.</p>
     <pre class="json" id="schema-json" tabindex="0"></pre>
   </div>
 </dialog>
@@ -779,9 +782,10 @@ const LIB = {
   t_srt: E('invert_seismic → run_srt_manager_inversion', P + 'inversion/srt_inversion.py', 'Registered tool. Inverts first-arrival travel times for a P-wave velocity model.'),
   t_iface: E('extract_seismic_interfaces → extract_velocity_structure', P + 'Geophy_modular/seismic_processor.py', 'Registered tool. Traces layer interfaces through the velocity model at threshold velocities.'),
   t_gpr: E('process_gpr_line → process', P + 'data_processing/gpr.py', 'Registered tool. Dewow, time zero, filtering, gain, migration and time-to-depth for one radar line.'),
+  t_tdemload: E('load_tdem_data → load_sounding', P + 'data_processing/em1d.py', 'Registered tool. Reads a TDEM sounding or survey and draws the decay curves of a few soundings.'),
   t_tdem: E('invert_tdem → run_tdem_inversion', P + 'inversion/tdem_inversion.py', 'Registered tool. Inverts a transient electromagnetic sounding for a layered model.'),
   t_wc: E('convert_water_content → run_petrophysics_monte_carlo', P + 'petrophysics/monte_carlo.py', 'Registered tool. Converts resistivity to water content, propagating petrophysical uncertainty by Monte Carlo.'),
-  t_unc: E('propagate_uncertainty → propagate_petro_uncertainty', P + 'uncertainty/posterior.py', 'Implemented in the library; not yet in its tool registry. Samples a model covariance through a petrophysical transform.'),
+  t_sreport: E('write_survey_report → generate_survey_report', P + 'agents/report_agent.py', 'Registered tool. Writes the report of a run without ERT, from the seismic, TDEM, GPR and other results it produced.'),
   t_report: E('write_report', P + 'agents/workflow_audit.py', 'Registered tool. Writes the report and its provenance record from everything the run produced.')
 };
 const libUrl = k => { const e = LIB[k]; return e.path ? `${REPO}/${e.tree ? 'tree' : 'blob'}/main/${e.path}` : REPO; };
@@ -929,13 +933,13 @@ const COMMUNITIES = [
   { id: 'biogeochemistry', name: 'Biogeochemistry', fig: 'biogeo', example: 'wind',
     question: 'How thick is the reactive zone, and where does it stay saturated?',
     yields: 'Reactive-zone thickness', yieldsUnit: 'metres',
-    lede: 'Saturation as a redox proxy, and the interval where it changes through the year, from repeat resistivity surveys.',
+    lede: 'Saturation as a redox proxy, and the interval where it changes through the surveyed season, from repeat resistivity surveys.',
     products: [
       { id: 'reactive-thickness', name: 'Reactive-zone thickness', units: 'm', range: 'Typically 0.5 to 5 m', methods: [['Electrical resistivity', '', 'ert_tl'], ['Ground-penetrating radar', 'shallow structure', 'gpr_read']] },
       { id: 'saturation', name: 'Saturation state, a redox proxy', units: 'fraction of pore space, dimensionless', range: 'Typically 0 to 8 m', methods: [['Electrical resistivity', '', 'petro_res'], ['Ground-penetrating radar', '', 'gpr_crim']] }
     ],
     needs: ['ert'],
-    comparability: 'Saturation is the fraction of pore space filled with water, so it compares across soils of different porosity. The reactive interval is bounded the same way at every site, between the seasonal high and low water tables, where saturation alternates through the year. Uncertainty includes porosity and the Archie exponents.' },
+    comparability: 'Saturation is the fraction of pore space filled with water, so it compares across soils of different porosity. The reactive interval is bounded the same way at every site, between the seasonal high and low water tables, where saturation alternates through the surveyed season. Uncertainty includes porosity and the Archie exponents.' },
   { id: 'natural-hazards', name: 'Natural hazards', fig: 'hazards', example: 'sgm',
     question: 'Is regolith thickness laterally continuous across this slope?',
     yields: 'Regolith thickness and a continuity flag', yieldsUnit: 'metres',
@@ -982,7 +986,7 @@ const STATUS = {
   biogeochemistry: [
     st('wind', 'ready', '', 'Four resistivity surveys from May to October, and pore-water chemistry.'),
     st('rcczo', 'partial', 'Pore-water chemistry for calibration', 'Saturation uses an uncalibrated formation factor; its uncertainty is widened.'),
-    st('bw', 'partial', 'Repeat surveys across the seasons', 'Saturation is mapped for July 2018 only; the fraction of the year saturated cannot be produced.'),
+    st('bw', 'partial', 'Repeat surveys across the seasons', 'Saturation is mapped for July 2018 only; the fraction of the season saturated cannot be produced.'),
     st('pb', 'none', 'A resistivity survey', 'Only a seismic line exists at this site.'),
     st('eel', 'none', 'The survey method, identified from the file headers', 'Format identification has not matched these files to a reader, so nothing can be produced yet.')
   ],
@@ -1083,9 +1087,10 @@ const TOOLS = [
   { name: 'extract_seismic_interfaces', args: [['model', 'seismic_results'], ['threshold', 'float', '1200'], ['interval', 'float', '4.0']], ret: 'seismic_structure', lib: 't_iface' },
   { name: 'load_gpr_line', args: [['path', 'PathLike'], ['**options', 'Any']], ret: 'gpr_data', lib: 't_gprload' },
   { name: 'process_gpr_line', args: [['profile', 'GPRProfile'], ['steps', 'list[dict]']], ret: 'gpr_results', lib: 't_gpr' },
+  { name: 'load_tdem_data', args: [['path', 'str'], ['method', 'str'], ['sounding', 'int', '0'], ['moment', 'str', '"HM"']], ret: 'tdem_data', lib: 't_tdemload' },
   { name: 'invert_tdem', args: [['times', 'ndarray'], ['dobs', 'ndarray'], ['uncertainties', 'ndarray'], ['n_layers', 'int', '25'], ['use_irls', 'bool', 'True']], ret: 'tdem_results', lib: 't_tdem' },
   { name: 'convert_water_content', args: [['resistivity', 'ndarray'], ['markers', 'ndarray'], ['layers', 'list[dict]'], ['n_realizations', 'int', '100'], ['seed', 'int', '7']], ret: 'water_content', lib: 't_wc' },
-  { name: 'propagate_uncertainty', args: [['rho', 'ndarray'], ['rho_cov', 'ndarray'], ['petro_func', 'Callable'], ['n_samples', 'int', '500'], ['seed', 'int | None', 'None']], ret: 'dict[str, ndarray]', lib: 't_unc' },
+  { name: 'write_survey_report', args: [['input_data', 'dict']], ret: 'report_files', lib: 't_sreport' },
   { name: 'write_report', args: [['output', 'str'], ['config', 'dict'], ['results', 'dict'], ['plan', 'dict'], ['calls', 'Counter'], ['sources', 'list']], ret: 'report_files', lib: 't_report' }
 ];
 const TIERS = [
@@ -1603,17 +1608,17 @@ function figureFor(cid, pid, s, k) {
       read: (x, z) => rd([...pos(x, z), ['Saturation', M.satW(x, z).toFixed(2)], ['1σ', '± ' + (M.sigma(x, z) * k / M.phi(x, z)).toFixed(3)]], z >= M.wtHigh(x) && z <= M.wtLow(x) ? 'Inside the reactive interval' : 'Outside the reactive interval')
     };
     const rep = ert.length > 1;
-    const prof = !rep ? { kind: 'none', title: 'Fraction of the year the interval is saturated', text: '<b>Not produced.</b> Missing input: repeat resistivity surveys across the seasons.' } : {
+    const prof = !rep ? { kind: 'none', title: 'Fraction of the surveyed season the interval is saturated', text: '<b>Not produced.</b> Missing input: repeat resistivity surveys across the seasons.' } : {
       kind: 'profile', site: s, ramp: 'sat', ymin: 0, ymax: 1, line: M.frac, sd: x => M.fracS(x, k), gaps,
-      title: 'Fraction of the year the interval is saturated', sub: rt ? `From ${ert.length} seasonal surveys over the first ${len(rt, 0)} of the line` : `From ${ert.length} seasonal surveys`, lib: 'ert_tl',
+      title: 'Fraction of the surveyed season the interval is saturated', sub: rt ? `From ${ert.length} seasonal surveys over the first ${len(rt, 0)} of the line` : `From ${ert.length} seasonal surveys`, lib: 'ert_tl',
       yTitle: () => 'Fraction of year', legend: `<span>${LEG.band(sc)}Fraction and 1σ</span>${gaps.length ? `<span>${LEG.hatch()}No repeat surveys</span>` : ''}`,
-      alt: `Fraction of the year saturated along the line, ${s.name}`, desc: () => 'Sample data. Fraction of the year the reactive interval is saturated, with a shaded uncertainty band and a gap where no repeat surveys exist.',
-      read: x => rt && x > rt ? rd([['Distance', len(x)]], 'No repeat surveys here') : rd([['Distance', len(x)], ['Saturated', `${M.frac(x).toFixed(2)} ± ${M.fracS(x, k).toFixed(2)} of the year`]])
+      alt: `Fraction of the surveyed season saturated along the line, ${s.name}`, desc: () => 'Sample data. Fraction of the surveyed season the reactive interval is saturated, with a shaded uncertainty band and a gap where no repeat surveys exist.',
+      read: x => rt && x > rt ? rd([['Distance', len(x)]], 'No repeat surveys here') : rd([['Distance', len(x)], ['Saturated', `${M.frac(x).toFixed(2)} ± ${M.fracS(x, k).toFixed(2)} of the season`]])
     };
     const xs = sampleX(s, 40), th = rangeOf(s, x => M.wtLow(x) - M.wtHigh(x)), xr = xs.filter(x => !rt || x <= rt);
     return { panels: [main, sigmaPanel(0.2, (x, z) => M.sigma(x, z) * k / M.phi(x, z), 'saturation', 'fraction', v => v.toFixed(2)), prof], stats: [
       ['Reactive-zone thickness', `${lenN(th[0])}–${lenN(th[1])}`, '', state.unit],
-      ['Saturated through the year', rep ? mean(xr.map(M.frac)).toFixed(2) : '—', rep ? mean(xr.map(x => M.fracS(x, k))).toFixed(2) : '', rep ? 'fraction of the year, interval mean' : 'not produced: single survey'],
+      ['Saturated through the season', rep ? mean(xr.map(M.frac)).toFixed(2) : '—', rep ? mean(xr.map(x => M.fracS(x, k))).toFixed(2) : '', rep ? `fraction of the ${s.repeat ? s.repeat.join(' to ') : 'surveyed'} season, interval mean` : 'not produced: single survey'],
       ['Saturation in the interval', mean(xs.map(x => M.satW(x, (M.wtHigh(x) + M.wtLow(x)) / 2))).toFixed(2), '', `of pore space, mid-interval, ${shown}`],
       ['Repeat coverage', !rep ? 'None' : rt ? `0–${lenN(rt, 0)}` : 'Full line', '', !rep ? 'single survey' : `${rt ? state.unit + ' of the line, ' : ''}${ert.length} seasons`]] };
   }
@@ -1924,33 +1929,36 @@ const AGENT_EX = [
   { title: 'Water storage', site: 'rcczo', cid: 'hydrology', pid: 'storage', stats: [0, 1], methods: ['ert', 'em'], cite: 'petro_res_inf',
     q: 'How much water is stored in the upper 5 m at RCCZO, and how did it change between the April and September 2019 surveys?',
     skills: ['ert', 'em', 'time-lapse', 'petrophysics', 'uncertainty'],
-    tools: ['load_ert_surveys', 'invert_ert', 'invert_tdem', 'convert_water_content', 'propagate_uncertainty', 'write_report'] },
+    tools: ['load_ert_surveys', 'invert_time_lapse', 'load_tdem_data', 'invert_tdem', 'convert_water_content', 'write_report'] },
   { title: 'Depth to fresh rock', site: 'bw', cid: 'geomorphology', pid: 'bedrock-depth', stats: [0, 1], methods: ['srt', 'ert', 'bh'], cite: 'iface_inf',
     q: 'Where is fresh rock under the BW ridge, and how sure are we of its depth?',
     skills: ['seismic', 'ert', 'borehole', 'interfaces', 'uncertainty'],
     tools: ['pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'load_ert_surveys', 'invert_ert', 'write_report'] },
-  { title: 'Root-accessible water', site: 'ssczo', cid: 'forest-ecology', pid: 'root-water', stats: [0, 1], methods: ['ert', 'srt', 'gpr'], cite: 'petro_res_inf',
-    q: 'How much water can roots reach at SSCZO, above the layer they cannot pass?',
+  { title: 'Root-accessible water capacity', site: 'ssczo', cid: 'forest-ecology', pid: 'root-water', stats: [0, 1], methods: ['ert', 'srt', 'gpr'], cite: 'petro_res_inf',
+    q: 'How much plant-available water can roots reach at SSCZO, above the layer they cannot pass?',
     skills: ['ert', 'seismic', 'gpr', 'interfaces', 'petrophysics', 'uncertainty'],
-    tools: ['load_ert_surveys', 'invert_ert', 'convert_water_content', 'pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'load_gpr_line', 'process_gpr_line', 'propagate_uncertainty', 'write_report'] },
+    tools: ['load_ert_surveys', 'invert_ert', 'convert_water_content', 'pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'load_gpr_line', 'process_gpr_line', 'write_report'] },
   { title: 'Reactive-zone thickness', site: 'wind', cid: 'biogeochemistry', pid: 'reactive-thickness', stats: [0, 1], methods: ['ert', 'gpr'], cite: 'sat_inf',
-    q: 'How thick is the reactive zone at WIND, and how much of the year does it stay saturated?',
+    q: 'How thick is the reactive zone at WIND, and for how much of the May to October season does it stay saturated?',
     skills: ['ert', 'gpr', 'data-quality', 'time-lapse', 'petrophysics'],
     tools: ['load_ert_surveys', 'invert_time_lapse', 'convert_water_content', 'load_gpr_line', 'process_gpr_line', 'write_report'] },
   { title: 'Slope continuity', site: 'sgm', cid: 'natural-hazards', pid: 'continuity', stats: [0, 1], methods: ['srt'], cite: 'iface_inf',
     q: 'Is the regolith continuous across the SGM slope, or does it break?',
     skills: ['seismic', 'data-quality', 'interfaces'],
-    tools: ['pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'write_report'] }
+    tools: ['pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'write_survey_report'] }
 ];
 const NUMW = ['no', 'one', 'two', 'three', 'four', 'five'];
 const listJoin = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
 const LATENCY = { light: 1.1, mid: 2.9, frontier: 7.4 };
-/* What a run returns. The provenance record is always written. */
+/* What a run returns and where it goes. The provenance record is always written. */
 const OUTPUTS = [
-  { k: 'report', name: 'Report', desc: 'A written report of the methods, the result and its uncertainty.' },
-  { k: 'figures', name: 'Figures', desc: 'Sections and profiles with their uncertainty, in metres or feet.' },
-  { k: 'data', name: 'Data files', desc: 'The product on its grid, with one standard deviation for every value.' }
+  { k: 'report', g: 'products', name: 'Report', desc: 'A written report of the methods, the result and its uncertainty.' },
+  { k: 'figures', g: 'products', name: 'Figures', desc: 'Sections and profiles with their uncertainty, in metres or feet.' },
+  { k: 'data', g: 'products', name: 'Data files', desc: 'The product on its grid, with one standard deviation for every value.' },
+  { k: 'review', g: 'publish', name: 'Curator review', req: true, desc: 'Required. A curator checks the plan and the result before anything leaves the catalog.' },
+  { k: 'deposit', g: 'publish', name: 'Deposit to HydroShare', desc: 'Once a curator approves, deposits the product, its 1σ and its record as a new HydroShare resource under the source surveys’ licence (CC BY 4.0 for these samples), citing them and PyHydroGeophysX.' }
 ];
+const OUTPUT_GROUPS = [['products', 'Products'], ['publish', 'Publish']];
 const ag = { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), out: new Set(OUTPUTS.map(o => o.k)), play: true };
 
 function agentTrace() {
@@ -1960,33 +1968,34 @@ function agentTrace() {
   const loaded = ex.skills.filter(k => ag.skills.has(k)), missing = ex.skills.filter(k => !ag.skills.has(k)), extra = [...ag.skills].filter(k => !ex.skills.includes(k));
   const prompt = 5752 + 34 + 180 + loaded.length * 620 + hits * 74, cached = 5752, comp = 1100 + ex.tools.length * 40;
   const t = (x, k) => `${tier.name} · ${(LATENCY[tier.k] * x).toFixed(1)} s`;
-  const outs = OUTPUTS.filter(o => ag.out.has(o.k)).map(o => o.name.toLowerCase());
-  const chip = n => { const tl = TOOLS.find(x => x.name === n); return `<span class="tchip" data-lib-host="${tl ? tl.lib : ''}">${n}</span>`; };
+  const outs = OUTPUTS.filter(o => o.g === 'products' && ag.out.has(o.k)).map(o => o.name.toLowerCase());
+  const pub = ag.out.has('deposit') ? 'After curator approval, deposit to HydroShare under the source surveys’ licence.' : 'Held for curator review; not deposited.';
+  const chip = n => { const tl = TOOLS.find(x => x.name === n); return tl ? `<a class="tchip" href="${libUrl(tl.lib)}" target="_blank" rel="noopener" data-lib-host="${tl.lib}">${n}</a>` : `<span class="tchip">${n}</span>`; };
   const steps = [];
   steps.push({ st: 'ok', title: 'Understand the request', meta: t(0.3),
     body: `Site <b>${esc(s.name)}</b> (${esc(s.region)}) · product <b>${esc(lc(PROD[ex.pid].name))}</b>${ex.methods.length ? ` · ${listJoin(ex.methods.map(m => METHOD[m].name.toLowerCase()))}` : ''}.${routed ? `<span class="tnote">Routed from Lightweight to Mid-tier: the request spans ${NUMW[ex.methods.length]} methods.</span>` : ''}` });
   if (srcOn.length) {
-    const c = ex.cite ? CITES[ex.cite](s)[0] : null;
+    const c = ex.cite ? CITES[ex.cite](s).find(x => x.src.startsWith('catalog') ? ag.src.cat : ag.src.lib) : null;
     steps.push({ st: 'ok', title: 'Ground the request', meta: `${hits} passages · ${srcOn.length} source${srcOn.length > 1 ? 's' : ''}`,
-      body: `Hybrid search over ${fmtInt(srcOn.reduce((a, x) => a + x.chunks, 0))} chunks, reranked to the top ${hits}.${c ? `<q class="tq">${esc(c.text)}</q><span class="tsrc">${esc(c.src)}</span>` : ''}` });
-  } else steps.push({ st: 'warn', title: 'Ground the request', meta: 'Retrieval off', body: 'No passages retrieved. Inferred parameters will carry no citations.' });
+      body: `Search over ${fmtInt(srcOn.reduce((a, x) => a + x.chunks, 0))} chunks; the top ${hits} are kept.${c ? `<q class="tq">${esc(c.text)}</q><span class="tsrc">${esc(c.src)}</span>` : ''}` });
+  } else steps.push({ st: 'warn', title: 'Ground the request', meta: 'Retrieval off', body: 'No passages retrieved. Each inferred value falls back to the library’s documented default and cites the docstring that sets it.' });
   steps.push({ st: missing.length ? 'warn' : 'ok', title: 'Load skills', meta: `${loaded.length} of ${ex.skills.length} needed`,
     body: `${loaded.length ? loaded.map(k => `<span class="tskill">${esc(SKILL[k].name)}</span>`).join('') : 'None loaded.'}${missing.length ? `<span class="tnote">Not loaded: ${missing.map(k => SKILL[k].name).join(', ')}. ${missing.includes('time-lapse') ? 'The change between surveys cannot be planned without it; ' : ''}parameters it would set fall back to documented defaults and are marked inferred.</span>` : ''}${extra.length ? `<span class="tnote">Selected but not needed here: ${extra.map(k => SKILL[k].name).join(', ')}. Only its index entry enters the context.</span>` : ''}` });
   const nInf = 2 + missing.length;
   steps.push({ st: 'ok', title: 'Plan with structured output', meta: t(0.5),
-    body: `Constrained decoding against plan schema v1.2; the plan validated on the first pass. ${ex.tools.length} tool calls, ${nInf} inferred value${nInf > 1 ? 's' : ''}${srcOn.length ? ', each cited' : ', uncited'}.` });
+    body: `Constrained decoding against plan schema v1.2; the plan validated on the first pass. ${ex.tools.length} tool calls, ${nInf} inferred value${nInf > 1 ? 's' : ''}, each cited${srcOn.length ? '' : ' to a documented default'}.` });
   steps.push({ st: 'ok', title: 'Call registered tools', meta: `${ex.tools.length} calls`, body: `<span class="tchain">${ex.tools.map(chip).join('<i aria-hidden="true">→</i>')}</span>` });
   steps.push({ st: 'ok', title: 'Execute deterministically', meta: 'Pinned environment', body: `The validated plan runs in a pinned environment with no model in the loop, and writes ${outs.length ? `the ${listJoin(outs)} with a provenance record` : 'a provenance record'}.` });
   const st2 = figureFor(ex.cid, ex.pid, s, 1).stats, noChange = missing.includes('time-lapse');
   const vals = ex.stats.filter(i => !(noChange && i === 1)).map(i => st2[i]);
   steps.push({ st: 'ok', title: 'Deliver', meta: 'Sample values', deliver: true,
-    body: `<span class="tvals">${vals.map(([k, v, sd, u]) => `<span><em>${esc(k)}</em><b>${v}${sd ? ` <small>± ${sd}</small>` : ''}</b><em>${esc(u)}</em></span>`).join('')}</span><a class="textlink" href="${wsHref(primarySurvey(s, ex.cid), { c: ex.cid, p: ex.pid })}">Open the result in the workspace ${ICON.arrow}</a>` });
+    body: `<span class="tvals">${vals.map(([k, v, sd, u]) => `<span><em>${esc(k)}</em><b>${v}${sd ? ` <small>± ${sd}</small>` : ''}</b><em>${esc(u)}</em></span>`).join('')}</span><span class="tdep">${pub}</span><a class="textlink" href="${wsHref(primarySurvey(s, ex.cid), { c: ex.cid, p: ex.pid })}">Open the result in the workspace ${ICON.arrow}</a>` });
   return { steps, prompt, cached, comp, tier, routed };
 }
 function traceHTML() {
   const tr = agentTrace(), f = fmtInt;
   return `<ol class="trace${ag.play ? ' play' : ''}">${tr.steps.map((x, i) => `<li class="t-${x.st}${x.deliver ? ' t-deliver' : ''}" style="--i:${i}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : x.st === 'warn' ? '!' : ''}</span><div class="tbody"><div class="tt"><span>${x.title}</span><em>${esc(x.meta)}</em></div><div class="tb">${x.body}</div></div></li>`).join('')}</ol>
-    <p class="tfoot" style="--i:${tr.steps.length}">Prompt ${f(tr.prompt)} tokens, ${f(tr.cached)} from the prompt cache · completion ${f(tr.comp)} · ${tr.tier.name}, ${tr.tier.ctx} context</p>`;
+    <p class="tfoot" style="--i:${tr.steps.length}">Prompt ${f(tr.prompt)} tokens (${f(tr.cached)} from the prompt cache) · completion ${f(tr.comp)} · ${tr.tier.name}</p>`;
 }
 /* Locator map of the example sites: every catalog site faint, the examples clickable, the chosen one labelled. */
 function agentMapHTML() {
@@ -1994,7 +2003,7 @@ function agentMapHTML() {
   const others = SITES.filter(s => !exSites.has(s.id)).map(s => `<circle class="am-o" cx="${s.x}" cy="${s.y}" r="7"/>`).join('');
   const marks = AGENT_EX.map((e, i) => { const s = SITE[e.site], left = s.x > 700;
     return `<g class="am" data-ag-ex="${i}" aria-pressed="${i === ag.ex}" transform="translate(${s.x} ${s.y})"><circle class="am-ring" r="26"/><circle class="am-dot" r="11"/><text class="am-code" x="${left ? -20 : 20}" y="10" text-anchor="${left ? 'end' : 'start'}">${s.name}</text></g>`; }).join('');
-  return `<svg class="ag-map" viewBox="0 30 1000 560" role="img" aria-label="Map of the example sites; the chosen one is highlighted"><path d="${MAP_US}" fill="var(--map-land)" stroke="var(--map-state)" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>${others}${marks}</svg>`;
+  return `<svg class="ag-map" viewBox="0 30 1000 560" aria-hidden="true" focusable="false"><path d="${MAP_US}" fill="var(--map-land)" stroke="var(--map-state)" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>${others}${marks}</svg>`;
 }
 function setAgentExample(i) {
   ag.ex = i; ag.skills = new Set(AGENT_EX[i].skills); $('#ag-q').value = AGENT_EX[i].q;
@@ -2027,11 +2036,10 @@ function agentHTML() {
       <div class="ag-group"><div class="ag-label"><span>Skills</span><span class="ag-hint">Procedures the agent reads when a task calls for them</span></div>
         <div class="ag-list">${SKILL_GROUPS.map(([m, label]) => `<div role="group" aria-label="${esc(label)} skills"><span class="sk-m">${esc(label)}</span><span class="ag-chips">${SKILLS.filter(k => k.m === m).map(k => `<button type="button" class="pillbtn skill" data-ag-skill="${k.k}" aria-pressed="${ag.skills.has(k.k)}" data-tip="${esc(k.desc)}">${ICON.check}${esc(k.name)}</button>`).join('')}</span></div>`).join('')}</div></div>
       <div class="ag-group"><div class="ag-label"><span>Output</span><span class="ag-hint">What the run returns, always with a provenance record</span></div>
-        <div class="ag-list"><div role="group" aria-label="Products"><span class="sk-m">Products</span><span class="ag-chips">${OUTPUTS.map(o => `<button type="button" class="pillbtn skill" data-ag-out="${o.k}" aria-pressed="${ag.out.has(o.k)}" data-tip="${esc(o.desc)}">${ICON.check}${esc(o.name)}</button>`).join('')}</span></div>
-          <div role="group" aria-label="Length unit"><span class="sk-m">Units</span><span class="seg"><button type="button" data-unit="m" aria-pressed="${state.unit === 'm'}">Metres</button><button type="button" data-unit="ft" aria-pressed="${state.unit === 'ft'}">Feet</button></span></div></div></div>
+        <div class="ag-list">${OUTPUT_GROUPS.map(([g, label]) => `<div role="group" aria-label="${label}"><span class="sk-m">${label}</span><span class="ag-chips">${OUTPUTS.filter(o => o.g === g).map(o => o.req ? `<span class="pillbtn skill req" data-tip="${esc(o.desc)}">${ICON.check}${esc(o.name)}<em>required</em></span>` : `<button type="button" class="pillbtn skill" data-ag-out="${o.k}" aria-pressed="${ag.out.has(o.k)}" data-tip="${esc(o.desc)}">${ICON.check}${esc(o.name)}</button>`).join('')}</span></div>`).join('')}</div></div>
     </div>
     <div class="ag-right">
-      <div class="ag-trace-h"><span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Sample run, replayed · nothing is computed</span><button type="button" class="linkbtn" data-ag-replay>Replay</button></div>
+      <div class="ag-trace-h"><span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Illustrative replay with sample values · nothing is computed</span><button type="button" class="linkbtn" data-ag-replay>Replay</button></div>
       <div id="ag-trace" aria-live="polite">${traceHTML()}</div>
     </div>
     </div>
@@ -2048,9 +2056,9 @@ function renderDoor() {
   const list = SITES.slice().sort((a, b) => CAT_ORDER.indexOf(a.cat) - CAT_ORDER.indexOf(b.cat) || a.name.localeCompare(b.name));
   $('#v-door').innerHTML = `<div class="page">
     <header class="door-hero">
-      <p class="hero-eyebrow">${ICON.spark}AI-native · agentic analysis of archived geophysics</p>
+      <p class="hero-eyebrow">${ICON.spark}Proposed service · agentic analysis of archived geophysics</p>
       <h1>Subsurface properties from surveys that already exist.</h1>
-      <p>Decades of near-surface surveys, curated and made comparable. Ask in your own words; an agent plans the analysis and returns the quantity you use, with its uncertainty.</p>
+      <p>A proposed service for decades of near-surface surveys: curated, made comparable, and turned into the quantity you use, with its uncertainty. You ask in your own words; an agent plans the analysis.</p>
     </header>
     ${agentHTML()}
     <section class="sec" aria-labelledby="place-h">
@@ -2067,7 +2075,7 @@ function renderDoor() {
     <section class="facts" aria-label="The catalog in numbers">
       <div class="fact"><b>${nSurveys}</b><span>surveys in the catalog</span></div>
       <div class="fact"><b>${nMethods}</b><span>methods covered</span></div>
-      <div class="fact"><b>${COMMUNITIES.length}</b><span>disciplinary communities served</span></div>
+      <div class="fact"><b>${COMMUNITIES.length}</b><span>disciplinary communities it would serve</span></div>
     </section>
     <p class="expert"><a class="textlink" href="#/workspace">Browse the full catalog</a></p>
     <footer class="foot"><span>Design preview. Site codes and states follow the WYCEHG dataset compilation, and the map groups its sites by the methods they hold; survey records, the agent trace and every value are sample content, and nothing on this page is computed. Boundaries from Natural Earth.</span><a href="#/about">About this preview</a><a href="${REPO}" target="_blank" rel="noopener">Powered by PyHydroGeophysX</a></footer>
@@ -2324,7 +2332,7 @@ function howHTML(s, cid, curatedOn, open) {
           <div class="readline">${state.cache ? `Prompt tokens at the full rate: <b>${f(sp.uncached)}</b> instead of ${f(sp.promptAll)} (−${pct} %)` : `All <b>${f(sp.promptAll)}</b> prompt tokens at the full rate`}</div></div>
         <div class="grp-h">Retrieval</div>
         <div class="inset"><div class="row"><span class="grow" id="rag-l">Retrieval-augmented parameter grounding</span><button class="switch" type="button" role="switch" aria-checked="${state.rag}" aria-labelledby="rag-l" data-switch="rag"></button></div>
-          <div class="readline" data-lib-host="rag">${state.rag ? `Index <b>library docs, docstrings, curated catalog</b> · 3,412 chunks<br>Hybrid lexical and dense search, 24 candidates → cross-encoder reranking → top passages per inferred value ${xref('rag', 'Retrieval')}` : 'Off. Inferred values carry no citations.'}</div></div>
+          <div class="readline" data-lib-host="rag">${state.rag ? `Index <b>library docs, docstrings, curated catalog</b> · 3,412 chunks<br>Proposed: hybrid lexical and dense search, 24 candidates → cross-encoder reranking → top passages per inferred value; the library has the lexical search today ${xref('rag', 'Retrieval')}` : 'Off. Inferred values cite the library’s documented defaults.'}</div></div>
         <div class="grp-h">Execution</div>
         <div class="inset"><div class="exec" tabindex="0" data-tip-key="versions">${ICON.lock}<span>Validated plan executed deterministically. Pinned environment, no model in the loop.</span></div></div>
       </div>
@@ -2401,6 +2409,7 @@ function patchWorkspace(patch, anchor) {
 }
 document.addEventListener('click', e => {
   const t = e.target;
+  if (t.closest('.skip')) { e.preventDefault(); const m = $('#main'); m.setAttribute('tabindex', '-1'); m.focus(); return; }
   const c = t.closest('.cite');
   if (c) { e.preventDefault(); if (pinned && popFor === c) { hidePop(); return; } showPop(c); pinned = true; return; }
   if (pinned && !pop.contains(t)) hidePop();
