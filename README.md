@@ -6,13 +6,13 @@ This is a non-functional design preview made for a proposal figure: it holds sam
 
 UnEARTHeD is a proposed service that turns archived near-surface geophysical surveys into the subsurface quantities Earth scientists use: bedrock depth, water storage, root-accessible water, reactive-zone thickness, regolith thickness. Each product comes with its uncertainty and a record of how it was produced, and is defined the same way at every site so results compare across sites.
 
-This repository shows the interaction design only. Every site, survey, number, timestamp, token count and evaluation result on the page is illustrative, and the basemap is fictional. Nothing is uploaded, computed or deposited, and the page makes no network requests.
+This repository shows the interaction design only. The sites are those of the WYCEHG geophysical dataset compilation (University of Wyoming), shown with their codes, states and dataset categories at approximate positions. Their survey records, and every number, timestamp, token count, agent trace and evaluation result on the page, are illustrative. Nothing is uploaded, computed or deposited, and the page makes no network requests.
 
 ## How the page is organised
 
 The page has three levels, built for three readers: a first-time reviewer, a scientist who is not a geophysicist, and a geophysicist who wants the full catalog. The product comes first, the method second and the machinery last.
 
-1. **Front door** (`#/`). A headline, a map of the sample sites with a site list beside it, five cards that each start from a community's question, three facts about the catalog, and a plain link into the full catalog. Entry is by place or by question.
+1. **Front door** (`#/`). A headline, then the agent console: a request in plain language, a choice of planner model (lightweight, mid-tier, frontier), retrieval-augmented grounding with its sources, and the skills the agent may load, beside a replayed agent trace that follows those choices (understand, ground, load skills, plan with structured output, call registered tools, execute deterministically, deliver, or decline when an input is missing). Below it, a map of the 16 sites across the continental U.S. by dataset category (Both ERT and seismic, Seismic only, Seismic-associated / BCZN, Unresolved) with a site list beside it, five cards that each start from a community's question, three facts about the catalog, and a plain link into the full catalog. Entry is by place, by question or by request.
 2. **Community views** (`#/community/hydrology`, and likewise `geomorphology`, `forest-ecology`, `biogeochemistry`, `natural-hazards`). Each opens with its question, lists the products it gets (units, depth range, methods), maps the sites as ready, partial or not supported (each naming the missing input), shows an example result with its uncertainty in that community's own quantity and units, says what makes the product comparable across sites, and opens the workspace with site, question and product already set.
 3. **Workspace** (`#/workspace/SRV-0142?c=hydrology&p=storage`). The catalog on the left, the record cards on the right. In the middle: what the site can and cannot produce (each with the input it has or lacks), the request, the result, then the analysis plan with the origin of every parameter (measured, curated metadata, file header or inferred). A product that cannot be made is refused, with the missing input named.
 
@@ -30,7 +30,7 @@ The tool names in the workspace are the ones registered in the library's tool re
 
 ## Files
 
-- `index.html`: the whole preview, with HTML, CSS and JavaScript inline, and the map and cross-sections drawn as inline SVG. No build step, frameworks, images or external requests.
+- `index.html`: the whole preview, with HTML, CSS and JavaScript inline, and the map and cross-sections drawn as inline SVG. No build step, frameworks, images or external requests. The map's state and country boundaries come from [Natural Earth](https://www.naturalearthdata.com/) (public domain), projected to NAD83 / Conus Albers and simplified.
 - `.nojekyll`: tells GitHub Pages to serve the files as they are.
 
 ## Viewing it locally
@@ -41,7 +41,7 @@ Open `index.html` in a browser, or serve the folder:
 python -m http.server 8000
 ```
 
-then visit http://localhost:8000. Links such as `index.html#/community/forest-ecology` or `index.html#/workspace/SRV-0119?c=hydrology&p=storage` open a view directly; links in the old `#analyze/SRV-0142` form still land in the workspace.
+then visit http://localhost:8000. Links such as `index.html#/community/forest-ecology` or `index.html#/workspace/SRV-0119?c=hydrology&p=storage` (a site whose survey format is still unresolved, so the product is declined) open a view directly; links in the old `#analyze/SRV-0142` form still land in the workspace.
 
 ## Deployment
 
