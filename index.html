@@ -291,8 +291,7 @@ a.tchip:hover{border-color:var(--accent);color:var(--accent);text-decoration:non
 .tvals b{font:600 22px/1.2 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:2px 0}
 .tvals b small{font-size:14px;font-weight:500;color:var(--text-2)}
 .tdep{display:block;margin:-2px 0 6px;font-size:13px;color:var(--text-2)}
-.tfoot{margin-top:2px;padding-top:10px;border-top:1px solid var(--hairline);font-size:12.5px;color:var(--text-2);font-variant-numeric:tabular-nums}
-.trace.play li,.trace.play + .tfoot{opacity:0;animation:stepIn 420ms var(--ease) forwards;animation-delay:calc(var(--i) * 280ms)}
+.trace.play li{opacity:0;animation:stepIn 420ms var(--ease) forwards;animation-delay:calc(var(--i) * 280ms)}
 .trace.play li .tdot{animation:dotIn 420ms var(--ease) backwards;animation-delay:calc(var(--i) * 280ms + 120ms)}
 @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes dotIn{from{transform:scale(.4);box-shadow:0 0 0 6px var(--accent-ring)}to{transform:none}}
@@ -304,7 +303,7 @@ a.tchip:hover{border-color:var(--accent);color:var(--accent);text-decoration:non
 .sl-name .meta{font-size:12px}
 @media (max-width:1023px){.ag-cols{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}.ag-head{grid-template-columns:minmax(0,1fr) 220px;gap:20px}}
 @media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-list > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
-@media (prefers-reduced-motion:reduce){.agent,.live{animation:none}.trace.play li,.trace.play + .tfoot{animation:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.agent,.live{animation:none}.trace.play li{animation:none;opacity:1}}
 
 /* ---------- LEVEL 2: community ---------- */
 .comm-head{max-width:900px;position:relative;isolation:isolate}
@@ -1966,7 +1965,6 @@ function agentTrace() {
   const routed = ag.tier === 'light' && ex.methods.length > 1, tier = TIERS.find(t => t.k === (routed ? 'mid' : ag.tier));
   const srcOn = SOURCES.filter(x => ag.rag && ag.src[x.k]), hits = srcOn.reduce((a, x) => a + x.hits, 0);
   const loaded = ex.skills.filter(k => ag.skills.has(k)), missing = ex.skills.filter(k => !ag.skills.has(k)), extra = [...ag.skills].filter(k => !ex.skills.includes(k));
-  const prompt = 5752 + 34 + 180 + loaded.length * 620 + hits * 74, cached = 5752, comp = 1100 + ex.tools.length * 40;
   const t = (x, k) => `${tier.name} · ${(LATENCY[tier.k] * x).toFixed(1)} s`;
   const outs = OUTPUTS.filter(o => o.g === 'products' && ag.out.has(o.k)).map(o => o.name.toLowerCase());
   const pub = ag.out.has('deposit') ? 'After curator approval, deposit to HydroShare under the source surveys’ licence.' : 'Held for curator review; not deposited.';
@@ -1990,12 +1988,11 @@ function agentTrace() {
   const vals = ex.stats.filter(i => !(noChange && i === 1)).map(i => st2[i]);
   steps.push({ st: 'ok', title: 'Deliver', meta: 'Sample values', deliver: true,
     body: `<span class="tvals">${vals.map(([k, v, sd, u]) => `<span><em>${esc(k)}</em><b>${v}${sd ? ` <small>± ${sd}</small>` : ''}</b><em>${esc(u)}</em></span>`).join('')}</span><span class="tdep">${pub}</span><a class="textlink" href="${wsHref(primarySurvey(s, ex.cid), { c: ex.cid, p: ex.pid })}">Open the result in the workspace ${ICON.arrow}</a>` });
-  return { steps, prompt, cached, comp, tier, routed };
+  return { steps, tier, routed };
 }
 function traceHTML() {
-  const tr = agentTrace(), f = fmtInt;
-  return `<ol class="trace${ag.play ? ' play' : ''}">${tr.steps.map((x, i) => `<li class="t-${x.st}${x.deliver ? ' t-deliver' : ''}" style="--i:${i}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : x.st === 'warn' ? '!' : ''}</span><div class="tbody"><div class="tt"><span>${x.title}</span><em>${esc(x.meta)}</em></div><div class="tb">${x.body}</div></div></li>`).join('')}</ol>
-    <p class="tfoot" style="--i:${tr.steps.length}">Prompt ${f(tr.prompt)} tokens (${f(tr.cached)} from the prompt cache) · completion ${f(tr.comp)} · ${tr.tier.name}</p>`;
+  const tr = agentTrace();
+  return `<ol class="trace${ag.play ? ' play' : ''}">${tr.steps.map((x, i) => `<li class="t-${x.st}${x.deliver ? ' t-deliver' : ''}" style="--i:${i}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : x.st === 'warn' ? '!' : ''}</span><div class="tbody"><div class="tt"><span>${x.title}</span><em>${esc(x.meta)}</em></div><div class="tb">${x.body}</div></div></li>`).join('')}</ol>`;
 }
 /* Locator map of the example sites: every catalog site faint, the examples clickable, the chosen one labelled. */
 function agentMapHTML() {
