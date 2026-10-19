@@ -268,6 +268,10 @@ a:hover{text-decoration:underline}
 .trace.play li .tdot{animation:dotIn 420ms var(--ease) backwards;animation-delay:calc(var(--i) * 280ms + 120ms)}
 @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes dotIn{from{transform:scale(.4);box-shadow:0 0 0 6px var(--accent-ring)}to{transform:none}}
+.mfilter{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 16px}
+.mapcard .mk{transition:opacity var(--dur) var(--ease)}
+.mapcard .mk.dim{opacity:.14;pointer-events:none}
+.sitelist li.dim{display:none}
 .sl-name{display:inline-flex;align-items:center;gap:8px;min-width:0}
 .sl-name .meta{font-size:12px}
 @media (max-width:1023px){.agent-in{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}}
@@ -730,6 +734,7 @@ const LIB = {
   mt_io: E('data_processing/mt', P + 'data_processing/mt', 'Reads EDI, EMTF XML, J-file and Z-file transfer functions, and LEMI, Metronix, Phoenix (two generations) and Zonge time series.', true),
   mt_1d: E('occam1d', P + 'data_processing/mt/inversion1d.py', 'Occam 1D inversion of MT soundings, with TEM static-shift correction.'),
   mt_2d: E('invert_profile', P + 'data_processing/mt/inversion2d.py', 'Inverts a profile of MT sites for 2D conductivity on SimPEG’s simulations.'),
+  bh_load: E('load_boreholes · read_las', P + 'data_processing/boreholes.py', 'Reads wells, lithology logs, LAS and tabular geophysical logs and water levels, and projects each well onto the profile.'),
   unc_post: E('linearized_posterior', P + 'uncertainty/posterior.py', 'Posterior model covariance from the Jacobian, the data covariance and the prior.'),
   unc_res: E('model_resolution_spread', P + 'uncertainty/posterior.py', 'Per-cell resolution and spread from the model resolution matrix.'),
   unc_doi: E('compute_depth_of_investigation', P + 'analysis/sensitivity.py', 'Depth of investigation from two inversions with different reference models.'),
@@ -759,12 +764,14 @@ const libUrl = k => { const e = LIB[k]; return e.path ? `${REPO}/${e.tree ? 'tre
 /* Every value is illustrative.                                         */
 /* ================================================================== */
 const METHOD = {
-  ert: { name: 'Electrical resistivity', lib: 'ert_inv' },
-  srt: { name: 'Seismic refraction', lib: 'srt_inv' },
-  gpr: { name: 'Ground-penetrating radar', lib: 'gpr_read' },
-  tem: { name: 'Transient electromagnetics', lib: 'tdem_inv' },
-  unk: { name: 'Method not yet identified', lib: null }
+  ert: { name: 'Electrical resistivity', short: 'ERT', lib: 'ert_inv' },
+  srt: { name: 'Seismic refraction', short: 'Seismic', lib: 'srt_inv' },
+  gpr: { name: 'Ground-penetrating radar', short: 'GPR', lib: 'gpr_read' },
+  em: { name: 'Electromagnetics', short: 'EM', lib: 'tdem_inv' },
+  bh: { name: 'Borehole logs', short: 'Borehole', lib: 'bh_load' },
+  unk: { name: 'Method not yet identified', short: 'Unidentified', lib: null }
 };
+const METHOD_KEYS = ['ert', 'srt', 'gpr', 'em', 'bh'];
 /* Dataset categories of the WYCEHG site compilation. */
 const CAT = {
   both: { name: 'Both (ERT + Seismic)', shape: 'circle' },
@@ -780,29 +787,29 @@ const UNRES = { q: 1, md: 1, L: 60, D: 10, sp: 2, topo: 'not identified', boreho
    Survey records and every value derived from them are sample content. */
 const SITES = [
   { id: 'rcczo', name: 'RCCZO', region: 'Idaho', cat: 'both', x: 160.0, y: 159.4, q: 3, md: 3, L: 96, D: 16, sp: 2,
-    surveys: [sv('SRV-0139', 'srt', 'Aug 2018'), sv('SRV-0142', 'ert', 'Apr 2019'), sv('SRV-0143', 'ert', 'Sep 2019')],
+    surveys: [sv('SRV-0139', 'srt', 'Aug 2018'), sv('SRV-0142', 'ert', 'Apr 2019'), sv('SRV-0143', 'ert', 'Sep 2019'), sv('SRV-0145', 'em', 'Sep 2019'), sv('SRV-0147', 'bh', 'Jun 2019')],
     repeat: ['12 Apr 2019', '19 Sep 2019'], topo: 'RTK survey', boreholes: 'BH-1, 12 m', cores: 'six cores',
     meta: 'Loamy soil over weathered granite · porosity 0.38–0.46 from six cores · borehole BH-1 to 12 m · temperature logger at 1 m',
-    header: 'ERT dipole–dipole, 49 electrodes at 2 m · SRT 47 geophones at 2 m, 24 shots',
+    header: 'ERT dipole–dipole, 49 electrodes at 2 m · SRT 47 geophones at 2 m, 24 shots · TEM 8 soundings along the line · BH-1 lithology and natural-gamma log to 12 m',
     f: { base: 4.4, a1: 1.4, l1: 80, p1: 0.4, a2: 0.5, l2: 26, p2: 2.0, w: 0.22, t0: 0.18, tg: 0.02, dry: 0.06, lat: 0.025, latL: 60, b0: 0.13, bg: -0.004, lens: [{ x: 64, z: 2.6, rx: 8, rz: 1.2, a: 0.06 }, { x: 22, z: 3.0, rx: 7, rz: 1.3, a: 0.035 }, { x: 44, z: 9, rx: 14, rz: 3, a: -0.03 }], doi: 13, sb: 0.010, sd: 0.030, se: 0.030, soil: 1.1, phiA: 0.44, phiB: 0.15, slope: 22, elev0: 1650 } },
   { id: 'wind', name: 'WIND', region: 'Wyoming', cat: 'both', x: 273.3, y: 180.0, q: 3, md: 3, L: 100, D: 8, sp: 1,
-    surveys: [sv('SRV-0201', 'ert', 'May 2018'), sv('SRV-0202', 'ert', 'Jul 2018'), sv('SRV-0203', 'ert', 'Sep 2018'), sv('SRV-0204', 'ert', 'Oct 2018'), sv('SRV-0205', 'srt', 'Jul 2018')],
+    surveys: [sv('SRV-0201', 'ert', 'May 2018'), sv('SRV-0202', 'ert', 'Jul 2018'), sv('SRV-0203', 'ert', 'Sep 2018'), sv('SRV-0204', 'ert', 'Oct 2018'), sv('SRV-0205', 'srt', 'Jul 2018'), sv('SRV-0206', 'gpr', 'Jul 2018')],
     repeat: ['May 2018', 'Oct 2018'], topo: 'RTK survey', boreholes: 'piezometers P1–P4', cores: 'two cores',
     meta: 'Meadow soil over glacial till · porosity from two cores · pore-water chemistry at four piezometers',
-    header: 'ERT 81 electrodes at 1 m, four surveys May to October (first 80 m) · SRT 41 geophones at 2.5 m',
+    header: 'ERT 81 electrodes at 1 m, four surveys May to October (first 80 m) · SRT 41 geophones at 2.5 m · GPR 250 MHz along 100 m',
     f: { base: 2.6, a1: 0.4, l1: 90, p1: 0.8, a2: 0.2, l2: 23, p2: 2.2, w: 0.25, t0: 0.20, tg: 0.03, dry: 0.05, lat: 0.02, latL: 50, b0: 0.36, bg: -0.006, lens: [], doi: 7, sb: 0.012, sd: 0.030, se: 0.030, soil: 0.3, phiA: 0.48, phiB: 0.40, wt: 1.9, repeatTo: 80 } },
   { id: 'eel', name: 'EEL', region: 'California', cat: 'unres', x: 22.4, y: 202.3, ...UNRES,
     surveys: [sv('SRV-0119', 'unk', 'Sep 2017')], header: 'Three files; vendor format not recognised from the header' },
   { id: 'ssczo', name: 'SSCZO', region: 'California', cat: 'both', x: 87.3, y: 291.0, q: 3, md: 3, L: 80, D: 12, sp: 1,
-    surveys: [sv('SRV-0312', 'ert', 'Apr 2019'), sv('SRV-0313', 'ert', 'Jul 2019'), sv('SRV-0314', 'ert', 'Sep 2019'), sv('SRV-0315', 'srt', 'Apr 2019')],
+    surveys: [sv('SRV-0312', 'ert', 'Apr 2019'), sv('SRV-0313', 'ert', 'Jul 2019'), sv('SRV-0314', 'ert', 'Sep 2019'), sv('SRV-0315', 'srt', 'Apr 2019'), sv('SRV-0316', 'gpr', 'Jul 2019')],
     repeat: ['Apr 2019', 'Sep 2019'], topo: 'RTK survey', boreholes: null, cores: 'soil-pit texture',
     meta: 'Sandy loam over saprolite · wilting point 0.07 from soil texture · rooting depth logged in two soil pits',
-    header: 'ERT 81 electrodes at 1 m (April, July, September) · SRT 41 geophones at 2 m',
+    header: 'ERT 81 electrodes at 1 m (April, July, September) · SRT 41 geophones at 2 m · GPR 500 MHz along the line',
     f: { base: 2.3, a1: 0.6, l1: 55, p1: 1.1, a2: 0.25, l2: 17, p2: 0.4, w: 0.25, t0: 0.16, tg: 0.035, dry: 0.05, lat: 0.025, latL: 45, b0: 0.12, bg: -0.004, lens: [{ x: 30, z: 1.2, rx: 9, rz: 0.8, a: 0.04 }], doi: 10, sb: 0.010, sd: 0.028, se: 0.030, soil: 0.4, phiA: 0.42, phiB: 0.25, wp: 0.07 } },
   { id: 'bw', name: 'BW', region: 'Wyoming', cat: 'both', x: 324.6, y: 236.6, q: 3, md: 3, L: 115, D: 25, sp: 2.5, la: 'left',
-    surveys: [sv('SRV-0175', 'srt', 'Jul 2018'), sv('SRV-0176', 'ert', 'Jul 2018')], topo: 'total-station survey', boreholes: 'BW-1 and BW-2', cores: 'core samples',
+    surveys: [sv('SRV-0175', 'srt', 'Jul 2018'), sv('SRV-0176', 'ert', 'Jul 2018'), sv('SRV-0177', 'bh', 'Aug 2018'), sv('SRV-0178', 'em', 'Jul 2018')], topo: 'total-station survey', boreholes: 'BW-1 and BW-2', cores: 'core samples',
     meta: 'Weathered granite under a forested ridge · porosity 0.30–0.42 from core · boreholes BW-1 and BW-2',
-    header: 'SRT 47 geophones at 2.5 m, 24 shots · ERT Wenner, 24 electrodes at 5 m',
+    header: 'SRT 47 geophones at 2.5 m, 24 shots · ERT Wenner, 24 electrodes at 5 m · BW-1 and BW-2 lithology, gamma and resistivity logs · TEM 10 soundings',
     f: { base: 7.5, a1: 2.2, l1: 100, p1: 0.8, a2: 0.8, l2: 33, p2: 2.6, w: 0.4, t0: 0.12, tg: 0.012, dry: 0.04, lat: 0.02, latL: 70, b0: 0.09, bg: -0.002, lens: [], doi: 20, sb: 0.015, sd: 0.035, se: 0.030, soil: 1.4, phiA: 0.40, phiB: 0.12 } },
   { id: 'snow', name: 'SNOW', region: 'Wyoming', cat: 'seis', x: 347.0, y: 218.7, q: 2, md: 2, L: 96, D: 20, sp: 2,
     surveys: [sv('SRV-0263', 'srt', 'Jun 2022')], topo: 'RTK survey', boreholes: null, cores: 'soil pits',
@@ -864,8 +871,8 @@ const COMMUNITIES = [
     yields: 'Depth to unweathered bedrock', yieldsUnit: 'metres below ground',
     lede: 'Two products from seismic refraction, checked against resistivity, reported in metres below the ground surface.',
     products: [
-      { id: 'bedrock-depth', name: 'Depth to unweathered bedrock', units: 'm below ground surface', range: 'Typically 2 to 40 m', methods: [['Seismic refraction', 'primary', 'srt_inv'], ['Electrical resistivity', 'secondary constraint', 'ert_inv']] },
-      { id: 'weathered-thickness', name: 'Weathered-zone thickness', units: 'm', range: 'Typically 1 to 30 m', methods: [['Seismic refraction', 'primary', 'srt_inv'], ['Electrical resistivity', 'secondary constraint', 'ert_inv']] }
+      { id: 'bedrock-depth', name: 'Depth to unweathered bedrock', units: 'm below ground surface', range: 'Typically 2 to 40 m', methods: [['Seismic refraction', 'primary', 'srt_inv'], ['Electrical resistivity', 'secondary constraint', 'ert_inv'], ['Borehole logs', 'calibration', 'bh_load']] },
+      { id: 'weathered-thickness', name: 'Weathered-zone thickness', units: 'm', range: 'Typically 1 to 30 m', methods: [['Seismic refraction', 'primary', 'srt_inv'], ['Electrical resistivity', 'secondary constraint', 'ert_inv'], ['Borehole logs', 'calibration', 'bh_load']] }
     ],
     needs: ['srt'],
     comparability: 'Every site reports fresh rock at the same criterion, the 1,200 m/s velocity contour unless boreholes calibrate it, as depth below ground surface in metres along the survey line, at the geophone-spacing support. The depth uncertainty combines pick error, the inversion’s linearized posterior and the spread of the velocity criterion.' },
@@ -876,16 +883,16 @@ const COMMUNITIES = [
     products: [
       { id: 'storage', name: 'Subsurface water storage', units: 'mm of equivalent water depth', range: 'Integrated over 0 to 5 m', methods: [['Electrical resistivity', '', 'ert_inv'], ['Transient electromagnetics', '', 'tdem_inv']] },
       { id: 'storage-change', name: 'Seasonal storage change', units: 'mm', range: '0 to 5 m, between two surveys', methods: [['Time-lapse electrical resistivity', '', 'ert_tl']] },
-      { id: 'saturated-geometry', name: 'Saturated-zone geometry', units: 'm', range: 'Typically 0 to 30 m', methods: [['Electrical resistivity', '', 'ert_inv'], ['Transient electromagnetics', '', 'tdem_inv']] }
+      { id: 'saturated-geometry', name: 'Saturated-zone geometry', units: 'm', range: 'Typically 0 to 30 m', methods: [['Electrical resistivity', '', 'ert_inv'], ['Transient electromagnetics', '', 'tdem_inv'], ['Borehole logs', 'water levels', 'bh_load']] }
     ],
-    needs: ['ert', 'tem'],
+    needs: ['ert', 'em'],
     comparability: 'Storage is the depth of water held between 0 and 5 m below ground, in millimetres, at the electrode-spacing support of each line. Its uncertainty carries measurement error, the linearized posterior and the petrophysical parameter ranges; temperature is corrected wherever a logger record exists, and stated as unconstrained where it does not.' },
   { id: 'forest-ecology', name: 'Forest ecology', fig: 'forest', example: 'ssczo',
     question: 'How much water can roots reach at this site?',
     yields: 'Root-accessible water capacity', yieldsUnit: 'mm',
     lede: 'Plant-available water above the layer roots cannot pass, from resistivity for water and refraction for the layer.',
     products: [
-      { id: 'root-water', name: 'Root-accessible water capacity', units: 'mm', range: 'Above the root-limiting layer, typically 0 to 4 m', methods: [['Electrical resistivity', 'water content', 'ert_wc'], ['Seismic refraction', 'limiting layer', 'srt_iface']] },
+      { id: 'root-water', name: 'Root-accessible water capacity', units: 'mm', range: 'Above the root-limiting layer, typically 0 to 4 m', methods: [['Electrical resistivity', 'water content', 'ert_wc'], ['Seismic refraction', 'limiting layer', 'srt_iface'], ['Ground-penetrating radar', 'shallow layering', 'gpr_read']] },
       { id: 'root-limit', name: 'Depth to a root-limiting layer', units: 'm', range: 'Typically 0.5 to 5 m', methods: [['Seismic refraction', '', 'srt_iface'], ['Electrical resistivity', '', 'ert_inv']] }
     ],
     needs: ['ert'],
@@ -905,7 +912,7 @@ const COMMUNITIES = [
     yields: 'Regolith thickness and a continuity flag', yieldsUnit: 'metres',
     lede: 'Regolith thickness along a slope profile, masked where the data cannot constrain it, with continuity stated only where they can.',
     products: [
-      { id: 'regolith-thickness', name: 'Regolith thickness', units: 'm', range: 'Typically 0.5 to 10 m', methods: [['Seismic refraction', '', 'srt_inv'], ['Electrical resistivity', '', 'ert_inv']] },
+      { id: 'regolith-thickness', name: 'Regolith thickness', units: 'm', range: 'Typically 0.5 to 10 m', methods: [['Seismic refraction', '', 'srt_inv'], ['Electrical resistivity', '', 'ert_inv'], ['Borehole logs', 'calibration where present', 'bh_load']] },
       { id: 'continuity', name: 'Lateral continuity', units: 'flag with a stated confidence', range: 'Along the survey line', methods: [['Seismic refraction', '', 'srt_iface']] }
     ],
     needs: ['srt'],
@@ -964,16 +971,16 @@ function statusFor(site, cid) {
   const c = COMM[cid], has = c.needs.some(m => site.surveys.some(v => v.m === m));
   if (site.surveys.every(v => v.m === 'unk')) return st(site.id, 'none', 'The survey method, identified from the file headers', 'Format identification has not matched these files to a reader, so nothing can be produced yet.');
   return has ? st(site.id, 'partial', 'Curation of this site for these products', 'The site holds the right survey, but its metadata has not been reviewed for this community.')
-    : st(site.id, 'none', `A ${c.needs.map(m => METHOD[m].name.toLowerCase()).join(' or ')} survey`, 'No survey at this site can support these products.');
+    : st(site.id, 'none', (w => `${/^[aeiou]/.test(w) ? 'An' : 'A'} ${w} survey`)(c.needs.map(m => METHOD[m].name.toLowerCase()).join(' or ')), 'No survey at this site can support these products.');
 }
 function productStatus(site, cid, pid) {
   const s = statusFor(site, cid);
   if (s.status === 'none' || s.blocked.includes(pid)) return { can: false, label: 'none', why: s.missing, s };
   return { can: true, limited: s.status === 'partial', label: s.status, why: s.status === 'partial' ? s.missing : '', s };
 }
-const PREF = { geomorphology: ['srt', 'ert'], 'natural-hazards': ['srt', 'ert'], hydrology: ['ert', 'tem', 'gpr'], 'forest-ecology': ['ert', 'srt'], biogeochemistry: ['ert', 'gpr'] };
+const PREF = { geomorphology: ['srt', 'ert'], 'natural-hazards': ['srt', 'ert'], hydrology: ['ert', 'em', 'gpr'], 'forest-ecology': ['ert', 'srt'], biogeochemistry: ['ert', 'gpr'] };
 function primarySurvey(site, cid) {
-  for (const m of (cid ? PREF[cid] : ['ert', 'srt', 'gpr', 'tem'])) { const v = site.surveys.find(x => x.m === m); if (v) return v.id; }
+  for (const m of (cid ? PREF[cid] : ['ert', 'srt', 'gpr', 'em', 'bh'])) { const v = site.surveys.find(x => x.m === m); if (v) return v.id; }
   return site.surveys[0].id;
 }
 const methodsOf = s => [...new Set(s.surveys.map(v => v.m))];
@@ -1058,6 +1065,7 @@ const CAPS = [
   ['Seismic refraction', [['first-break picking', 'srt_pick'], ['tomographic inversion', 'srt_inv'], ['interface extraction', 'srt_iface']]],
   ['Ground-penetrating radar', [['vendor format readers', 'gpr_read'], ['dewow', 'gpr_dewow'], ['time-zero', 'gpr_t0'], ['bandpass', 'gpr_bp'], ['background removal', 'gpr_bg'], ['gain', 'gpr_gain'], ['Stolt migration', 'gpr_mig'], ['time-to-depth', 'gpr_t2d']]],
   ['Electromagnetics', [['transient forward modeling', 'tdem_fwd'], ['frequency-domain forward modeling', 'fdem_fwd'], ['transient inversion', 'tdem_inv'], ['frequency-domain inversion', 'fdem_inv']]],
+  ['Boreholes', [['wells, lithology and water levels', 'bh_load'], ['LAS and tabular geophysical logs', 'bh_load']]],
   ['Magnetotellurics', [['nine file formats', 'mt_io'], ['1D inversion', 'mt_1d'], ['2D inversion', 'mt_2d']]],
   ['Uncertainty', [['linearized posterior', 'unc_post'], ['model resolution', 'unc_res'], ['depth of investigation', 'unc_doi'], ['Monte Carlo petrophysical propagation', 'unc_mc']]],
   ['Provenance', [['processing record', 'prov'], ['input inventory', 'prov_inv'], ['call sequence', 'prov_calls'], ['warnings', 'prov_warn'], ['quality metrics', 'prov_q']]]
@@ -1870,11 +1878,11 @@ const SOURCES = [
   { k: 'pub', name: 'Published studies', chunks: 296, hits: 1 }
 ];
 const AGENT_EX = [
-  { label: 'Water storage at RCCZO', site: 'rcczo', cid: 'hydrology', pid: 'storage', stats: [0, 1], methods: ['ert'], cite: 'petro_res_inf',
+  { label: 'Water storage at RCCZO', site: 'rcczo', cid: 'hydrology', pid: 'storage', stats: [0, 1], methods: ['ert', 'em'], cite: 'petro_res_inf',
     q: 'How much water is stored in the upper 5 m at RCCZO, and how did it change between the April and September 2019 surveys?',
-    skills: ['ert-data-quality', 'ert-inversion-settings', 'timelapse-ert', 'water-content-from-resistivity'],
-    tools: ['load_ert_surveys', 'invert_ert', 'convert_water_content', 'propagate_uncertainty', 'write_report'] },
-  { label: 'Fresh rock at BW', site: 'bw', cid: 'geomorphology', pid: 'bedrock-depth', stats: [0, 1], methods: ['srt', 'ert'], cite: 'iface_inf',
+    skills: ['ert-data-quality', 'ert-inversion-settings', 'timelapse-ert', 'tdem-sounding-inversion', 'water-content-from-resistivity'],
+    tools: ['load_ert_surveys', 'invert_ert', 'invert_tdem', 'convert_water_content', 'propagate_uncertainty', 'write_report'] },
+  { label: 'Fresh rock at BW', site: 'bw', cid: 'geomorphology', pid: 'bedrock-depth', stats: [0, 1], methods: ['srt', 'ert', 'bh'], cite: 'iface_inf',
     q: 'Where is fresh rock under the BW ridge, and how sure are we of its depth?',
     skills: ['seismic-first-break-review', 'ert-inversion-settings'],
     tools: ['pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'load_ert_surveys', 'invert_ert', 'write_report'] },
@@ -1889,6 +1897,8 @@ const AGENT_EX = [
   { label: 'Water storage at EEL', site: 'eel', cid: 'hydrology', pid: 'storage', stats: [], methods: [], cite: null,
     q: 'How much water is stored under the EEL hillslope?', skills: [], tools: ['load_ert_surveys'] }
 ];
+const NUMW = ['no', 'one', 'two', 'three', 'four', 'five'];
+const listJoin = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
 const LATENCY = { light: 1.1, mid: 2.9, frontier: 7.4 };
 const ag = { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), play: true };
 
@@ -1902,7 +1912,7 @@ function agentTrace() {
   const chip = n => { const tl = TOOLS.find(x => x.name === n); return `<span class="tchip" data-lib-host="${tl ? tl.lib : ''}">${n}</span>`; };
   const steps = [];
   steps.push({ st: 'ok', title: 'Understand the request', meta: t(0.3),
-    body: `Site <b>${esc(s.name)}</b> (${esc(s.region)}) · product <b>${esc(lc(PROD[ex.pid].name))}</b>${ex.methods.length ? ` · ${ex.methods.map(m => METHOD[m].name.toLowerCase()).join(' and ')}` : ''}.${routed ? `<span class="tnote">Routed from Lightweight to Mid-tier: the request spans two methods.</span>` : ''}` });
+    body: `Site <b>${esc(s.name)}</b> (${esc(s.region)}) · product <b>${esc(lc(PROD[ex.pid].name))}</b>${ex.methods.length ? ` · ${listJoin(ex.methods.map(m => METHOD[m].name.toLowerCase()))}` : ''}.${routed ? `<span class="tnote">Routed from Lightweight to Mid-tier: the request spans ${NUMW[ex.methods.length]} methods.</span>` : ''}` });
   if (srcOn.length) {
     const c = ex.cite ? CITES[ex.cite](s)[0] : null;
     steps.push({ st: 'ok', title: 'Ground the request', meta: `${hits} passages · ${srcOn.length} source${srcOn.length > 1 ? 's' : ''}`,
@@ -1973,7 +1983,8 @@ function renderDoor() {
     </header>
     ${agentHTML()}
     <section class="sec" aria-labelledby="place-h">
-      <div class="sec-h"><h2 id="place-h">Start from a place</h2><p>${SITES.length} sites across the continental United States. Select one to see what it can tell you.</p></div>
+      <div class="sec-h"><h2 id="place-h">Start from a place</h2><p>${SITES.length} sites across the continental United States, with ${listJoin(METHOD_KEYS.map(m => METHOD[m].short === 'Seismic' ? 'seismic' : METHOD[m].short === 'Borehole' ? 'borehole logs' : METHOD[m].short))}. Select one to see what it can tell you.</p></div>
+      <div class="mfilter" role="group" aria-label="Show sites by method">${[['', 'All methods'], ...METHOD_KEYS.map(m => [m, METHOD[m].short])].map(([m, l]) => `<button type="button" class="pillbtn" data-mf="${m}" aria-pressed="${m === ''}">${l} <em>${m ? SITES.filter(x => x.surveys.some(v => v.m === m)).length : SITES.length}</em></button>`).join('')}</div>
       <div class="place">${mapHTML('door')}
         <ul class="sitelist compact" aria-label="Sites">${list.map(s => `<li><a href="${wsHref(primarySurvey(s), { from: 'map' })}" data-site="${s.id}" data-mode="door"><span class="sl-name">${catGlyph(s.cat)}<b>${esc(s.name)}</b><span class="meta">${esc(s.region)}</span></span><span class="meta">${yearsOf(s)}</span></a></li>`).join('')}</ul>
       </div>
@@ -2062,7 +2073,7 @@ function planFor(s, cid, curatedOn) {
   ];
   const repeat = !!s.repeat, srt = s.surveys.find(v => v.m === 'srt'), linked = !!srt || !!s.boreholes;
   return [
-    r('Method', fig === 'biogeo' ? (s.surveys.some(v => v.m === 'gpr') ? 'Time-lapse resistivity, radar for shallow structure' : 'Time-lapse resistivity') : fig === 'forest' ? 'Resistivity for water content; refraction for the limiting layer' : repeat ? 'Electrical resistivity, time-lapse inversion' : 'Electrical resistivity, single survey', s.header, 'header', repeat ? 'ert_tl' : 'ert_inv'),
+    r('Method', fig === 'biogeo' ? (s.surveys.some(v => v.m === 'gpr') ? 'Time-lapse resistivity, radar for shallow structure' : 'Time-lapse resistivity') : fig === 'forest' ? 'Resistivity for water content; refraction for the limiting layer' : (repeat ? 'Electrical resistivity, time-lapse inversion' : 'Electrical resistivity, single survey') + (fig === 'hydro' && s.surveys.some(v => v.m === 'em') ? '; TEM soundings below the line' : ''), s.header, 'header', repeat ? 'ert_tl' : 'ert_inv'),
     r('Solver', 'Gauss–Newton, sparse Cholesky', 'Exact factorization of each step (spd_cholesky)', 'inferred', 'solver', 'solver_ert'),
     cur('Mesh', linked && s.md >= 2, linked ? 'Triangular, interface embedded' : 'Triangular, single region', linked ? `Interface from the curated link to ${srt ? srt.id : s.boreholes}` : 'No linked survey or borehole', 'ert_mesh', 'mesh_inf'),
     r('Regularization', repeat ? 'Smoothness in space and time; weight for χ² ≈ 1' : 'Smoothness; weight for χ² ≈ 1', 'Weight searched by χ² target', 'inferred', 'lambda', 'lambda_ert'),
@@ -2079,7 +2090,10 @@ function provFor(s, cid) {
   if (ert.length) push(0, ert.length > 1 ? `${ert.length} resistivity surveys read` : 'Resistivity survey read', ert.map(v => `${v.id} (${v.label})`).join(', '), 'load_ert_container');
   if (srt.length) push(4, 'Shot records read', srt.map(v => `${v.id} (${v.label})`).join(', '), 'read_seg2_seismic');
   if (srt.length) push(6, 'First breaks picked', 'Shots left out where times disagree with their reciprocals', 'pick_first_breaks');
-  if (gpr.length && fig === 'biogeo') push(3, 'Radar line read and processed', `${gpr.map(v => v.id).join(', ')}; dewow, time zero, band-pass, gain`, 'read_gpr · process');
+  const em = s.surveys.filter(v => v.m === 'em'), bh = s.surveys.filter(v => v.m === 'bh');
+  if (gpr.length && (fig === 'biogeo' || fig === 'forest')) push(3, 'Radar line read and processed', `${gpr.map(v => v.id).join(', ')}; dewow, time zero, band-pass, gain`, 'read_gpr · process');
+  if (bh.length) push(3, 'Borehole logs read', `${bh.map(v => v.id).join(', ')}; ${s.boreholes} projected onto the line`, 'load_boreholes');
+  if (em.length && fig === 'hydro') push(20, 'TEM soundings inverted', `${em.map(v => v.id).join(', ')}; layered resistivity below the line`, 'run_tdem_inversion');
   if (fig === 'geomorph' || fig === 'hazards') {
     push(12, 'Mesh built', fig === 'hazards' ? 'Following the surveyed slope surface' : 'Refined under the spread', 'build_srt_mesh');
     push(118, 'Inversion', '9 iterations, χ² 1.08', 'run_srt_manager_inversion');
@@ -2330,6 +2344,8 @@ document.addEventListener('click', e => {
   if (ags) { const k = ags.dataset.agSrc; ag.src[k] = !ag.src[k]; ags.setAttribute('aria-pressed', ag.src[k]); renderTrace(false); return; }
   const agk = t.closest('[data-ag-skill]');
   if (agk) { const k = agk.dataset.agSkill; if (ag.skills.has(k)) ag.skills.delete(k); else ag.skills.add(k); agk.setAttribute('aria-pressed', ag.skills.has(k)); renderTrace(false); return; }
+  const mfb = t.closest('[data-mf]');
+  if (mfb) { const m = mfb.dataset.mf; $$('[data-mf]').forEach(b => b.setAttribute('aria-pressed', b === mfb)); let n = 0; $$('#v-door .mk, #v-door .sitelist li').forEach(el => { const id = el.dataset.site || el.querySelector('[data-site]').dataset.site, keep = !m || SITE[id].surveys.some(v => v.m === m); el.classList.toggle('dim', !keep); if (keep && el.tagName === 'LI') n++; }); $('#live').textContent = m ? `${n} sites with ${METHOD[m].name.toLowerCase()}` : `All ${n} sites`; return; }
   const pc = t.closest('[data-product]');
   if (pc) { history.replaceState(null, '', `#/community/${route.cid}?p=${pc.dataset.product}`); keepScroll(render, `[data-product="${pc.dataset.product}"]`); const b = $(`[data-product="${pc.dataset.product}"]`); b && b.focus({ preventScroll: true }); return; }
   const cur = t.closest('[data-curated]');
