@@ -225,16 +225,13 @@ a:hover{text-decoration:underline}
 .ag-map .am:hover .am-dot{stroke:var(--accent)}
 .ag-map .am[aria-pressed=true] .am-dot{fill:var(--accent-fill);stroke:var(--map-halo)}
 .ag-map .am[aria-pressed=true] .am-ring,.ag-map .am[aria-pressed=true] .am-code{opacity:1}
-.ag-exgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:22px}
-.ag-extile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;padding:12px 14px 13px;border-radius:14px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);text-align:left;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.ag-exgrid{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.ag-extile{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0;padding:9px 14px 10px;border-radius:12px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);text-align:left;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
 .ag-extile:hover{background:var(--fill)}
 .ag-extile[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
 .ag-extile .x-c{font-size:11.5px;font-weight:600;color:var(--text-2)}
 .ag-extile[aria-pressed=true] .x-c{color:var(--accent)}
 .ag-extile .x-t{font:600 15px/1.25 var(--font-display);letter-spacing:-.01em}
-.ag-extile .x-s{font-size:12px;color:var(--text-2)}
-.ag-extile .x-m{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.ag-extile .x-m span{font-size:10.5px;font-weight:600;color:var(--text-2);background:var(--fill);border-radius:5px;padding:1px 6px}
 .ag-ask textarea{font-size:16px;min-height:96px;padding-right:56px}
 .ag-chips{display:flex;flex-wrap:wrap;gap:6px}
 .ag-skills{border-radius:12px;border:1px solid var(--hairline);overflow:hidden}
@@ -301,8 +298,8 @@ a:hover{text-decoration:underline}
 .sitelist li.dim{display:none}
 .sl-name{display:inline-flex;align-items:center;gap:8px;min-width:0}
 .sl-name .meta{font-size:12px}
-@media (max-width:1023px){.ag-cols{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}.ag-exgrid{gap:8px}.ag-extile{padding:10px 11px 11px}.ag-extile .x-t{font-size:14px}.ag-head{grid-template-columns:minmax(0,1fr) 220px;gap:20px}}
-@media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-exgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-skills > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
+@media (max-width:1023px){.ag-cols{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}.ag-head{grid-template-columns:minmax(0,1fr) 220px;gap:20px}}
+@media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-skills > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
 @media (prefers-reduced-motion:reduce){.agent,.live{animation:none}.trace.play li,.trace.play + .tfoot{animation:none;opacity:1}}
 
 /* ---------- LEVEL 2: community ---------- */
@@ -1999,8 +1996,7 @@ function setAgentExample(i) {
 }
 function agentHTML() {
   const ex = AGENT_EX[ag.ex];
-  const tile = (e, i) => { const s = SITE[e.site];
-    return `<button type="button" class="ag-extile" data-ag-ex="${i}" aria-pressed="${i === ag.ex}"><span class="x-c">${esc(COMM[e.cid].name)}</span><span class="x-t">${esc(e.title)}</span><span class="x-s">${esc(s.name)} · ${esc(s.region)}</span><span class="x-m">${e.methods.map(m => `<span>${METHOD[m].short}</span>`).join('')}</span></button>`; };
+  const tile = (e, i) => `<button type="button" class="ag-extile" data-ag-ex="${i}" aria-pressed="${i === ag.ex}"><span class="x-c">${esc(COMM[e.cid].name)}</span><span class="x-t">${esc(e.title)}</span></button>`;
   return `<section class="agent" aria-labelledby="ag-h"><div class="agent-in">
     <div class="ag-top">
       <div class="ag-head">
