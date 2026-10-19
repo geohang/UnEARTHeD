@@ -18,7 +18,7 @@
   --veil:rgba(251,251,253,.6);--ifc-halo:rgba(255,255,255,.92);--ifc-line:#000000;
   --hatch:rgba(0,0,0,.2);--rock:#e6e6ea;
   --map-land:#f7f7f5;--map-nbr:#ececee;--map-water:#dde8f3;--map-state:rgba(60,60,67,.3);--map-halo:#ffffff;
-  --cat-both:#0071e3;--cat-seis:#e8830c;--cat-bczn:#c8372d;--cat-unres:#8e8e93;
+  --cat-multi:#0071e3;--cat-seis:#e8830c;--cat-unres:#8e8e93;
   --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05);
   --shadow-hover:0 2px 4px rgba(0,0,0,.05),0 12px 30px rgba(0,0,0,.09);
   --shadow-lg:0 2px 8px rgba(0,0,0,.06),0 28px 64px rgba(0,0,0,.16);
@@ -39,7 +39,7 @@
     --veil:rgba(0,0,0,.52);--ifc-halo:rgba(0,0,0,.78);--ifc-line:#ffffff;
     --hatch:rgba(255,255,255,.24);--rock:#2c2c2f;
     --map-land:#2a2a2d;--map-nbr:#1d1d1f;--map-water:#0f1922;--map-state:rgba(235,235,245,.2);--map-halo:#1c1c1e;
-    --cat-both:#2997ff;--cat-seis:#ff9f0a;--cat-bczn:#ff6a5c;--cat-unres:#98989d;
+    --cat-multi:#2997ff;--cat-seis:#ff9f0a;--cat-unres:#98989d;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
     --shadow-hover:0 2px 4px rgba(0,0,0,.45),0 12px 32px rgba(0,0,0,.45);
     --shadow-lg:0 2px 8px rgba(0,0,0,.5),0 28px 64px rgba(0,0,0,.6);
@@ -207,13 +207,43 @@ a:hover{text-decoration:underline}
 @property --ag-a{syntax:'<angle>';inherits:false;initial-value:0deg}
 .agent{position:relative;margin-top:56px;padding:1.5px;border-radius:26px;background:conic-gradient(from var(--ag-a),var(--accent-fill),var(--accent-ring) 18%,transparent 34%,transparent 58%,var(--accent-ring) 78%,var(--accent-fill));box-shadow:0 0 0 1px var(--hairline),0 24px 64px -24px var(--accent-ring),var(--shadow);animation:agSpin 9s linear infinite}
 @keyframes agSpin{to{--ag-a:360deg}}
-.agent-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);border-radius:24.5px;overflow:hidden;background:var(--surface)}
-.ag-left{display:flex;flex-direction:column;gap:18px;padding:26px 26px 28px;border-right:1px solid var(--hairline);min-width:0}
+.agent-in{border-radius:24.5px;overflow:hidden;background:var(--surface)}
+.ag-top{padding:26px 26px 22px;border-bottom:1px solid var(--hairline)}
+.ag-head{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:center}
+.ag-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr)}
+.ag-left{display:flex;flex-direction:column;gap:18px;padding:22px 26px 28px;border-right:1px solid var(--hairline);min-width:0}
 .ag-right{padding:22px 26px 24px;background:var(--surface-2);min-width:0}
 .ag-eyebrow{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--accent)}
-.ag-left h2{font:600 24px/1.2 var(--font-display);letter-spacing:-.02em;margin-top:6px}
+.ag-head h2{font:600 28px/1.15 var(--font-display);letter-spacing:-.022em;margin-top:6px;max-width:18em}
+.ag-sub{margin-top:8px;font-size:15px;line-height:1.45;color:var(--text-2);max-width:32em}
+.ag-map{display:block;width:100%;height:auto;border-radius:16px;background:var(--map-water);box-shadow:inset 0 0 0 1px var(--hairline)}
+.ag-map .am-o{fill:var(--text-3);opacity:.5}
+.ag-map .am{cursor:pointer}
+.ag-map .am-dot{fill:var(--surface);stroke:var(--text-2);stroke-width:2;vector-effect:non-scaling-stroke;transition:fill var(--dur) var(--ease),stroke var(--dur) var(--ease)}
+.ag-map .am-ring{fill:var(--accent-ring);opacity:0;transition:opacity var(--dur) var(--ease)}
+.ag-map .am-code{font:600 30px var(--font-text);fill:var(--text);paint-order:stroke;stroke:var(--map-land);stroke-width:7px;stroke-linejoin:round;opacity:0;transition:opacity var(--dur) var(--ease)}
+.ag-map .am:hover .am-dot{stroke:var(--accent)}
+.ag-map .am[aria-pressed=true] .am-dot{fill:var(--accent-fill);stroke:var(--map-halo)}
+.ag-map .am[aria-pressed=true] .am-ring,.ag-map .am[aria-pressed=true] .am-code{opacity:1}
+.ag-exgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:22px}
+.ag-extile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;padding:12px 14px 13px;border-radius:14px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);text-align:left;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.ag-extile:hover{background:var(--fill)}
+.ag-extile[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.ag-extile .x-c{font-size:11.5px;font-weight:600;color:var(--text-2)}
+.ag-extile[aria-pressed=true] .x-c{color:var(--accent)}
+.ag-extile .x-t{font:600 15px/1.25 var(--font-display);letter-spacing:-.01em}
+.ag-extile .x-s{font-size:12px;color:var(--text-2)}
+.ag-extile .x-m{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.ag-extile .x-m span{font-size:10.5px;font-weight:600;color:var(--text-2);background:var(--fill);border-radius:5px;padding:1px 6px}
+.ag-decline{margin-top:12px;font-size:12.5px;color:var(--text-2)}
+.ag-decline .linkbtn[aria-pressed=true]{font-weight:600}
 .ag-ask textarea{font-size:16px;min-height:96px;padding-right:56px}
-.ag-ex,.ag-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ag-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ag-skills{border-radius:12px;border:1px solid var(--hairline);overflow:hidden}
+.ag-skills > div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:10px;align-items:center;padding:6px 10px 6px 14px}
+.ag-skills > div + div{border-top:1px solid var(--hairline)}
+.ag-skills .sk-m{font-size:12.5px;font-weight:500;color:var(--text)}
+.ag-skills .pillbtn{padding:4px 10px;font-size:12px}
 .pillbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);border-radius:999px;padding:5px 11px;font-size:12.5px;line-height:1.3;cursor:pointer;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
 .pillbtn:hover{background:var(--fill)}
 .pillbtn[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
@@ -274,8 +304,8 @@ a:hover{text-decoration:underline}
 .sitelist li.dim{display:none}
 .sl-name{display:inline-flex;align-items:center;gap:8px;min-width:0}
 .sl-name .meta{font-size:12px}
-@media (max-width:1023px){.agent-in{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}}
-@media (max-width:760px){.ag-left,.ag-right{padding:20px 16px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
+@media (max-width:1023px){.ag-cols{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}.ag-exgrid{gap:8px}.ag-extile{padding:10px 11px 11px}.ag-extile .x-t{font-size:14px}.ag-head{grid-template-columns:minmax(0,1fr) 220px;gap:20px}}
+@media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-exgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-skills > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
 @media (prefers-reduced-motion:reduce){.agent,.live{animation:none}.trace.play li,.trace.play + .tfoot{animation:none;opacity:1}}
 
 /* ---------- LEVEL 2: community ---------- */
@@ -748,6 +778,8 @@ const LIB = {
   registry: E('agents/runtime/catalog.py', P + 'agents/runtime/catalog.py', 'The library’s registry of tools a planner may call, each with what it requires and produces.'),
   t_load: E('load_ert_surveys → load_ert_container', P + 'data_processing/ert_io.py', 'Registered tool. Reads ERT field files with electrode geometry and topography.'),
   t_inv: E('invert_ert → run_ert_manager_inversion', P + 'inversion/ert_inversion.py', 'Registered tool. Recovers a resistivity model from a single ERT survey.'),
+  t_tl: E('invert_time_lapse → TimeLapseERTInversion', P + 'inversion/time_lapse.py', 'Registered tool. Recovers a resistivity model for every survey at once, linking consecutive surveys in time.'),
+  t_gprload: E('load_gpr_line → read_gpr', P + 'data_processing/gpr.py', 'Registered tool. Reads a radar line (GSSI DZT, pulseEKKO DT1, MALÅ, SEG-Y) and draws its radargram as recorded.'),
   t_pick: E('pick_first_breaks', P + 'data_processing/seismic.py', 'Registered tool. Picks first-arrival travel times and places them on the survey geometry.'),
   t_srt: E('invert_seismic → run_srt_manager_inversion', P + 'inversion/srt_inversion.py', 'Registered tool. Inverts first-arrival travel times for a P-wave velocity model.'),
   t_iface: E('extract_seismic_interfaces → extract_velocity_structure', P + 'Geophy_modular/seismic_processor.py', 'Registered tool. Traces layer interfaces through the velocity model at threshold velocities.'),
@@ -772,27 +804,29 @@ const METHOD = {
   unk: { name: 'Method not yet identified', short: 'Unidentified', lib: null }
 };
 const METHOD_KEYS = ['ert', 'srt', 'gpr', 'em', 'bh'];
-/* Dataset categories of the WYCEHG site compilation. */
+/* Dataset categories by the methods a site holds. They regroup the WYCEHG compilation's:
+   "Both (ERT + Seismic)" is multi, "Seismic only" and "Seismic-associated / BCZN" are seis
+   (BCZN kept as the site's net), "Unresolved" is unres. */
 const CAT = {
-  both: { name: 'Both (ERT + Seismic)', shape: 'circle' },
-  seis: { name: 'Seismic only', shape: 'triangle' },
-  bczn: { name: 'Seismic-associated / BCZN', shape: 'diamond' },
-  unres: { name: 'Unresolved', shape: 'square' }
+  multi: { name: 'Multi-method (ERT, seismic and more)', shape: 'circle' },
+  seis: { name: 'Seismic refraction only', shape: 'triangle' },
+  unres: { name: 'Survey format not yet identified', shape: 'square' }
 };
 const sv = (id, m, label) => ({ id, m, label });
 const UNRES = { q: 1, md: 1, L: 60, D: 10, sp: 2, topo: 'not identified', boreholes: null, cores: null,
   meta: 'Survey files archived; method and geometry not yet identified',
   f: { base: 3, a1: 0.6, l1: 50, p1: 0.5, a2: 0.2, l2: 15, p2: 1, w: 0.3, t0: 0.15, tg: 0.02, dry: 0.04, lat: 0.02, latL: 40, b0: 0.12, bg: -0.004, lens: [], doi: 8, sb: 0.02, sd: 0.04, se: 0.035, soil: 0.5, phiA: 0.4, phiB: 0.2 } };
-/* Site codes, states and categories follow the WYCEHG compilation; map positions follow its figure.
+/* Site codes, states and BCZN membership follow the WYCEHG compilation, categories regroup its
+   (see CAT); map positions follow its figure.
    Survey records and every value derived from them are sample content. */
 const SITES = [
-  { id: 'rcczo', name: 'RCCZO', region: 'Idaho', cat: 'both', x: 160.0, y: 159.4, q: 3, md: 3, L: 96, D: 16, sp: 2,
+  { id: 'rcczo', name: 'RCCZO', region: 'Idaho', cat: 'multi', x: 160.0, y: 159.4, q: 3, md: 3, L: 96, D: 16, sp: 2,
     surveys: [sv('SRV-0139', 'srt', 'Aug 2018'), sv('SRV-0142', 'ert', 'Apr 2019'), sv('SRV-0143', 'ert', 'Sep 2019'), sv('SRV-0145', 'em', 'Sep 2019'), sv('SRV-0147', 'bh', 'Jun 2019')],
     repeat: ['12 Apr 2019', '19 Sep 2019'], topo: 'RTK survey', boreholes: 'BH-1, 12 m', cores: 'six cores',
     meta: 'Loamy soil over weathered granite · porosity 0.38–0.46 from six cores · borehole BH-1 to 12 m · temperature logger at 1 m',
     header: 'ERT dipole–dipole, 49 electrodes at 2 m · SRT 47 geophones at 2 m, 24 shots · TEM 8 soundings along the line · BH-1 lithology and natural-gamma log to 12 m',
     f: { base: 4.4, a1: 1.4, l1: 80, p1: 0.4, a2: 0.5, l2: 26, p2: 2.0, w: 0.22, t0: 0.18, tg: 0.02, dry: 0.06, lat: 0.025, latL: 60, b0: 0.13, bg: -0.004, lens: [{ x: 64, z: 2.6, rx: 8, rz: 1.2, a: 0.06 }, { x: 22, z: 3.0, rx: 7, rz: 1.3, a: 0.035 }, { x: 44, z: 9, rx: 14, rz: 3, a: -0.03 }], doi: 13, sb: 0.010, sd: 0.030, se: 0.030, soil: 1.1, phiA: 0.44, phiB: 0.15, slope: 22, elev0: 1650 } },
-  { id: 'wind', name: 'WIND', region: 'Wyoming', cat: 'both', x: 273.3, y: 180.0, q: 3, md: 3, L: 100, D: 8, sp: 1,
+  { id: 'wind', name: 'WIND', region: 'Wyoming', cat: 'multi', x: 273.3, y: 180.0, q: 3, md: 3, L: 100, D: 8, sp: 1,
     surveys: [sv('SRV-0201', 'ert', 'May 2018'), sv('SRV-0202', 'ert', 'Jul 2018'), sv('SRV-0203', 'ert', 'Sep 2018'), sv('SRV-0204', 'ert', 'Oct 2018'), sv('SRV-0205', 'srt', 'Jul 2018'), sv('SRV-0206', 'gpr', 'Jul 2018')],
     repeat: ['May 2018', 'Oct 2018'], topo: 'RTK survey', boreholes: 'piezometers P1–P4', cores: 'two cores',
     meta: 'Meadow soil over glacial till · porosity from two cores · pore-water chemistry at four piezometers',
@@ -800,13 +834,13 @@ const SITES = [
     f: { base: 2.6, a1: 0.4, l1: 90, p1: 0.8, a2: 0.2, l2: 23, p2: 2.2, w: 0.25, t0: 0.20, tg: 0.03, dry: 0.05, lat: 0.02, latL: 50, b0: 0.36, bg: -0.006, lens: [], doi: 7, sb: 0.012, sd: 0.030, se: 0.030, soil: 0.3, phiA: 0.48, phiB: 0.40, wt: 1.9, repeatTo: 80 } },
   { id: 'eel', name: 'EEL', region: 'California', cat: 'unres', x: 22.4, y: 202.3, ...UNRES,
     surveys: [sv('SRV-0119', 'unk', 'Sep 2017')], header: 'Three files; vendor format not recognised from the header' },
-  { id: 'ssczo', name: 'SSCZO', region: 'California', cat: 'both', x: 87.3, y: 291.0, q: 3, md: 3, L: 80, D: 12, sp: 1,
+  { id: 'ssczo', name: 'SSCZO', region: 'California', cat: 'multi', x: 87.3, y: 291.0, q: 3, md: 3, L: 80, D: 12, sp: 1,
     surveys: [sv('SRV-0312', 'ert', 'Apr 2019'), sv('SRV-0313', 'ert', 'Jul 2019'), sv('SRV-0314', 'ert', 'Sep 2019'), sv('SRV-0315', 'srt', 'Apr 2019'), sv('SRV-0316', 'gpr', 'Jul 2019')],
     repeat: ['Apr 2019', 'Sep 2019'], topo: 'RTK survey', boreholes: null, cores: 'soil-pit texture',
     meta: 'Sandy loam over saprolite · wilting point 0.07 from soil texture · rooting depth logged in two soil pits',
     header: 'ERT 81 electrodes at 1 m (April, July, September) · SRT 41 geophones at 2 m · GPR 500 MHz along the line',
     f: { base: 2.3, a1: 0.6, l1: 55, p1: 1.1, a2: 0.25, l2: 17, p2: 0.4, w: 0.25, t0: 0.16, tg: 0.035, dry: 0.05, lat: 0.025, latL: 45, b0: 0.12, bg: -0.004, lens: [{ x: 30, z: 1.2, rx: 9, rz: 0.8, a: 0.04 }], doi: 10, sb: 0.010, sd: 0.028, se: 0.030, soil: 0.4, phiA: 0.42, phiB: 0.25, wp: 0.07 } },
-  { id: 'bw', name: 'BW', region: 'Wyoming', cat: 'both', x: 324.6, y: 236.6, q: 3, md: 3, L: 115, D: 25, sp: 2.5, la: 'left',
+  { id: 'bw', name: 'BW', region: 'Wyoming', cat: 'multi', x: 324.6, y: 236.6, q: 3, md: 3, L: 115, D: 25, sp: 2.5, la: 'left',
     surveys: [sv('SRV-0175', 'srt', 'Jul 2018'), sv('SRV-0176', 'ert', 'Jul 2018'), sv('SRV-0177', 'bh', 'Aug 2018'), sv('SRV-0178', 'em', 'Jul 2018')], topo: 'total-station survey', boreholes: 'BW-1 and BW-2', cores: 'core samples',
     meta: 'Weathered granite under a forested ridge · porosity 0.30–0.42 from core · boreholes BW-1 and BW-2',
     header: 'SRT 47 geophones at 2.5 m, 24 shots · ERT Wenner, 24 electrodes at 5 m · BW-1 and BW-2 lithology, gamma and resistivity logs · TEM 10 soundings',
@@ -826,17 +860,17 @@ const SITES = [
     meta: 'Colluvium over crystalline bedrock · no boreholes',
     header: 'SRT 41 geophones at 2 m, 21 shots',
     f: { base: 5.0, a1: 1.3, l1: 75, p1: 0.9, a2: 0.5, l2: 22, p2: 1.9, w: 0.3, t0: 0.16, tg: 0.015, dry: 0.04, lat: 0.02, latL: 45, b0: 0.10, bg: -0.003, lens: [], doi: 14, sb: 0.015, sd: 0.035, se: 0.030, soil: 0.8, phiA: 0.40, phiB: 0.13, slope: 18, elev0: 2600 } },
-  { id: 'bc', name: 'BC', region: 'Colorado', cat: 'bczn', x: 334.1, y: 277.5, q: 3, md: 2, L: 110, D: 20, sp: 2.5,
+  { id: 'bc', name: 'BC', region: 'Colorado', cat: 'seis', net: 'BCZN', x: 334.1, y: 277.5, q: 3, md: 2, L: 110, D: 20, sp: 2.5,
     surveys: [sv('SRV-0088', 'srt', 'Jul 2016')], topo: 'total-station survey', boreholes: null, cores: null,
     meta: 'Weathered granite and gneiss on a forested slope · no boreholes',
     header: 'SRT 45 geophones at 2.5 m, 23 shots',
     f: { base: 6.0, a1: 1.8, l1: 95, p1: 0.2, a2: 0.6, l2: 27, p2: 1.3, w: 0.35, t0: 0.15, tg: 0.015, dry: 0.04, lat: 0.02, latL: 55, b0: 0.10, bg: -0.003, lens: [], doi: 16, sb: 0.015, sd: 0.035, se: 0.030, soil: 0.8, phiA: 0.40, phiB: 0.13, slope: 20, elev0: 2700 } },
-  { id: 'sgm', name: 'SGM', region: 'California', cat: 'bczn', x: 95.8, y: 354.0, q: 3, md: 2, L: 120, D: 10, sp: 2.5,
+  { id: 'sgm', name: 'SGM', region: 'California', cat: 'seis', net: 'BCZN', x: 95.8, y: 354.0, q: 3, md: 2, L: 120, D: 10, sp: 2.5,
     surveys: [sv('SRV-0305', 'srt', 'Jun 2020')], topo: 'total-station survey', boreholes: null, cores: null,
     meta: 'Colluvium over fractured gneiss · mean slope 28° · no boreholes',
     header: 'SRT 49 geophones at 2.5 m, 25 shots',
     f: { base: 2.9, a1: 0.9, l1: 70, p1: 0.3, a2: 0.4, l2: 19, p2: 1.7, w: 0.3, t0: 0.14, tg: 0.02, dry: 0.04, lat: 0.02, latL: 40, b0: 0.08, bg: -0.003, lens: [], doi: 8, sb: 0.014, sd: 0.030, se: 0.030, soil: 0.4, phiA: 0.36, phiB: 0.10, step: { x: 98, w: 1.6, a: -1.7 }, slope: 28, elev0: 1460, masks: [[0, 7], [54, 66], [113, 120]] } },
-  { id: 'sjm', name: 'SJM', region: 'California', cat: 'bczn', x: 110.4, y: 368.5, q: 1, md: 1, L: 64, D: 10, sp: 2,
+  { id: 'sjm', name: 'SJM', region: 'California', cat: 'seis', net: 'BCZN', x: 110.4, y: 368.5, q: 1, md: 1, L: 64, D: 10, sp: 2,
     surveys: [sv('SRV-0290', 'srt', 'Aug 2017')], topo: 'none recorded', boreholes: null, cores: null,
     meta: 'Steep granitic slope · mean slope 35° · no survey geometry recorded',
     header: 'SRT 33 geophones, nominal 2 m spacing, 9 shots',
@@ -853,7 +887,7 @@ const SITES = [
     meta: 'Shale-derived soil under cropland · no core data',
     header: 'SRT 25 geophones at 3 m, 13 shots',
     f: { base: 5.2, a1: 0.5, l1: 140, p1: 0, a2: 0.15, l2: 18, p2: 1.0, w: 0.3, t0: 0.10, tg: 0.012, dry: 0.03, lat: 0.015, latL: 50, b0: 0.34, bg: -0.004, lens: [], doi: 6, sb: 0.020, sd: 0.040, se: 0.035, soil: 0.7, phiA: 0.38, phiB: 0.36 } },
-  { id: 'pb', name: 'PB', region: 'Maryland', cat: 'bczn', x: 847.7, y: 247.4, q: 2, md: 2, L: 120, D: 30, sp: 2.5,
+  { id: 'pb', name: 'PB', region: 'Maryland', cat: 'seis', net: 'BCZN', x: 847.7, y: 247.4, q: 2, md: 2, L: 120, D: 30, sp: 2.5,
     surveys: [sv('SRV-0241', 'srt', 'Aug 2020')], topo: 'RTK survey', boreholes: null, cores: null,
     meta: 'Deep saprolite over schist · no boreholes',
     header: 'SRT 49 geophones at 2.5 m, 25 shots',
@@ -1034,6 +1068,10 @@ const CITES = {
     { src: P + 'petrophysics/resistivity_models.py', text: 'Convert resistivity to water content using Waxman-Smits model.', score: 0.86 },
     { src: P + 'petrophysics/monte_carlo.py', text: 'Canonical seeded Monte Carlo conversion for ERT-derived petrophysics.', score: 0.72 }
   ],
+  sat_inf: s => [
+    { src: P + 'petrophysics/resistivity_models.py', text: 'Convert resistivity to saturation using Waxman-Smits model.', score: 0.87 },
+    { src: P + 'data_processing/gpr.py', text: 'Bulk relative permittivity of a soil by the CRIM mixing law.', score: 0.69 }
+  ],
   iface_inf: s => [
     { src: P + 'Geophy_modular/seismic_processor.py', text: 'Extract structure interface from velocity model at the specified threshold.', score: 0.89 },
     { src: P + 'agents/runtime/catalog.py', text: 'Trace layer interfaces through the seismic velocity model at the threshold velocities (velocity_threshold, 1200 m/s by default)', score: 0.84 }
@@ -1044,9 +1082,11 @@ const CITES = {
 const TOOLS = [
   { name: 'load_ert_surveys', args: [['path', 'str'], ['instrument', 'str | None', 'None'], ['electrode_file', 'str | None', 'None'], ['spacing', 'float | None', 'None']], ret: 'ert_data', lib: 't_load' },
   { name: 'invert_ert', args: [['data', 'ert_data'], ['lam', 'float', '50.0'], ['auto_lambda', 'bool', 'False'], ['target_chi2', 'float', '1.0'], ['zones', 'list[dict] | None', 'None'], ['decouple_zones', 'bool', 'False'], ['solver', 'str', '"cgls"']], ret: 'inversion_results', lib: 't_inv' },
+  { name: 'invert_time_lapse', args: [['data_files', 'list[str]'], ['measurement_times', 'list[float]'], ['mesh', 'Mesh | None', 'None']], ret: 'inversion_results', lib: 't_tl' },
   { name: 'pick_first_breaks', args: [['data', 'SeismicDataset'], ['threshold', 'float', '0.2'], ['noise_multiplier', 'float', '5.0'], ['max_time', 'float | None', 'None']], ret: 'seismic_picks', lib: 't_pick' },
   { name: 'invert_seismic', args: [['travel_times', 'seismic_picks'], ['lam', 'float', '50.0'], ['secondary_nodes', 'int', '3'], ['auto_lambda', 'bool', 'False']], ret: 'seismic_results', lib: 't_srt' },
   { name: 'extract_seismic_interfaces', args: [['model', 'seismic_results'], ['threshold', 'float', '1200'], ['interval', 'float', '4.0']], ret: 'seismic_structure', lib: 't_iface' },
+  { name: 'load_gpr_line', args: [['path', 'PathLike'], ['**options', 'Any']], ret: 'gpr_data', lib: 't_gprload' },
   { name: 'process_gpr_line', args: [['profile', 'GPRProfile'], ['steps', 'list[dict]']], ret: 'gpr_results', lib: 't_gpr' },
   { name: 'invert_tdem', args: [['times', 'ndarray'], ['dobs', 'ndarray'], ['uncertainties', 'ndarray'], ['n_layers', 'int', '25'], ['use_irls', 'bool', 'True']], ret: 'tdem_results', lib: 't_tdem' },
   { name: 'convert_water_content', args: [['resistivity', 'ndarray'], ['markers', 'ndarray'], ['layers', 'list[dict]'], ['n_realizations', 'int', '100'], ['seed', 'int', '7']], ret: 'water_content', lib: 't_wc' },
@@ -1759,7 +1799,7 @@ function popHTML(t) {
   if (t.dataset.site) {
     const s = SITE[t.dataset.site];
     if (t.dataset.mode === 'community') { const ps = productStatus(s, t.dataset.cid, t.dataset.pid); return `<div class="pop-name">${esc(s.name)}</div><p class="pop-desc">${statusChip(ps.label)}</p><p class="pop-desc">${ps.why ? 'Missing: ' + esc(lc(ps.why)) + '. ' : ''}${esc(ps.s.effect)}</p>`; }
-    return `<div class="pop-name">${esc(s.name)} · ${esc(s.region)}</div><p class="pop-desc pop-cat">${catGlyph(s.cat)} ${CAT[s.cat].name}</p><dl><dt>Methods</dt><dd>${methodsOf(s).map(m => METHOD[m].name).join('<br>')}</dd><dt>Years</dt><dd>${yearsOf(s)}</dd><dt>Surveys</dt><dd>${s.surveys.length}</dd></dl>`;
+    return `<div class="pop-name">${esc(s.name)} · ${esc(s.region)}</div><p class="pop-desc pop-cat">${catGlyph(s.cat)} ${CAT[s.cat].name}</p><dl>${s.net ? `<dt>Network</dt><dd>${esc(s.net)}</dd>` : ''}<dt>Methods</dt><dd>${methodsOf(s).map(m => METHOD[m].name).join('<br>')}</dd><dt>Years</dt><dd>${yearsOf(s)}</dd><dt>Surveys</dt><dd>${s.surveys.length}</dd></dl>`;
   }
   if (t.dataset.tip) return `<p class="pop-plain">${esc(t.dataset.tip)}</p>`;
   if (t.dataset.cite) {
@@ -1863,38 +1903,50 @@ function renderCrumbs(r) {
 /* Agent console on the front door: a sample run, replayed in the      */
 /* browser. The controls change the replayed trace; nothing is computed.*/
 /* ================================================================== */
+/* Skills, grouped by the method they serve; 'x' holds the ones every method shares. */
 const SKILLS = [
-  { k: 'ert-data-quality', name: 'ERT data quality', desc: 'Screens reciprocal errors and bad electrodes before an inversion.', lib: 'ert_load' },
-  { k: 'ert-inversion-settings', name: 'ERT inversion settings', desc: 'Chooses mesh, regularization weight and solver for a resistivity survey.', lib: 'ert_inv' },
-  { k: 'timelapse-ert', name: 'Time-lapse ERT', desc: 'Inverts repeat surveys of one line together and differences them.', lib: 'ert_tl' },
-  { k: 'water-content-from-resistivity', name: 'Water content from resistivity', desc: 'Converts resistivity to water content, carrying the petrophysical uncertainty.', lib: 'unc_mc' },
-  { k: 'seismic-first-break-review', name: 'Seismic first-break review', desc: 'Picks and screens first arrivals before refraction tomography.', lib: 'srt_pick' },
-  { k: 'tdem-sounding-inversion', name: 'TEM sounding inversion', desc: 'Inverts transient electromagnetic soundings for a layered model.', lib: 'tdem_inv' }
+  { k: 'ert-data-quality', m: 'ert', short: 'Data quality', name: 'ERT data quality', desc: 'Screens reciprocal errors and bad electrodes before an inversion.', lib: 'ert_load' },
+  { k: 'ert-inversion-settings', m: 'ert', short: 'Inversion', name: 'ERT inversion settings', desc: 'Chooses mesh, regularization weight and solver for a resistivity survey.', lib: 'ert_inv' },
+  { k: 'timelapse-ert', m: 'ert', short: 'Time-lapse', name: 'Time-lapse ERT', desc: 'Inverts repeat surveys of one line together and differences them.', lib: 'ert_tl' },
+  { k: 'seismic-first-break-review', m: 'srt', short: 'First breaks', name: 'Seismic first-break review', desc: 'Picks and screens first arrivals before refraction tomography.', lib: 'srt_pick' },
+  { k: 'seismic-interfaces', m: 'srt', short: 'Interfaces', name: 'Seismic interfaces', desc: 'Traces fresh rock and other layer boundaries along a threshold velocity, 1,200 m/s unless boreholes calibrate it.', lib: 'srt_iface' },
+  { k: 'gpr-processing', m: 'gpr', short: 'Processing', name: 'GPR processing', desc: 'Dewow, time zero, filtering, gain, migration and time-to-depth for one radar line.', lib: 't_gpr' },
+  { k: 'gpr-water-content', m: 'gpr', short: 'Water content', name: 'GPR water content', desc: 'Relates radar velocity to water content through the CRIM mixing law.', lib: 'gpr_crim' },
+  { k: 'tdem-sounding-inversion', m: 'em', short: 'TEM soundings', name: 'TEM sounding inversion', desc: 'Inverts transient electromagnetic soundings for a layered model.', lib: 'tdem_inv' },
+  { k: 'borehole-calibration', m: 'bh', short: 'Log calibration', name: 'Borehole calibration', desc: 'Ties velocity and resistivity interfaces to lithology logs and water levels.', lib: 'bh_load' },
+  { k: 'water-content-from-resistivity', m: 'x', short: 'Resistivity to water', name: 'Water content from resistivity', desc: 'Converts resistivity to water content, carrying the petrophysical uncertainty.', lib: 'unc_mc' },
+  { k: 'uncertainty-propagation', m: 'x', short: 'Uncertainty', name: 'Uncertainty propagation', desc: 'Carries the inversion posterior and parameter ranges into every derived product.', lib: 'unc_post' }
 ];
 const SKILL = Object.fromEntries(SKILLS.map(k => [k.k, k]));
+const SKILL_GROUPS = [...METHOD_KEYS.map(m => [m, METHOD[m].short]), ['x', 'Across methods']];
 const SOURCES = [
   { k: 'lib', name: 'Library docs and docstrings', chunks: 2604, hits: 4 },
   { k: 'cat', name: 'Curated catalog metadata', chunks: 512, hits: 2 },
   { k: 'pub', name: 'Published studies', chunks: 296, hits: 1 }
 ];
+/* One example per community, together covering the five methods; the last is one the agent declines. */
 const AGENT_EX = [
-  { label: 'Water storage at RCCZO', site: 'rcczo', cid: 'hydrology', pid: 'storage', stats: [0, 1], methods: ['ert', 'em'], cite: 'petro_res_inf',
+  { title: 'Water storage', site: 'rcczo', cid: 'hydrology', pid: 'storage', stats: [0, 1], methods: ['ert', 'em'], cite: 'petro_res_inf',
     q: 'How much water is stored in the upper 5 m at RCCZO, and how did it change between the April and September 2019 surveys?',
-    skills: ['ert-data-quality', 'ert-inversion-settings', 'timelapse-ert', 'tdem-sounding-inversion', 'water-content-from-resistivity'],
+    skills: ['ert-data-quality', 'ert-inversion-settings', 'timelapse-ert', 'tdem-sounding-inversion', 'water-content-from-resistivity', 'uncertainty-propagation'],
     tools: ['load_ert_surveys', 'invert_ert', 'invert_tdem', 'convert_water_content', 'propagate_uncertainty', 'write_report'] },
-  { label: 'Fresh rock at BW', site: 'bw', cid: 'geomorphology', pid: 'bedrock-depth', stats: [0, 1], methods: ['srt', 'ert', 'bh'], cite: 'iface_inf',
+  { title: 'Depth to fresh rock', site: 'bw', cid: 'geomorphology', pid: 'bedrock-depth', stats: [0, 1], methods: ['srt', 'ert', 'bh'], cite: 'iface_inf',
     q: 'Where is fresh rock under the BW ridge, and how sure are we of its depth?',
-    skills: ['seismic-first-break-review', 'ert-inversion-settings'],
+    skills: ['seismic-first-break-review', 'seismic-interfaces', 'borehole-calibration', 'ert-inversion-settings'],
     tools: ['pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'load_ert_surveys', 'invert_ert', 'write_report'] },
-  { label: 'Root water at SSCZO', site: 'ssczo', cid: 'forest-ecology', pid: 'root-water', stats: [0, 1], methods: ['ert', 'srt'], cite: 'petro_res_inf',
+  { title: 'Root-accessible water', site: 'ssczo', cid: 'forest-ecology', pid: 'root-water', stats: [0, 1], methods: ['ert', 'srt', 'gpr'], cite: 'petro_res_inf',
     q: 'How much water can roots reach at SSCZO, above the layer they cannot pass?',
-    skills: ['ert-data-quality', 'ert-inversion-settings', 'water-content-from-resistivity', 'seismic-first-break-review'],
-    tools: ['load_ert_surveys', 'invert_ert', 'convert_water_content', 'pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'propagate_uncertainty', 'write_report'] },
-  { label: 'Slope continuity at SGM', site: 'sgm', cid: 'natural-hazards', pid: 'continuity', stats: [0, 1], methods: ['srt'], cite: 'iface_inf',
+    skills: ['ert-data-quality', 'water-content-from-resistivity', 'seismic-interfaces', 'gpr-processing', 'uncertainty-propagation'],
+    tools: ['load_ert_surveys', 'invert_ert', 'convert_water_content', 'pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'load_gpr_line', 'process_gpr_line', 'propagate_uncertainty', 'write_report'] },
+  { title: 'Reactive-zone thickness', site: 'wind', cid: 'biogeochemistry', pid: 'reactive-thickness', stats: [0, 1], methods: ['ert', 'gpr'], cite: 'sat_inf',
+    q: 'How thick is the reactive zone at WIND, and how much of the year does it stay saturated?',
+    skills: ['ert-data-quality', 'timelapse-ert', 'water-content-from-resistivity', 'gpr-processing'],
+    tools: ['load_ert_surveys', 'invert_time_lapse', 'convert_water_content', 'load_gpr_line', 'process_gpr_line', 'write_report'] },
+  { title: 'Slope continuity', site: 'sgm', cid: 'natural-hazards', pid: 'continuity', stats: [0, 1], methods: ['srt'], cite: 'iface_inf',
     q: 'Is the regolith continuous across the SGM slope, or does it break?',
-    skills: ['seismic-first-break-review'],
+    skills: ['seismic-first-break-review', 'seismic-interfaces'],
     tools: ['pick_first_breaks', 'invert_seismic', 'extract_seismic_interfaces', 'write_report'] },
-  { label: 'Water storage at EEL', site: 'eel', cid: 'hydrology', pid: 'storage', stats: [], methods: [], cite: null,
+  { title: 'Water storage', site: 'eel', cid: 'hydrology', pid: 'storage', stats: [], methods: [], cite: null, decline: true,
     q: 'How much water is stored under the EEL hillslope?', skills: [], tools: ['load_ert_surveys'] }
 ];
 const NUMW = ['no', 'one', 'two', 'three', 'four', 'five'];
@@ -1925,7 +1977,7 @@ function agentTrace() {
       body: `The plan schema allows a refusal, not a guess: <span class="mono">{"declined": {"missing_input": "the survey method, identified from the file headers"}}</span>. A curator can confirm the format, and the request will plan normally.` });
   } else {
     steps.push({ st: missing.length ? 'warn' : 'ok', title: 'Load skills', meta: `${loaded.length} of ${ex.skills.length} needed`,
-      body: `${loaded.length ? loaded.map(k => `<span class="tskill">${esc(SKILL[k].name)}</span>`).join('') : 'None loaded.'}${missing.length ? `<span class="tnote">Not loaded: ${missing.map(k => SKILL[k].name).join(', ')}. ${missing.includes('timelapse-ert') ? 'Storage change cannot be planned without it; ' : ''}parameters it would set fall back to documented defaults and are marked inferred.</span>` : ''}${extra.length ? `<span class="tnote">Selected but not needed here: ${extra.map(k => SKILL[k].name).join(', ')}. Only its index entry enters the context.</span>` : ''}` });
+      body: `${loaded.length ? loaded.map(k => `<span class="tskill">${esc(SKILL[k].name)}</span>`).join('') : 'None loaded.'}${missing.length ? `<span class="tnote">Not loaded: ${missing.map(k => SKILL[k].name).join(', ')}. ${missing.includes('timelapse-ert') ? 'The change between surveys cannot be planned without it; ' : ''}parameters it would set fall back to documented defaults and are marked inferred.</span>` : ''}${extra.length ? `<span class="tnote">Selected but not needed here: ${extra.map(k => SKILL[k].name).join(', ')}. Only its index entry enters the context.</span>` : ''}` });
     const nInf = 2 + missing.length;
     steps.push({ st: 'ok', title: 'Plan with structured output', meta: t(0.5),
       body: `Constrained decoding against plan schema v1.2; the plan validated on the first pass. ${ex.tools.length} tool calls, ${nInf} inferred value${nInf > 1 ? 's' : ''}${srcOn.length ? ', each cited' : ', uncited'}.` });
@@ -1943,26 +1995,51 @@ function traceHTML() {
   return `<ol class="trace${ag.play ? ' play' : ''}">${tr.steps.map((x, i) => `<li class="t-${x.st}${x.deliver ? ' t-deliver' : ''}" style="--i:${i}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : x.st === 'warn' ? '!' : ''}</span><div class="tbody"><div class="tt"><span>${x.title}</span><em>${esc(x.meta)}</em></div><div class="tb">${x.body}</div></div></li>`).join('')}</ol>
     <p class="tfoot" style="--i:${tr.steps.length}">Prompt ${f(tr.prompt)} tokens, ${f(tr.cached)} from the prompt cache · completion ${f(tr.comp)} · ${tr.tier.name}, ${tr.tier.ctx} context</p>`;
 }
+/* Locator map of the example sites: every catalog site faint, the examples clickable, the chosen one labelled. */
+function agentMapHTML() {
+  const exSites = new Set(AGENT_EX.map(e => e.site));
+  const others = SITES.filter(s => !exSites.has(s.id)).map(s => `<circle class="am-o" cx="${s.x}" cy="${s.y}" r="7"/>`).join('');
+  const marks = AGENT_EX.map((e, i) => { const s = SITE[e.site], left = s.x > 700;
+    return `<g class="am" data-ag-ex="${i}" aria-pressed="${i === ag.ex}" transform="translate(${s.x} ${s.y})"><circle class="am-ring" r="26"/><circle class="am-dot" r="11"/><text class="am-code" x="${left ? -20 : 20}" y="10" text-anchor="${left ? 'end' : 'start'}">${s.name}</text></g>`; }).join('');
+  return `<svg class="ag-map" viewBox="0 30 1000 560" role="img" aria-label="Map of the example sites; the chosen one is highlighted"><path d="${MAP_US}" fill="var(--map-land)" stroke="var(--map-state)" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>${others}${marks}</svg>`;
+}
+function setAgentExample(i) {
+  ag.ex = i; ag.skills = new Set(AGENT_EX[i].skills); $('#ag-q').value = AGENT_EX[i].q;
+  $$('[data-ag-ex]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.agEx === i));
+  $$('[data-ag-skill]').forEach(b => b.setAttribute('aria-pressed', ag.skills.has(b.dataset.agSkill)));
+  renderTrace(true);
+}
 function agentHTML() {
-  const ex = AGENT_EX[ag.ex];
+  const ex = AGENT_EX[ag.ex], dIx = AGENT_EX.findIndex(e => e.decline), dEx = AGENT_EX[dIx];
+  const tile = (e, i) => { const s = SITE[e.site];
+    return `<button type="button" class="ag-extile" data-ag-ex="${i}" aria-pressed="${i === ag.ex}"><span class="x-c">${esc(COMM[e.cid].name)}</span><span class="x-t">${esc(e.title)}</span><span class="x-s">${esc(s.name)} · ${esc(s.region)}</span><span class="x-m">${e.methods.map(m => `<span>${METHOD[m].short}</span>`).join('')}</span></button>`; };
   return `<section class="agent" aria-labelledby="ag-h"><div class="agent-in">
+    <div class="ag-top">
+      <div class="ag-head">
+        <div><p class="ag-eyebrow">${ICON.spark}Agentic workflow</p>
+          <h2 id="ag-h">Ask in your own words. An agent plans the analysis.</h2>
+          <p class="ag-sub">One question from each of five communities, answered with all five methods between them. Pick one to replay how the agent plans it.</p></div>
+        ${agentMapHTML()}
+      </div>
+      <div class="ag-exgrid" role="group" aria-label="Example requests, one per community">${AGENT_EX.map((e, i) => e.decline ? '' : tile(e, i)).join('')}</div>
+      <p class="ag-decline">Or one it should decline: <button type="button" class="linkbtn" data-ag-ex="${dIx}" aria-pressed="${dIx === ag.ex}">${esc(lc(dEx.title))} at ${esc(SITE[dEx.site].name)}, whose survey format is not yet identified</button></p>
+    </div>
+    <div class="ag-cols">
     <div class="ag-left">
-      <div><p class="ag-eyebrow">${ICON.spark}Agentic workflow</p>
-      <h2 id="ag-h">Ask in your own words. An agent plans the analysis.</h2></div>
       <div class="ask ag-ask"><label class="vh" for="ag-q">Request</label>
         <textarea id="ag-q" rows="3">${esc(ex.q)}</textarea>
         <button class="ask-send" type="button" aria-disabled="true" aria-label="Run (unavailable in the design preview)" data-tip="Design preview: the trace beside this is a sample run, and nothing is submitted.">${ICON.arrowUp}</button></div>
-      <div class="ag-ex" role="group" aria-label="Example requests">${AGENT_EX.map((e, i) => `<button type="button" class="pillbtn" data-ag-ex="${i}" aria-pressed="${i === ag.ex}">${esc(e.label)}</button>`).join('')}</div>
       <div class="ag-group"><div class="ag-label">Model</div>
         <div class="ag-tiers" role="radiogroup" aria-label="Planner model">${TIERS.map(t => `<label class="ag-tier"><input type="radio" name="ag-tier" value="${t.k}"${t.k === ag.tier ? ' checked' : ''}><span><b>${t.name}</b><em>${t.ctx} context</em><span>${t.role}</span></span></label>`).join('')}</div></div>
       <div class="ag-group"><div class="ag-label"><span>Retrieval (RAG)</span><button class="switch" type="button" role="switch" aria-checked="${ag.rag}" aria-label="Retrieval-augmented grounding" data-ag-rag></button></div>
         <div class="ag-chips">${SOURCES.map(x => `<button type="button" class="pillbtn" data-ag-src="${x.k}" aria-pressed="${ag.rag && ag.src[x.k]}"${ag.rag ? '' : ' disabled'}>${esc(x.name)} <em>${fmtInt(x.chunks)}</em></button>`).join('')}</div></div>
       <div class="ag-group"><div class="ag-label"><span>Skills</span><span class="ag-hint">Procedures the agent reads when a task calls for them</span></div>
-        <div class="ag-chips">${SKILLS.map(k => `<button type="button" class="pillbtn skill" data-ag-skill="${k.k}" aria-pressed="${ag.skills.has(k.k)}" data-tip="${esc(k.desc)}">${ICON.check}${esc(k.name)}</button>`).join('')}</div></div>
+        <div class="ag-skills">${SKILL_GROUPS.map(([m, label]) => `<div role="group" aria-label="${esc(label)} skills"><span class="sk-m">${esc(label)}</span><span class="ag-chips">${SKILLS.filter(k => k.m === m).map(k => `<button type="button" class="pillbtn skill" data-ag-skill="${k.k}" aria-pressed="${ag.skills.has(k.k)}" data-tip="${esc(k.desc)}">${ICON.check}${esc(k.short)}</button>`).join('')}</span></div>`).join('')}</div></div>
     </div>
     <div class="ag-right">
       <div class="ag-trace-h"><span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Sample run, replayed · nothing is computed</span><button type="button" class="linkbtn" data-ag-replay>Replay</button></div>
       <div id="ag-trace" aria-live="polite">${traceHTML()}</div>
+    </div>
     </div>
   </div></section>`;
 }
@@ -1971,7 +2048,7 @@ function renderTrace(play) { ag.play = !!play; const el = $('#ag-trace'); if (el
 /* ================================================================== */
 /* LEVEL 1 · front door                                                 */
 /* ================================================================== */
-const CAT_ORDER = ['both', 'seis', 'bczn', 'unres'];
+const CAT_ORDER = ['multi', 'seis', 'unres'];
 function renderDoor() {
   const nSurveys = SITES.reduce((a, s) => a + s.surveys.length, 0), nMethods = new Set(SITES.flatMap(methodsOf).filter(m => m !== 'unk')).size;
   const list = SITES.slice().sort((a, b) => CAT_ORDER.indexOf(a.cat) - CAT_ORDER.indexOf(b.cat) || a.name.localeCompare(b.name));
@@ -1999,7 +2076,7 @@ function renderDoor() {
       <div class="fact"><b>${COMMUNITIES.length}</b><span>disciplinary communities served</span></div>
     </section>
     <p class="expert"><a class="textlink" href="#/workspace">Browse the full catalog</a></p>
-    <footer class="foot"><span>Design preview. Site codes, states and categories follow the WYCEHG dataset compilation; survey records, the agent trace and every value are sample content, and nothing on this page is computed. Boundaries from Natural Earth.</span><a href="#/about">About this preview</a><a href="${REPO}" target="_blank" rel="noopener">Powered by PyHydroGeophysX</a></footer>
+    <footer class="foot"><span>Design preview. Site codes and states follow the WYCEHG dataset compilation, and the map groups its sites by the methods they hold; survey records, the agent trace and every value are sample content, and nothing on this page is computed. Boundaries from Natural Earth.</span><a href="#/about">About this preview</a><a href="${REPO}" target="_blank" rel="noopener">Powered by PyHydroGeophysX</a></footer>
   </div>`;
   ag.play = false;
 }
@@ -2010,7 +2087,7 @@ function renderAbout() {
     <p class="body">PyHydroGeophysX is an open-source Python package that connects near-surface geophysics with hydrology. It reads field data from common instruments; runs forward models and inversions for electrical resistivity, seismic refraction, ground-penetrating radar, electromagnetic and magnetotelluric surveys; and converts the results to water content through petrophysical relationships, carrying the uncertainty through each step. It also turns the output of hydrological models such as MODFLOW and ParFlow into the geophysical data they predict.</p>
     <p class="body">Today the package is used from Python, from a desktop studio and from a web app. A run can keep a provenance record: the input files with their hashes, the sequence of calls, the warnings raised and the quality of the fit.</p>
     <p class="body">UnEARTHeD would add a curated catalog of archived surveys, entry by place or by a question in a community’s own terms, products defined the same way at every site, and deposit of each product with its record. It is agentic by design: a language model plans each analysis, grounded by retrieval in the library and the catalog and guided by skills, the written procedures it reads when a task calls for them. Its output is structured, decoded against a plan schema and limited to registered tools; the validated plan then runs deterministically in a pinned environment, with no model in the loop.</p>
-    <p class="body">The sites shown are those of the WYCEHG geophysical dataset compilation, with their codes, states and dataset categories, at approximate positions. Their survey records, and every value derived from them here, are sample content.</p>
+    <p class="body">The sites shown are those of the WYCEHG geophysical dataset compilation, with their codes and states, at approximate positions. The map groups them by the methods they hold: multi-method sites, which the compilation lists as having both ERT and seismic data; seismic refraction only, which includes the compilation’s seismic-associated BCZN sites; and sites whose survey format is not yet identified. Their survey records, and every value derived from them here, are sample content.</p>
     <div class="links">
       <a href="${PAPER}" target="_blank" rel="noopener">Chen, Niu and Wu (2026), PyHydroGeophysX, SoftwareX 34, 102710 ↗</a>
       <a href="${REPO}" target="_blank" rel="noopener">Source code: github.com/geohang/PyHydroGeophysX ↗</a>
@@ -2137,7 +2214,7 @@ const STAT = { prop: ['st-prop', 'Propagated'], nc: ['st-nc', 'Not constrained']
 
 function renderWorkspaceCatalog() {
   const q = state.query.trim().toLowerCase(), cur = curSite(), rq = route.q || {};
-  const shown = SITES.filter(s => !q || q.split(/\s+/).every(w => `${s.name} ${s.region} ${CAT[s.cat].name} ${methodsOf(s).map(m => METHOD[m].name).join(' ')} ${s.surveys.map(v => v.id + ' ' + v.label).join(' ')}`.toLowerCase().includes(w)));
+  const shown = SITES.filter(s => !q || q.split(/\s+/).every(w => `${s.name} ${s.region} ${CAT[s.cat].name} ${s.net || ''} ${methodsOf(s).map(m => METHOD[m].name).join(' ')} ${s.surveys.map(v => v.id + ' ' + v.label).join(' ')}`.toLowerCase().includes(w)));
   $('#catalog').innerHTML = shown.length ? shown.map(s => `<li class="scard${s === cur ? ' is-selected' : ''}">
       <h3><a class="stretch" href="${wsHref(primarySurvey(s, rq.c), { c: rq.c, p: rq.p, curated: rq.curated, from: rq.c ? null : rq.from })}"${s === cur ? ' aria-current="true"' : ''}>${esc(s.name)}</a></h3>
       <p class="line">${catGlyph(s.cat)} ${esc(s.region)} · ${CAT[s.cat].name}</p>
@@ -2336,7 +2413,7 @@ document.addEventListener('click', e => {
   const dis = t.closest('[aria-disabled="true"]');
   if (dis) { e.preventDefault(); showPop(dis); return; }
   const agx = t.closest('[data-ag-ex]');
-  if (agx) { ag.ex = +agx.dataset.agEx; ag.skills = new Set(AGENT_EX[ag.ex].skills); $('#ag-q').value = AGENT_EX[ag.ex].q; $$('[data-ag-ex]').forEach(b => b.setAttribute('aria-pressed', b === agx)); $$('[data-ag-skill]').forEach(b => b.setAttribute('aria-pressed', ag.skills.has(b.dataset.agSkill))); renderTrace(true); return; }
+  if (agx) { setAgentExample(+agx.dataset.agEx); return; }
   if (t.closest('[data-ag-replay]')) { renderTrace(true); return; }
   const agr = t.closest('[data-ag-rag]');
   if (agr) { ag.rag = !ag.rag; agr.setAttribute('aria-checked', ag.rag); $$('[data-ag-src]').forEach(b => { b.disabled = !ag.rag; b.setAttribute('aria-pressed', ag.rag && ag.src[b.dataset.agSrc]); }); renderTrace(false); return; }
