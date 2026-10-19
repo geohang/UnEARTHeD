@@ -234,11 +234,12 @@ a:hover{text-decoration:underline}
 .ag-extile .x-t{font:600 15px/1.25 var(--font-display);letter-spacing:-.01em}
 .ag-ask textarea{font-size:16px;min-height:96px;padding-right:56px}
 .ag-chips{display:flex;flex-wrap:wrap;gap:6px}
-.ag-skills{border-radius:12px;border:1px solid var(--hairline);overflow:hidden}
-.ag-skills > div{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:start;padding:8px 10px 8px 14px}
-.ag-skills > div + div{border-top:1px solid var(--hairline)}
-.ag-skills .sk-m{padding-top:4px;font-size:12.5px;font-weight:500;color:var(--text)}
-.ag-skills .pillbtn{padding:4px 10px;font-size:12px}
+.ag-list{border-radius:12px;border:1px solid var(--hairline);overflow:hidden}
+.ag-list > div{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:start;padding:8px 10px 8px 14px}
+.ag-list > div + div{border-top:1px solid var(--hairline)}
+.ag-list .sk-m{padding-top:4px;font-size:12.5px;font-weight:500;color:var(--text)}
+.ag-list .pillbtn{padding:4px 10px;font-size:12px}
+.ag-list .seg{justify-self:start}
 .pillbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--hairline-strong);background:var(--surface);color:var(--text);border-radius:999px;padding:5px 11px;font-size:12.5px;line-height:1.3;cursor:pointer;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
 .pillbtn:hover{background:var(--fill)}
 .pillbtn[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
@@ -258,12 +259,12 @@ a:hover{text-decoration:underline}
 .ag-tier em{font-style:normal;color:var(--text-3);font-variant-numeric:tabular-nums}
 .ag-tier input:checked + span{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
 .ag-tier input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
-.ag-trace-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;margin-bottom:14px}
+.ag-trace-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;margin-bottom:12px}
 .ag-trace-h .sub{flex:1;font-size:12px;color:var(--text-2)}
 .live{width:8px;height:8px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 0 0 var(--accent-ring);animation:livePulse 2.4s var(--ease) infinite}
 @keyframes livePulse{0%{box-shadow:0 0 0 0 var(--accent-ring)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
 .trace{display:flex;flex-direction:column}
-.trace li{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding-bottom:14px}
+.trace li{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding-bottom:11px}
 .trace li::after{content:"";position:absolute;left:10.5px;top:26px;bottom:2px;width:1px;background:var(--hairline-strong)}
 .trace li:last-child::after{display:none}
 .tdot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff;background:var(--accent-fill)}
@@ -282,7 +283,7 @@ a:hover{text-decoration:underline}
 .tchain i{font-style:normal;color:var(--text-3);font-size:11px}
 .tchip{font-family:var(--font-mono);font-size:10.5px;color:var(--text);background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:1px 6px;cursor:help}
 .t-deliver .tb{color:var(--text)}
-.tvals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:6px 0 10px}
+.tvals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:5px 0 8px}
 .tvals > span{display:flex;flex-direction:column;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--hairline)}
 .tvals em{font-style:normal;font-size:11.5px;color:var(--text-2)}
 .tvals b{font:600 20px/1.2 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:2px 0}
@@ -299,7 +300,7 @@ a:hover{text-decoration:underline}
 .sl-name{display:inline-flex;align-items:center;gap:8px;min-width:0}
 .sl-name .meta{font-size:12px}
 @media (max-width:1023px){.ag-cols{grid-template-columns:minmax(0,1fr)}.ag-left{border-right:0;border-bottom:1px solid var(--hairline)}.ag-head{grid-template-columns:minmax(0,1fr) 220px;gap:20px}}
-@media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-skills > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
+@media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-list > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
 @media (prefers-reduced-motion:reduce){.agent,.live{animation:none}.trace.play li,.trace.play + .tfoot{animation:none;opacity:1}}
 
 /* ---------- LEVEL 2: community ---------- */
@@ -1944,7 +1945,13 @@ const AGENT_EX = [
 const NUMW = ['no', 'one', 'two', 'three', 'four', 'five'];
 const listJoin = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
 const LATENCY = { light: 1.1, mid: 2.9, frontier: 7.4 };
-const ag = { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), play: true };
+/* What a run returns. The provenance record is always written. */
+const OUTPUTS = [
+  { k: 'report', name: 'Report', desc: 'A written report of the methods, the result and its uncertainty.' },
+  { k: 'figures', name: 'Figures', desc: 'Sections and profiles with their uncertainty, in metres or feet.' },
+  { k: 'data', name: 'Data files', desc: 'The product on its grid, with one standard deviation for every value.' }
+];
+const ag = { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), out: new Set(OUTPUTS.map(o => o.k)), play: true };
 
 function agentTrace() {
   const ex = AGENT_EX[ag.ex], s = SITE[ex.site];
@@ -1953,6 +1960,7 @@ function agentTrace() {
   const loaded = ex.skills.filter(k => ag.skills.has(k)), missing = ex.skills.filter(k => !ag.skills.has(k)), extra = [...ag.skills].filter(k => !ex.skills.includes(k));
   const prompt = 5752 + 34 + 180 + loaded.length * 620 + hits * 74, cached = 5752, comp = 1100 + ex.tools.length * 40;
   const t = (x, k) => `${tier.name} · ${(LATENCY[tier.k] * x).toFixed(1)} s`;
+  const outs = OUTPUTS.filter(o => ag.out.has(o.k)).map(o => o.name.toLowerCase());
   const chip = n => { const tl = TOOLS.find(x => x.name === n); return `<span class="tchip" data-lib-host="${tl ? tl.lib : ''}">${n}</span>`; };
   const steps = [];
   steps.push({ st: 'ok', title: 'Understand the request', meta: t(0.3),
@@ -1968,7 +1976,7 @@ function agentTrace() {
   steps.push({ st: 'ok', title: 'Plan with structured output', meta: t(0.5),
     body: `Constrained decoding against plan schema v1.2; the plan validated on the first pass. ${ex.tools.length} tool calls, ${nInf} inferred value${nInf > 1 ? 's' : ''}${srcOn.length ? ', each cited' : ', uncited'}.` });
   steps.push({ st: 'ok', title: 'Call registered tools', meta: `${ex.tools.length} calls`, body: `<span class="tchain">${ex.tools.map(chip).join('<i aria-hidden="true">→</i>')}</span>` });
-  steps.push({ st: 'ok', title: 'Execute deterministically', meta: 'Pinned environment', body: 'The validated plan runs in a pinned environment with no model in the loop, and writes a provenance record.' });
+  steps.push({ st: 'ok', title: 'Execute deterministically', meta: 'Pinned environment', body: `The validated plan runs in a pinned environment with no model in the loop, and writes ${outs.length ? `the ${listJoin(outs)} with a provenance record` : 'a provenance record'}.` });
   const st2 = figureFor(ex.cid, ex.pid, s, 1).stats, noChange = missing.includes('time-lapse');
   const vals = ex.stats.filter(i => !(noChange && i === 1)).map(i => st2[i]);
   steps.push({ st: 'ok', title: 'Deliver', meta: 'Sample values', deliver: true,
@@ -2017,7 +2025,10 @@ function agentHTML() {
       <div class="ag-group"><div class="ag-label"><span>Retrieval (RAG)</span><button class="switch" type="button" role="switch" aria-checked="${ag.rag}" aria-label="Retrieval-augmented grounding" data-ag-rag></button></div>
         <div class="ag-chips">${SOURCES.map(x => `<button type="button" class="pillbtn" data-ag-src="${x.k}" aria-pressed="${ag.rag && ag.src[x.k]}"${ag.rag ? '' : ' disabled'}>${esc(x.name)} <em>${fmtInt(x.chunks)}</em></button>`).join('')}</div></div>
       <div class="ag-group"><div class="ag-label"><span>Skills</span><span class="ag-hint">Procedures the agent reads when a task calls for them</span></div>
-        <div class="ag-skills">${SKILL_GROUPS.map(([m, label]) => `<div role="group" aria-label="${esc(label)} skills"><span class="sk-m">${esc(label)}</span><span class="ag-chips">${SKILLS.filter(k => k.m === m).map(k => `<button type="button" class="pillbtn skill" data-ag-skill="${k.k}" aria-pressed="${ag.skills.has(k.k)}" data-tip="${esc(k.desc)}">${ICON.check}${esc(k.name)}</button>`).join('')}</span></div>`).join('')}</div></div>
+        <div class="ag-list">${SKILL_GROUPS.map(([m, label]) => `<div role="group" aria-label="${esc(label)} skills"><span class="sk-m">${esc(label)}</span><span class="ag-chips">${SKILLS.filter(k => k.m === m).map(k => `<button type="button" class="pillbtn skill" data-ag-skill="${k.k}" aria-pressed="${ag.skills.has(k.k)}" data-tip="${esc(k.desc)}">${ICON.check}${esc(k.name)}</button>`).join('')}</span></div>`).join('')}</div></div>
+      <div class="ag-group"><div class="ag-label"><span>Output</span><span class="ag-hint">What the run returns, always with a provenance record</span></div>
+        <div class="ag-list"><div role="group" aria-label="Products"><span class="sk-m">Products</span><span class="ag-chips">${OUTPUTS.map(o => `<button type="button" class="pillbtn skill" data-ag-out="${o.k}" aria-pressed="${ag.out.has(o.k)}" data-tip="${esc(o.desc)}">${ICON.check}${esc(o.name)}</button>`).join('')}</span></div>
+          <div role="group" aria-label="Length unit"><span class="sk-m">Units</span><span class="seg"><button type="button" data-unit="m" aria-pressed="${state.unit === 'm'}">Metres</button><button type="button" data-unit="ft" aria-pressed="${state.unit === 'ft'}">Feet</button></span></div></div></div>
     </div>
     <div class="ag-right">
       <div class="ag-trace-h"><span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Sample run, replayed · nothing is computed</span><button type="button" class="linkbtn" data-ag-replay>Replay</button></div>
@@ -2402,6 +2413,8 @@ document.addEventListener('click', e => {
   if (agr) { ag.rag = !ag.rag; agr.setAttribute('aria-checked', ag.rag); $$('[data-ag-src]').forEach(b => { b.disabled = !ag.rag; b.setAttribute('aria-pressed', ag.rag && ag.src[b.dataset.agSrc]); }); renderTrace(false); return; }
   const ags = t.closest('[data-ag-src]');
   if (ags) { const k = ags.dataset.agSrc; ag.src[k] = !ag.src[k]; ags.setAttribute('aria-pressed', ag.src[k]); renderTrace(false); return; }
+  const ago = t.closest('[data-ag-out]');
+  if (ago) { const k = ago.dataset.agOut; if (ag.out.has(k)) ag.out.delete(k); else ag.out.add(k); ago.setAttribute('aria-pressed', ag.out.has(k)); renderTrace(false); return; }
   const agk = t.closest('[data-ag-skill]');
   if (agk) { const k = agk.dataset.agSkill; if (ag.skills.has(k)) ag.skills.delete(k); else ag.skills.add(k); agk.setAttribute('aria-pressed', ag.skills.has(k)); renderTrace(false); return; }
   const mfb = t.closest('[data-mf]');
