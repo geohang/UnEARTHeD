@@ -741,20 +741,17 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
 .fig-panel .tdep{margin:2px 0 0;font-size:12.5px;color:var(--text-2)}
 .fig-panel .textlink{font-size:12.5px;font-weight:500}
 .fig-panel .tt .textlink{white-space:nowrap}
-/* entry: the Hydrology view, what it can and cannot produce before anything runs */
-.fe-comm{font-size:12px;font-weight:600;color:var(--accent)}
-.fe-q{margin-top:2px;font:600 17px/1.3 var(--font-display);letter-spacing:-.01em}
-.fe-prods{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.fe-label{margin-top:14px;font-size:12px;font-weight:600;color:var(--text-2)}
-.fe-sites{margin-top:6px;border:1px solid var(--hairline-strong);border-radius:12px}
-.fe-sites li{display:grid;grid-template-columns:166px 58px minmax(0,1fr);align-items:baseline;gap:12px;padding:7px 14px}
-.fe-sites li + li{border-top:1px solid var(--hairline)}
-.fe-site{font-size:13px;font-weight:600}
-.fe-why{font-size:13px;color:var(--text-2)}
-.fig-panel .status{font-size:12.5px}
-.fig-panel .status i,.fig-panel .status .glyph{width:11px;height:11px}
-.fig-panel .st-unres{color:var(--text-2)}
-.fig-panel .st-unres .glyph{width:16px;height:16px;margin:0 -2.5px}
+/* entry (Figure 6a): where a researcher starts, built from the landing components */
+.fe-ask{padding:12px 16px;border:1px solid var(--hairline-strong);border-radius:14px;font:400 15px/1.45 var(--font-display);letter-spacing:-.005em;color:var(--text)}
+.fe-label{margin-top:14px;font-size:12.5px;font-weight:600;color:var(--text-2)}
+.fe-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:6px}
+.fe-card{display:flex;flex-direction:column;gap:2px;padding:10px 12px 11px;border:1px solid var(--hairline-strong);border-radius:12px}
+.fe-card b{font:600 14px/1.25 var(--font-display);letter-spacing:-.01em}
+.fe-card span{font-size:12.5px;line-height:1.35;color:var(--text-2)}
+.fe-card.is-on{background:rgba(0,113,227,.12);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.fe-card.is-on b,.fe-card.is-on span{color:var(--accent)}
+.fe-methods{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.fe-methods .pillbtn{font-size:12.5px;padding:4px 11px}
 </style>
 </head>
 <body>
@@ -2057,7 +2054,9 @@ const SOURCES = [
 /* One example per community, together covering the five methods. */
 const AGENT_EX = [
   { title: 'Water storage', site: 'rcczo', cid: 'hydrology', pid: 'storage', stats: [0, 1], methods: ['ert', 'em'], cite: 'petro_res_inf',
-    q: 'How much water is stored in the upper 5 m at RCCZO, and how did it change between the April and September 2019 surveys?',
+    /* Generic wording: the real site's survey inventory is not known yet, so the request names no site or dates. */
+    place: 'a montane catchment site (sample)', period: 'between the spring and late-summer surveys',
+    q: 'How much water is stored in the upper 5 m at this montane catchment site, and how did it change between the spring and late-summer surveys?',
     skills: ['ert', 'em', 'time-lapse', 'petrophysics', 'uncertainty'],
     tools: ['load_ert_surveys', 'invert_time_lapse', 'load_tdem_data', 'invert_tdem', 'convert_water_content', 'write_report'] },
   { title: 'Depth to fresh rock', site: 'bw', cid: 'geomorphology', pid: 'bedrock-depth', stats: [0, 1], methods: ['srt', 'ert', 'bh'], cite: 'iface_inf',
@@ -2102,7 +2101,7 @@ function agentTrace() {
   const chip = n => { const tl = TOOLS.find(x => x.name === n); return tl ? `<a class="tchip" href="${libUrl(tl.lib)}" target="_blank" rel="noopener" data-lib-host="${tl.lib}">${n}</a>` : `<span class="tchip">${n}</span>`; };
   const steps = [];
   steps.push({ st: 'ok', title: 'Understand the request', meta: t(0.3),
-    body: `Site <b>${esc(s.name)}</b> (${esc(s.region)}) · product <b>${esc(lc(PROD[ex.pid].name))}</b>${ex.methods.length ? ` · ${listJoin(ex.methods.map(m => METHOD[m].name.toLowerCase()))}` : ''}.${routed ? `<span class="tnote">Routed from Lightweight to Mid-tier: the request spans ${NUMW[ex.methods.length]} methods.</span>` : ''}` });
+    body: `${ex.place ? `Site: <b>${esc(ex.place)}</b>` : `Site <b>${esc(s.name)}</b> (${esc(s.region)})`} · product <b>${esc(lc(PROD[ex.pid].name))}</b>${ex.methods.length ? ` · ${listJoin(ex.methods.map(m => METHOD[m].name.toLowerCase()))}` : ''}.${routed ? `<span class="tnote">Routed from Lightweight to Mid-tier: the request spans ${NUMW[ex.methods.length]} methods.</span>` : ''}` });
   if (srcOn.length) {
     const c = ex.cite ? CITES[ex.cite](s).find(x => x.src.startsWith('catalog') ? ag.src.cat : ag.src.lib) : null;
     steps.push({ st: 'ok', title: 'Ground the request', meta: `${hits} passages · ${srcOn.length} source${srcOn.length > 1 ? 's' : ''}`,
@@ -2116,7 +2115,7 @@ function agentTrace() {
   steps.push({ st: 'ok', title: 'Call registered tools', meta: `${ex.tools.length} calls`, body: `<span class="tchain">${ex.tools.map(chip).join('<i aria-hidden="true">→</i>')}</span>` });
   steps.push({ st: 'ok', title: 'Execute deterministically', meta: 'Pinned environment', body: `The validated plan runs in a pinned environment with no model in the loop, and writes ${outs.length ? `the ${listJoin(outs)} with a provenance record` : 'a provenance record'}.` });
   const st2 = figureFor(ex.cid, ex.pid, s, 1).stats, noChange = missing.includes('time-lapse');
-  const vals = ex.stats.filter(i => !(noChange && i === 1)).map(i => st2[i]);
+  const vals = ex.stats.filter(i => !(noChange && i === 1)).map(i => st2[i]).map(v => ex.period && v[0] === 'Seasonal change' ? [v[0], v[1], v[2], `mm, ${ex.period}`] : v);
   const href = wsHref(primarySurvey(s, ex.cid), { c: ex.cid, p: ex.pid });
   steps.push({ st: 'ok', title: 'Deliver', meta: 'Sample values', deliver: true, vals, pub, href,
     body: `<span class="tvals">${vals.map(([k, v, sd, u]) => `<span><em>${esc(k)}</em><b>${v}${sd ? ` <small>± ${sd}</small>` : ''}</b><em>${esc(u)}</em></span>`).join('')}</span><span class="tdep">${pub}</span><a class="textlink" href="${href}">Open the result in the workspace ${ICON.arrow}</a>` });
@@ -2192,11 +2191,11 @@ function figAgentHTML() {
     const ex = AGENT_EX[ag.ex], tr = agentTrace();
     const steps = tr.steps.map(x => {
       const strong = FIG_STRONG.includes(x.title);
-      const body = !x.deliver ? x.body
+      const body = x.title === 'Load skills' ? '' : !x.deliver ? x.body
         : `<div class="fig-vals"><span class="fig-sample">Sample values</span><span class="fig-vlist">${x.vals.map(([k, v, sd, u]) => `<span>${esc(k)}: <b>${v}${sd ? ` ± ${sd}` : ''}</b> ${esc(u)}</span>`).join('')}</span></div>
           <p class="fig-gate"><span class="pillbtn skill req">${ICON.check}Curator review<em>required</em></span></p>
           <p class="tdep">${x.pub}</p>`;
-      return `<li class="t-${x.st} ${strong ? 'fig-strong' : 'fig-quiet'}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : '!'}</span><div class="tbody"><div class="tt"><span>${x.title}</span>${x.deliver ? `<a class="textlink" href="${x.href}">Open the result in the workspace ${ICON.arrow}</a>` : `<em>${esc(x.meta)}</em>`}</div><div class="tb">${body}</div></div></li>`;
+      return `<li class="t-${x.st} ${strong ? 'fig-strong' : 'fig-quiet'}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : '!'}</span><div class="tbody"><div class="tt"><span>${x.title}</span>${x.deliver ? `<a class="textlink" href="${x.href}">Open the result in the workspace ${ICON.arrow}</a>` : `<em>${esc(x.meta)}</em>`}</div>${body ? `<div class="tb">${body}</div>` : ''}</div></li>`;
     }).join('');
     return `<article class="fig-panel fig-agent" aria-label="Figure: the agent's plan for one request, replayed with sample values">
       <div class="fig-cols">
@@ -2214,20 +2213,17 @@ function figAgentHTML() {
       </div>${FIG_FOOT}</article>`;
   });
 }
-/* One Hydrology site per readiness state, with the reason the Hydrology status list gives. */
-const FIG_ENTRY_ROWS = [['rcczo', 'ready'], ['bw', 'partial'], ['gar', 'none'], ['jem', 'unres']];
+/* Figure 6a: the request field, the five disciplines (Hydrology selected) and the five methods in the catalog.
+   Short questions in each community's words; no sites, units or statuses. */
+const FIG_SHORT_Q = { geomorphology: 'Where is fresh rock?', hydrology: 'How much water is stored?', 'forest-ecology': 'How much water can roots reach?', biogeochemistry: 'How thick is the reactive zone?', 'natural-hazards': 'Is the regolith continuous?' };
+const FIG_METHODS = { ert: 'Electrical resistivity', srt: 'Seismic refraction', gpr: 'Ground-penetrating radar', em: 'Electromagnetics', bh: 'Borehole' };
 function figEntryHTML() {
-  const c = COMM.hydrology;
-  const rows = FIG_ENTRY_ROWS.map(([id, state]) => {
-    const site = SITE[id], r = statusFor(site, c.id);
-    const marker = state === 'unres' ? `<span class="status st-unres">${catGlyph('unres')}Format not identified</span>` : statusChip(state);
-    return `<li><span>${marker}</span><span class="fe-site">${esc(site.name)}</span><span class="fe-why">${esc(r.effect)}</span></li>`;
-  }).join('');
-  return `<article class="fig-panel fig-entry" aria-label="Figure: what the Hydrology view can and cannot produce, before anything is run">
-    <header><p class="fe-comm">${esc(c.name)}</p><h2 class="fe-q">${esc(c.question)}</h2></header>
-    <div class="fe-prods" aria-label="Products">${['storage', 'storage-change'].map(pid => `<span class="pillbtn">${esc(PROD[pid].name)}, mm</span>`).join('')}</div>
-    <p class="fe-label">Where it can be produced</p>
-    <ul class="fe-sites" aria-label="Sites by readiness">${rows}</ul>${FIG_FOOT}</article>`;
+  return `<article class="fig-panel fig-entry" aria-label="Figure: where a researcher starts, a question in their own discipline">
+    <p class="fe-ask" aria-label="Request">${esc(AGENT_EX[0].q)}</p>
+    <p class="fe-label">Start from your discipline</p>
+    <div class="fe-cards">${COMMUNITIES.map(c => `<div class="fe-card${c.id === 'hydrology' ? ' is-on' : ''}"${c.id === 'hydrology' ? ' aria-current="true"' : ''}><b>${esc(c.name)}</b><span>${esc(FIG_SHORT_Q[c.id])}</span></div>`).join('')}</div>
+    <p class="fe-label">Methods in the catalog</p>
+    <div class="fe-methods">${METHOD_KEYS.map(m => `<span class="pillbtn">${esc(FIG_METHODS[m])}</span>`).join('')}</div>${FIG_FOOT}</article>`;
 }
 const FIGS = {
   'agent-trace': { title: 'agent trace', render: () => { $('#v-figure').innerHTML = figAgentHTML(); } },
