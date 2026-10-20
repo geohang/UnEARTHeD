@@ -308,6 +308,102 @@ a.tchip:hover{border-color:var(--accent);color:var(--accent);text-decoration:non
 @media (max-width:760px){.ag-top,.ag-left,.ag-right{padding:20px 16px}.ag-head{grid-template-columns:minmax(0,1fr)}.ag-head h2{font-size:24px}.ag-map{max-width:360px}.ag-tiers{grid-template-columns:minmax(0,1fr)}.ag-list > div{grid-template-columns:minmax(0,1fr);gap:6px}.tvals{grid-template-columns:minmax(0,1fr)}.agent{margin-top:40px}}
 @media (prefers-reduced-motion:reduce){.agent,.live{animation:none}.trace.play li{animation:none;opacity:1}}
 
+/* ---------- PyHydroGeophysX today, scale-up, methods, local studio ---------- */
+#pyhgx,#scale,#methods,#get{scroll-margin-top:72px}
+.toplink.getlink{color:var(--accent);font-weight:500}
+.chain-wrap{border-radius:20px;background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--shadow);padding:20px 20px 16px}
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.chain li{position:relative;display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:14px;background:var(--surface-2);font-size:12.5px;color:var(--text-2)}
+.chain li b{font-size:14px;color:var(--text);font-weight:600}
+.chain li + li::before{content:"";position:absolute;left:-10px;top:50%;width:10px;height:2px;background:var(--accent-ring)}
+.chain li.end{background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent-ring)}
+.chain li.end b{color:var(--accent)}
+.agentbar{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 14px;border-radius:12px;border:1px dashed var(--accent-ring);font-size:13px;color:var(--text-2)}
+.agentbar svg{width:15px;height:15px;color:var(--accent);flex:none}
+.agentbar b{color:var(--text);font-weight:600}
+.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:20px;border-radius:18px;overflow:hidden;background:var(--hairline);border:1px solid var(--hairline)}
+.pcell{display:flex;flex-direction:column;gap:6px;padding:18px 18px 16px;background:var(--surface)}
+.pcell h3{font:600 15px/1.3 var(--font-display);letter-spacing:-.01em}
+.pcell p{font-size:13px;line-height:1.5;color:var(--text-2)}
+.pcell.paper{background:var(--surface-2)}
+.plinks{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:auto;padding-top:4px}
+.plinks .textlink{font-size:13px}
+.vrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.pubs{margin-top:20px;padding:18px 20px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--shadow)}
+.pubs h3{font:600 15px/1.3 var(--font-display)}
+.pubs ol{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.pubs li{display:grid;grid-template-columns:130px minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding-top:10px;border-top:1px solid var(--hairline);font-size:13px;line-height:1.5}
+.pubs li:first-child{border-top:0;padding-top:0}
+.ptag{font-size:11.5px;font-weight:600;color:var(--accent)}
+.pref{color:var(--text-2)}
+.pubs li .textlink{font-size:12.5px;white-space:nowrap}
+.pubs .plinks{margin-top:12px}
+.vtile{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--shadow);color:var(--text);transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.vtile:hover{text-decoration:none;box-shadow:var(--shadow-hover);transform:translateY(-1px)}
+.vplay{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--accent-fill);color:#fff;flex:none}
+.vplay svg{width:16px;height:16px;margin-left:2px}
+.vtxt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vtxt b{font-size:14px;font-weight:600}
+.vtxt span{font-size:12.5px;color:var(--text-2);line-height:1.4}
+.demo-link{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:500;line-height:1.3;transition:background var(--dur) var(--ease)}
+.demo-link:hover{text-decoration:none;background:var(--accent-ring)}
+.demo-link svg{width:10px;height:10px;flex:none}
+.scale{border-radius:18px;overflow:hidden;border:1px solid var(--hairline);background:var(--surface);box-shadow:var(--shadow)}
+.srow{display:grid;grid-template-columns:200px minmax(0,1.2fr) minmax(0,1fr);gap:20px;padding:16px 20px;border-top:1px solid var(--hairline);align-items:start}
+.srow:first-child{border-top:0}
+.shead{padding:10px 20px;background:var(--surface-2);font-size:12px;font-weight:600;color:var(--text-2)}
+.srow.is-live{background:linear-gradient(90deg,var(--accent-soft),transparent 70%)}
+.sfield{display:flex;flex-direction:column;gap:4px}
+.sfield a{color:var(--text);font-size:15px}
+.stag{align-self:flex-start;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--fill);color:var(--text-2)}
+.is-live .stag{background:var(--accent-fill);color:#fff}
+.slab{display:none;font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
+.stoday p,.sto p{font-size:13px;line-height:1.5;color:var(--text-2)}
+.sdemos,.sprods,.mdemos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.prodchip{display:inline-flex;padding:4px 10px;border-radius:999px;border:1px solid var(--hairline-strong);color:var(--text);font-size:12.5px;background:var(--surface);transition:border-color var(--dur) var(--ease)}
+.prodchip:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
+.mcards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.mcard{display:flex;flex-direction:column;gap:6px;padding:18px 16px 16px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--shadow)}
+.mcard h3{font:600 16px/1.25 var(--font-display);letter-spacing:-.01em}
+.mcard h3 a{color:var(--text)}
+.mcard h3 a:hover{color:var(--accent)}
+.mcard .mn{font-size:12px;color:var(--text-3)}
+.mcard .mw{font-size:12.5px;line-height:1.5;color:var(--text-2)}
+.mcard .mdemos{flex-direction:column;align-items:flex-start;margin-top:auto;padding-top:6px}
+.mcard .mnone{font-size:12px;color:var(--text-3)}
+.mcard .mguide .textlink{font-size:12.5px}
+.gcards{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px}
+.gcard{display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:20px;background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--shadow);min-width:0}
+.gcard.gmain{box-shadow:0 0 0 1px var(--accent-ring),var(--shadow)}
+.gcard h3{font:600 18px/1.25 var(--font-display);letter-spacing:-.015em}
+.gcard p{font-size:13px;line-height:1.5;color:var(--text-2)}
+.gtag{align-self:flex-start;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--fill);color:var(--text-2)}
+.gtag svg{width:11px;height:11px;color:var(--accent)}
+.gcard .btn{align-self:flex-start;height:40px;font-size:14px;padding:0 18px}
+.btn svg{width:15px;height:15px}
+.gsteps{list-style:decimal;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--text-2)}
+.gcard code,.gnote code{font-family:var(--font-mono);font-size:11.5px;background:var(--fill);padding:1px 5px;border-radius:5px;color:var(--text);overflow-wrap:anywhere}
+.gnote{font-size:12.5px}
+.cmd{display:flex;flex-direction:column;gap:4px}
+.cmd-l{font-size:12px;color:var(--text-2)}
+.cmd-c{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 12px;border-radius:10px;background:var(--surface-2);border:1px solid var(--hairline)}
+.cmd-c code{flex:1;min-width:0;font-family:var(--font-mono);font-size:11.5px;color:var(--text);overflow-wrap:anywhere;background:none;padding:0}
+.copy{flex:none;border:0;border-radius:7px;padding:4px 9px;background:var(--fill);color:var(--text);font-size:11.5px;font-weight:500;cursor:pointer;transition:background var(--dur) var(--ease)}
+.copy:hover{background:var(--fill-strong)}
+.copy.done{background:var(--accent-fill);color:#fff}
+.get-foot{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:16px;font-size:13px}
+.trytoday{margin-top:24px;padding:16px 18px;border-radius:16px;background:var(--accent-soft);border:1px solid var(--accent-ring)}
+.trytoday h3{font:600 15px/1.35 var(--font-display)}
+.trytoday p{font-size:13.5px;line-height:1.55;color:var(--text-2);margin-top:4px;max-width:60em}
+.mlink{color:inherit;text-decoration:underline;text-decoration-color:var(--hairline-strong);text-underline-offset:2px}
+.mlink:hover{color:var(--accent);text-decoration-color:var(--accent)}
+.pop-demo{display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-size:12px;font-weight:500;color:var(--accent)}
+.pop-demo svg{width:9px;height:9px}
+@media (max-width:1240px){.mcards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1240px){.vrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1023px){.pubs li{grid-template-columns:minmax(0,1fr)}.pubs li .textlink{white-space:normal}.chain{grid-template-columns:repeat(2,minmax(0,1fr))}.chain li:nth-child(3)::before{display:none}.proof,.vrow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.gcards{grid-template-columns:minmax(0,1fr)}.srow{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}}
+@media (max-width:760px){.chain,.proof,.vrow,.mcards{grid-template-columns:minmax(0,1fr)}.chain li::before{display:none}.srow{grid-template-columns:minmax(0,1fr);gap:10px}.shead{display:none}.slab{display:block}.topbar .getlink{display:none}}
+
 /* ---------- LEVEL 2: community ---------- */
 .comm-head{max-width:900px;position:relative;isolation:isolate}
 .comm-head h1{font:600 52px/1.06 var(--font-display);letter-spacing:-.037em;margin-top:10px}
@@ -763,6 +859,7 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
     <span class="pill">Design preview</span>
   </div>
   <div class="topbar-right">
+    <a class="toplink getlink" href="#/" data-goto="get">Get the studio</a>
     <a class="toplink about-link" href="#/about" id="about-link">About</a>
     <a class="toplink powered" href="https://github.com/geohang/PyHydroGeophysX" target="_blank" rel="noopener"><span>Powered by </span><b>PyHydroGeophysX</b></a>
     <span class="avatar" role="img" aria-label="Account (placeholder)"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="5.5" r="2.8"/><path d="M2.5 14c.6-2.9 2.9-4.4 5.5-4.4s4.9 1.5 5.5 4.4z"/></svg></span>
@@ -783,13 +880,20 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
       <h1>About this preview</h1>
       <p class="lede">A non-functional design preview, made for a proposal figure. It holds sample data and performs no computation.</p>
       <p class="body">PyHydroGeophysX is an open-source Python package that connects near-surface geophysics with hydrology. It reads field data from common instruments; runs forward models and inversions for electrical resistivity, seismic refraction, ground-penetrating radar, electromagnetic and magnetotelluric surveys; and converts the results to water content through petrophysical relationships, carrying the uncertainty through each step. It also turns the output of hydrological models such as MODFLOW and ParFlow into the geophysical data they predict.</p>
+      <p class="body">PyHydroGeophysX is also a working example of agentic AI in the geosciences. Its AQUAH agent takes a goal in plain language and carries a workflow from field data to a hydrologic product, such as water content with its uncertainty, through to a report: in the desktop studio and in the web app, step by step with the user’s approval or straight through. UnEARTHeD would scale that from water content to more hydrologic functions, and to four more fields: geomorphology, forest ecology, biogeochemistry and natural hazards.</p>
       <p class="body">Today the package is used from Python, from a desktop studio and from a web app. A run can keep a provenance record: the input files with their hashes, the sequence of calls, the warnings raised and the quality of the fit.</p>
       <p class="body">UnEARTHeD would add a curated catalog of archived surveys, entry by place or by a question in a community’s own terms, products defined the same way at every site, and deposit of each product with its record. It is agentic by design: a language model plans each analysis, grounded by retrieval in the library and the catalog and guided by skills, the written procedures it reads when a task calls for them. Its output is structured, decoded against a plan schema and limited to registered tools; the validated plan then runs deterministically in a pinned environment, with no model in the loop.</p>
       <p class="body">The sites shown are those of the WYCEHG geophysical dataset compilation, with their codes and states, at approximate positions. The map groups them by the methods they hold: multi-method sites, which the compilation lists as having both ERT and seismic data; seismic only, which includes the compilation’s seismic-associated BCZN sites; and sites whose survey format is not yet identified. Their survey records, and every value derived from them here, are sample content.</p>
       <div class="links">
         <a href="https://doi.org/10.1016/j.softx.2026.102710" target="_blank" rel="noopener">Chen, Niu and Wu (2026), PyHydroGeophysX, SoftwareX 34, 102710 ↗</a>
         <a href="https://github.com/geohang/PyHydroGeophysX" target="_blank" rel="noopener">Source code: github.com/geohang/PyHydroGeophysX ↗</a>
+        <a href="https://doi.org/10.1016/j.bdes.2026.100042" target="_blank" rel="noopener">Chen (2026), A generalizable automated geophysical agent workflow for accessible subsurface hydrology analysis, Big Data and Earth System 2, 100042 ↗</a>
+        <a href="https://doi.org/10.1016/j.cageo.2026.106282" target="_blank" rel="noopener">Fang, Yang, Liu, Feng and Chen (2026), GeoSAGE: A multi-agent workflow for geological reasoning from joint gravity and magnetic inversion models, Computers &amp; Geosciences, 106282 ↗</a>
         <a href="https://geohang.github.io/PyHydroGeophysX/" target="_blank" rel="noopener">Documentation ↗</a>
+        <a href="https://geohang.github.io/PyHydroGeophysX/auto_examples/index.html" target="_blank" rel="noopener">Example gallery ↗</a>
+        <a href="https://geohang.github.io/PyHydroGeophysX/agents/desktop_studio.html" target="_blank" rel="noopener">Run the desktop studio on your computer ↗</a>
+        <a href="https://www.youtube.com/watch?v=cSUEGBFGxrI" target="_blank" rel="noopener">Video: the agentic workflow in the desktop studio ↗</a>
+        <a href="https://www.youtube.com/watch?v=Gc2stglZCi8" target="_blank" rel="noopener">Video: GeoSAGE, an agent for joint gravity–magnetic inversion and geological modeling ↗</a>
         <a href="#/">Back to the front page</a>
       </div>
     </article></div>
@@ -1283,6 +1387,8 @@ const ICON = {
   stop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M5.5 18.5 18.5 5.5"/></svg>',
   lock: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>',
   spark: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c.6 4.3 3.7 7.4 8 8-4.3.6-7.4 3.7-8 8-.6-4.3-3.7-7.4-8-8 4.3-.6 7.4-3.7 8-8z" fill="currentColor"/></svg>',
+  play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z" fill="currentColor"/></svg>',
+  down: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>',
   arrowUp: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>',
   check: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg>'
 };
@@ -1932,7 +2038,8 @@ function popHTML(t) {
   }
   const key = t.dataset.lib || t.dataset.libHost, e = LIB[key];
   if (!e) return '';
-  return `<div class="pop-name">${esc(e.name)}</div><p class="pop-desc">${esc(e.desc)}</p><a class="pop-link" href="${libUrl(key)}" target="_blank" rel="noopener" tabindex="-1">${esc(e.path || 'github.com/geohang/PyHydroGeophysX')} ↗</a>`;
+  const dk = LIB_DEMO[key], dh = libDemoHref(key);
+  return `<div class="pop-name">${esc(e.name)}</div><p class="pop-desc">${esc(e.desc)}</p><a class="pop-link" href="${libUrl(key)}" target="_blank" rel="noopener" tabindex="-1">${esc(e.path || 'github.com/geohang/PyHydroGeophysX')} ↗</a>${dh ? `<br><a class="pop-demo" href="${dh}" target="_blank" rel="noopener" tabindex="-1">${ICON.play}${dk ? 'Example: ' + esc(DEMOS[dk].title) : 'Method guide'} ↗</a>` : ''}`;
 }
 const anchorOf = t => t.dataset.libHost ? (t.querySelector('.xref') || t) : t;
 function placePop(a) {
@@ -2234,6 +2341,142 @@ const FIGS = {
 /* ================================================================== */
 /* LEVEL 1 · front door                                                 */
 /* ================================================================== */
+/* ================================================================== */
+/* PyHydroGeophysX today: gallery examples, demo videos, the studio.   */
+/* Every link was checked against the published docs and main.         */
+/* ================================================================== */
+const DOCS = 'https://geohang.github.io/PyHydroGeophysX/';
+const GALLERY = DOCS + 'auto_examples/index.html';
+const exm = (file, title, what) => ({ url: `${DOCS}auto_examples/${file}.html`, src: `${REPO}/blob/main/examples/${file}.py`, title, what });
+const DEMOS = {
+  mc: exm('Ex_MC_Hydro', 'Monte Carlo water content with uncertainty', 'Converts ERT resistivity models to water content, propagating the petrophysical parameter ranges by Monte Carlo.'),
+  post: exm('Ex_posterior_uncertainty', 'Posterior uncertainty of water content', 'Reads the ERT inversion as a Gaussian posterior and checks the water-content uncertainty against the MODFLOW state behind the survey.'),
+  assim: exm('Ex_ensemble_assimilation', 'ERT assimilated into a MODFLOW forecast', 'One ERT survey updates a MODFLOW water-content ensemble, with EnKF and ES-MDA.'),
+  tl: exm('Ex_TL_inversion', 'Time-lapse ERT inversion', 'Full, windowed and L1 time-lapse inversions that follow resistivity through time.'),
+  struct: exm('Ex_Structure_resinv', 'Structure-constrained resistivity inversion', 'Seismic velocity interfaces built into the ERT mesh, then a constrained inversion.'),
+  ert: exm('Ex_ERT_single_inversion', 'One ERT survey: load, check, invert', 'Loads and checks one survey, inverts it, and saves the model and its convergence.'),
+  srt: exm('Ex_SRT_inv', 'Seismic refraction tomography and interfaces', 'Inverts travel times for velocity and defines the subsurface interfaces it implies.'),
+  joint: exm('Ex_joint_inversion', 'Joint ERT and seismic inversion', 'Direct and geostatistical cross-gradient coupling on the same field data.'),
+  tdem: exm('Ex_TDEM_workflow', 'TDEM workflow', 'MODFLOW water content to conductivity, then transient EM forward modeling and inversion.'),
+  fdem: exm('Ex_FDEM_workflow', 'FDEM forward modeling and inversion', 'Frequency-domain EM data built from hydrological properties, then inverted.'),
+  aem: exm('Ex_EM_line_section', 'Airborne EM line inversion', 'A VTEM line calibrated and inverted into a stitched resistivity section.'),
+  h2g: exm('Ex_hydro_to_multigeophys', 'Hydrology to multi-geophysics responses', 'One hydrological profile and the ERT, seismic, TDEM, FDEM and gravity data it predicts.'),
+  sens: exm('Ex_sensitivity_analysis', 'Where an ERT survey sees water content', 'What an ERT survey can resolve before water content is read from its inversion.'),
+  mf: exm('Ex_MODFLOW_geophysics_feedback', 'Geophysical structure into MODFLOW', 'Interpreted regolith and bedrock depths reshape a MODFLOW 6 model and its response.')
+};
+const VID = {
+  studio: { url: 'https://www.youtube.com/watch?v=cSUEGBFGxrI', title: 'Agentic AI workflow in the desktop studio', note: 'AQUAH runs a hydrogeophysical workflow beside the processing modules.' },
+  web: { url: 'https://www.youtube.com/watch?v=d4lgs_hQqDo', title: 'The agent in a browser', note: 'The same agent in the web app, with nothing to install.' },
+  install: { url: 'https://www.youtube.com/watch?v=W9SpHMyN9Fc', title: 'Install with a coding agent', note: 'One prompt checks the environment and installs the package.' },
+  geosage: { url: 'https://www.youtube.com/watch?v=Gc2stglZCi8', title: 'GeoSAGE: gravity, magnetics and geology', note: 'A multi-agent workflow from joint gravity–magnetic inversion to a geological model.' },
+  first: { url: 'https://www.youtube.com/watch?v=jaqfjqq7SN0', title: 'Install and a first ERT example', note: 'The manual route, from install to an inverted section.' }
+};
+/* Each method opens its example in the gallery, or its guide where the gallery has none yet. */
+const METHOD_DEMO = {
+  ert: { what: 'Load and check field data, invert single and time-lapse surveys, and build known structure into the mesh.', demos: ['ert', 'tl', 'struct'], guide: DOCS + 'methods/ert.html' },
+  srt: { what: 'Pick first breaks, invert travel times for velocity, and trace interfaces such as fresh rock.', demos: ['srt', 'joint'], guide: DOCS + 'methods/seismic.html' },
+  gpr: { what: 'Read GSSI, Sensors & Software, MALÅ and SEG-Y files; dewow, filter, gain, migrate and convert time to depth.', demos: [], guide: DOCS + 'methods/gpr.html' },
+  em: { what: 'Model and invert transient and frequency-domain soundings, airborne lines included.', demos: ['tdem', 'fdem', 'aem'], guide: DOCS + 'methods/em.html' },
+  bh: { what: 'Read wells, lithology, LAS and tabular logs and water levels, and project each well onto the profile.', demos: [], guide: null }
+};
+const LIB_DEMO = { ert_load: 'ert', ert_inv: 'ert', ert_tl: 'tl', ert_mesh: 'struct', ert_wc: 'mc', petro_res: 'mc', unc_mc: 'mc', unc_post: 'post',
+  srt_pick: 'srt', srt_inv: 'srt', srt_mesh: 'srt', srt_iface: 'srt', tdem_fwd: 'tdem', tdem_inv: 'tdem', fdem_fwd: 'fdem', fdem_inv: 'fdem',
+  t_load: 'ert', t_inv: 'ert', t_pick: 'srt', t_srt: 'srt', t_iface: 'srt', t_tdem: 'tdem', t_wc: 'mc', t_unc: 'post' };
+const methodHref = m => { const d = METHOD_DEMO[m]; return d ? (d.demos.length ? DEMOS[d.demos[0]].url : d.guide || libUrl('bh_load')) : null; };
+const libDemoHref = k => LIB_DEMO[k] ? DEMOS[LIB_DEMO[k]].url : /^gpr_/.test(k) ? METHOD_DEMO.gpr.guide : null;
+const extLink = (href, label, cls) => `<a class="${cls || 'textlink'}" href="${href}" target="_blank" rel="noopener">${label}<span class="vh"> (opens in a new tab)</span></a>`;
+const demoLink = k => extLink(DEMOS[k].url, `${ICON.play}${esc(DEMOS[k].title)}`, 'demo-link');
+/* What PyHydroGeophysX does today in each field, and what UnEARTHeD would scale it to. */
+const SCALE = [
+  { cid: 'hydrology', live: true, today: 'Water content and its uncertainty from ERT, from one survey or a time-lapse series, and ERT assimilated into a MODFLOW forecast.', demos: ['mc', 'post', 'assim'] },
+  { cid: 'geomorphology', today: 'Velocity models and interfaces from seismic refraction, and ERT constrained by that structure.', demos: ['srt', 'struct'] },
+  { cid: 'forest-ecology', today: 'The parts exist: water content from ERT and a limiting layer from seismic refraction.', demos: ['mc', 'srt'] },
+  { cid: 'biogeochemistry', today: 'The parts exist: saturation from resistivity, and time-lapse ERT.', demos: ['tl'] },
+  { cid: 'natural-hazards', today: 'The parts exist: a regolith base from seismic refraction, and borehole logs placed on the profile.', demos: ['srt'] }
+];
+const PROOF = [
+  ['An agent that plans, runs, evaluates and reports', 'AQUAH takes a goal in plain language and carries the workflow through to a report, step by step with your approval or straight through, in the desktop studio and in the web app.', [[VID.studio.url, 'Watch it in the studio'], [DOCS + 'agents/overview.html', 'Agent guide']]],
+  ['A controller loop over registered tools', 'The run chooses one action at a time with the previous results in front of it, from a registry of tools, and always ends with a result or a recorded refusal.', [[REPO + '/blob/main/PyHydroGeophysX/agents/runtime/controller.py', 'controller.py'], [libUrl('registry'), 'Tool registry']]],
+  ['Uncertainty from field data to water content', 'The inversion posterior and the petrophysical parameter ranges are carried into the hydrologic product.', [[DEMOS.mc.url, 'Monte Carlo example'], [DEMOS.post.url, 'Posterior example']]],
+  ['A record of every run', 'The inputs with their hashes, the calls made, the warnings and the quality of the fit, kept beside the results.', [[libUrl('prov'), 'workflow_audit.py']]],
+  ['Tools other agents can call', 'A local MCP server exposes the workflow registry to any MCP client.', [[REPO + '/blob/main/PyHydroGeophysX/mcp_server.py', 'mcp_server.py']]],
+  ['The same pattern beyond hydrology', 'GeoSAGE, a multi-agent workflow for geological reasoning from joint gravity and magnetic inversion models, plugs into the same studio as a second agent.', [['https://doi.org/10.1016/j.cageo.2026.106282', 'GeoSAGE paper'], [VID.geosage.url, 'Watch GeoSAGE'], [DOCS + 'agents/geosage.html', 'GeoSAGE guide']]]
+];
+const PUBS = [
+  ['Chen, H., Niu, Q. and Wu, Y. (2026). PyHydroGeophysX: An extensible open-source platform for integrating hydrological models with geophysical measurements.', 'SoftwareX, 34, 102710', 'https://doi.org/10.1016/j.softx.2026.102710', 'The platform'],
+  ['Chen, H. (2026). A generalizable automated geophysical agent workflow for accessible subsurface hydrology analysis.', 'Big Data and Earth System, 2, 100042', 'https://doi.org/10.1016/j.bdes.2026.100042', 'The agent workflow'],
+  ['Fang, Z., Yang, P., Liu, Y., Feng, D. and Chen, H. (2026). GeoSAGE: A multi-agent workflow for geological reasoning from joint gravity and magnetic inversion models.', 'Computers & Geosciences, 106282', 'https://doi.org/10.1016/j.cageo.2026.106282', 'Beyond hydrology']
+];
+const ZIP = REPO + '/archive/refs/heads/main.zip';
+const PIP = [['Install the studio', 'pip install "pyhydrogeophysx[desktop]"'], ['Start it', 'pyhydrogeophysx-studio'], ['Add the inversion engines and 3D viewer', 'pip install "pyhydrogeophysx[desktop,desktop-3d,geophysics]"']];
+const codeRow = ([label, cmd]) => `<div class="cmd"><span class="cmd-l">${esc(label)}</span><div class="cmd-c"><code>${esc(cmd)}</code><button type="button" class="copy" data-copy="${esc(cmd)}" aria-label="Copy: ${esc(cmd)}">Copy</button></div></div>`;
+const vidTile = v => `<a class="vtile" href="${v.url}" target="_blank" rel="noopener"><span class="vplay" aria-hidden="true">${ICON.play}</span><span class="vtxt"><b>${esc(v.title)}</b><span>${esc(v.note)}</span></span><span class="vh"> (video, opens in a new tab)</span></a>`;
+
+function pyhgxHTML() {
+  const chain = [['Field data', 'ERT · seismic · GPR · EM · boreholes'], ['Inversion', 'with its linearized posterior'], ['Petrophysics', 'parameter ranges by Monte Carlo'], ['Hydrologic product', 'water content ± σ, with its record']];
+  return `<section class="sec pyhgx" id="pyhgx" aria-labelledby="pyhgx-h">
+    <div class="sec-h"><h2 id="pyhgx-h">Already working: PyHydroGeophysX</h2><p>The agent above is not hypothetical. PyHydroGeophysX, open source and peer reviewed, already takes geophysical data to a hydrologic product with an agent in the loop, and GeoSAGE carries the same pattern into geology.</p></div>
+    <div class="chain-wrap">
+      <ol class="chain" aria-label="From field data to a hydrologic product">${chain.map(([b, s], i) => `<li${i === chain.length - 1 ? ' class="end"' : ''}><b>${b}</b><span>${s}</span></li>`).join('')}</ol>
+      <div class="agentbar">${ICON.spark}<span><b>AQUAH agent</b> plans the steps, calls the tools, checks the fit and writes the report</span></div>
+    </div>
+    <div class="proof">${PROOF.map(([h, p, links]) => `<div class="pcell"><h3>${h}</h3><p>${p}</p><p class="plinks">${links.map(([u, l]) => extLink(u, `${esc(l)} ↗`)).join('')}</p></div>`).join('')}
+</div>
+    <div class="pubs"><h3>Peer reviewed</h3><ol>${PUBS.map(([ref, venue, doi, tag]) => `<li><span class="ptag">${esc(tag)}</span><span class="pref">${esc(ref)} <i>${esc(venue)}</i>.</span>${extLink(doi, `${esc(doi.replace('https://doi.org/', 'doi:'))} ↗`)}</li>`).join('')}</ol><p class="plinks">${extLink(REPO, 'Source code ↗')}${extLink(DOCS, 'Documentation ↗')}</p></div>
+    <div class="vrow" aria-label="Demo videos">${[VID.studio, VID.web, VID.geosage, VID.install].map(vidTile).join('')}</div>
+  </section>`;
+}
+function scaleHTML() {
+  return `<section class="sec" id="scale" aria-labelledby="scale-h">
+    <div class="sec-h"><h2 id="scale-h">From one hydrologic product to five communities</h2><p>What PyHydroGeophysX does today, and what UnEARTHeD would scale it to: more hydrologic functions, and four more fields. GeoSAGE already shows the agent pattern working outside hydrology.</p></div>
+    <div class="scale">
+      <div class="srow shead" aria-hidden="true"><span>Field</span><span>PyHydroGeophysX today</span><span>UnEARTHeD scales it to</span></div>
+      ${SCALE.map(r => { const c = COMM[r.cid]; return `<div class="srow${r.live ? ' is-live' : ''}">
+        <div class="sfield"><a href="#/community/${c.id}"><b>${esc(c.name)}</b></a><span class="stag">${r.live ? 'Working today' : 'Building blocks today'}</span></div>
+        <div class="stoday"><span class="slab">Today</span><p>${esc(r.today)}</p><p class="sdemos">${r.demos.map(demoLink).join('')}</p></div>
+        <div class="sto"><span class="slab">UnEARTHeD</span><p class="sprods">${c.products.map(p => `<a class="prodchip" href="#/community/${c.id}?p=${p.id}">${esc(p.name)}</a>`).join('')}</p></div>
+      </div>`; }).join('')}
+    </div>
+  </section>`;
+}
+function methodsHTML() {
+  return `<section class="sec" id="methods" aria-labelledby="methods-h">
+    <div class="sec-h"><h2 id="methods-h">Five methods, each with a working example</h2><p>Open a method to see PyHydroGeophysX run it: the code, its figures and a notebook to download, in the example gallery.</p></div>
+    <div class="mcards">${METHOD_KEYS.map(m => { const d = METHOD_DEMO[m], n = SITES.filter(s => s.surveys.some(v => v.m === m)).length; return `<div class="mcard">
+      <h3><a href="${methodHref(m)}" target="_blank" rel="noopener">${esc(METHOD[m].name)}<span class="vh"> (opens in a new tab)</span></a></h3>
+      <p class="mn">${n} site${n === 1 ? '' : 's'} in the catalog</p>
+      <p class="mw">${esc(d.what)}</p>
+      <p class="mdemos">${d.demos.length ? d.demos.map(demoLink).join('') : `<span class="mnone">No gallery example yet.</span>${extLink(d.guide || libUrl('bh_load'), `${d.guide ? 'Method guide' : 'Module and file templates'} ↗`)}`}</p>
+      ${d.demos.length ? `<p class="mguide">${extLink(d.guide, 'Method guide ↗')}</p>` : ''}
+    </div>`; }).join('')}</div>
+    <p class="expert">${extLink(GALLERY, 'All examples in the PyHydroGeophysX gallery ↗')}</p>
+  </section>`;
+}
+function getHTML() {
+  return `<section class="sec get" id="get" aria-labelledby="get-h">
+    <div class="sec-h"><h2 id="get-h">Run PyHydroGeophysX Studio on your computer</h2><p>The Qt desktop studio, with the AQUAH agent beside the processing modules. Free and open source; it needs Python 3.10 or later.</p></div>
+    <div class="gcards">
+      <div class="gcard gmain"><span class="gtag">Windows</span><h3>Download and double-click</h3>
+        <a class="btn btn-primary" href="${ZIP}">${ICON.down}Download PyHydroGeophysX (.zip)</a>
+        <ol class="gsteps"><li>Unzip the folder. It includes the example data, so the download is large.</li><li>Double-click <code>examples\\start_studio.bat</code>.</li><li>The first start sets up its own environment, which takes several minutes; later starts reuse it.</li></ol>
+        <p class="gnote">macOS and Linux: run <code>examples/start_studio.sh</code>.</p></div>
+      <div class="gcard"><span class="gtag">Any platform</span><h3>Install with pip</h3>${PIP.map(codeRow).join('')}</div>
+      <div class="gcard"><span class="gtag">${ICON.spark}Agentic</span><h3>Install with a coding agent</h3>
+        <p>Paste one prompt into a coding agent. It checks the environment, installs the package and verifies that it starts.</p>
+        <p class="plinks">${extLink(DOCS + '_static/install-agent-prompt.txt', 'The install prompt ↗')}${extLink(DOCS + 'agent_install.html', 'How it works ↗')}${extLink(VID.install.url, 'Watch it ↗')}</p></div>
+    </div>
+    <p class="get-foot">${extLink(DOCS + 'agents/desktop_studio.html', 'Desktop studio guide ↗')}${extLink(VID.studio.url, 'Studio walkthrough video ↗')}${extLink(VID.first.url, 'Install and a first ERT example ↗')}${extLink('https://pypi.org/project/pyhydrogeophysx/', 'PyPI ↗')}</p>
+  </section>`;
+}
+function tryTodayHTML(cid) {
+  const r = SCALE.find(x => x.cid === cid);
+  return `<div class="trytoday"><h3>${r.live ? 'Working today in PyHydroGeophysX' : 'Building blocks in PyHydroGeophysX today'}</h3><p>${esc(r.today)}</p><p class="sdemos">${r.demos.map(demoLink).join('')}</p></div>`;
+}
+function gotoSection(id) {
+  const go = () => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); };
+  if (route.view !== 'door') { location.hash = '#/'; setTimeout(go, 60); } else go();
+}
+
 const CAT_ORDER = ['multi', 'seis', 'unres'];
 function renderDoor() {
   const nSurveys = SITES.reduce((a, s) => a + s.surveys.length, 0), nMethods = new Set(SITES.flatMap(methodsOf).filter(m => m !== 'unk')).size;
@@ -2245,6 +2488,8 @@ function renderDoor() {
       <p>A proposed service for decades of near-surface surveys: curated, made comparable, and turned into the quantity you use, with its uncertainty. You ask in your own words; an agent plans the analysis.</p>
     </header>
     ${agentHTML()}
+    ${pyhgxHTML()}
+    ${scaleHTML()}
     <section class="sec" aria-labelledby="place-h">
       <div class="sec-h"><h2 id="place-h">Start from a place</h2><p>${SITES.length} sites across the continental United States, with ${listJoin(METHOD_KEYS.map(m => METHOD[m].short === 'Seismic' ? 'seismic' : METHOD[m].short === 'Borehole' ? 'borehole logs' : METHOD[m].short))}. Select one to see what it can tell you.</p></div>
       <div class="mfilter" role="group" aria-label="Show sites by method">${[['', 'All methods'], ...METHOD_KEYS.map(m => [m, METHOD[m].short])].map(([m, l]) => `<button type="button" class="pillbtn" data-mf="${m}" aria-pressed="${m === ''}">${l} <em>${m ? SITES.filter(x => x.surveys.some(v => v.m === m)).length : SITES.length}</em></button>`).join('')}</div>
@@ -2256,6 +2501,8 @@ function renderDoor() {
       <div class="sec-h"><h2 id="q-h">Start from a question</h2><p>Choose your field. Each leads to the products it uses, in its own units.</p></div>
       <div class="ccards">${COMMUNITIES.map(c => `<a class="ccard" href="#/community/${c.id}"><span class="cn">${esc(c.name)}</span><span class="cq">${esc(c.question)}</span><span class="cy"><b>${esc(c.yields)}</b>${esc(c.yieldsUnit)}</span><span class="go" aria-hidden="true">${ICON.arrow}</span></a>`).join('')}</div>
     </section>
+    ${methodsHTML()}
+    ${getHTML()}
     <section class="facts" aria-label="The catalog in numbers">
       <div class="fact"><b>${nSurveys}</b><span>surveys in the catalog</span></div>
       <div class="fact"><b>${nMethods}</b><span>methods covered</span></div>
@@ -2281,7 +2528,7 @@ function renderCommunity(cid, q) {
         <span class="chk" aria-hidden="true">${ICON.check}</span>
         <button class="pick" type="button" aria-pressed="${p.id === pid}" data-product="${p.id}">${esc(p.name)}</button>
         <span class="pu">${esc(p.units)}</span><span class="pr">${esc(p.range)}</span>
-        <span class="pm">${p.methods.map(([n, role, lib]) => `<span data-lib-host="${lib}">${esc(n)}${role ? `, ${esc(role)}` : ''} ${xref(lib, n)}</span>`).join('')}</span></div>`).join('')}</div>
+        <span class="pm">${p.methods.map(([n, role, lib]) => `<span data-lib-host="${lib}">${libDemoHref(lib) ? `<a class="mlink" href="${libDemoHref(lib)}" target="_blank" rel="noopener">${esc(n)}</a>` : esc(n)}${role ? `, ${esc(role)}` : ''} ${xref(lib, n)}</span>`).join('')}</span></div>`).join('')}</div>
     </section>
     <section class="sec" aria-labelledby="sites-h">
       <div class="sec-h"><h2 id="sites-h">Where it can be produced</h2><p>Sites holding the surveys these products need. Where an input is missing, the site says which.</p></div>
@@ -2297,6 +2544,7 @@ function renderCommunity(cid, q) {
         <div id="c-fig"></div>${statsHTML(fig.stats)}<p class="sample-note">Sample result for the design preview; nothing here was computed.</p>
       </div>
       <div class="note"><h3>What makes these comparable across sites</h3><p>${esc(c.comparability)}</p></div>
+      ${tryTodayHTML(cid)}
       <div class="actionbar"><a class="btn btn-primary" href="${wsHref(primarySurvey(ex, cid), { c: cid, p: pid })}">Open in workspace ${ICON.arrow}</a><p>Opens ${esc(ex.name)} with this question and ${esc(lc(PROD[pid].name))} already set.</p></div>
     </section>
   </div>`;
@@ -2388,7 +2636,7 @@ function renderWorkspaceCatalog() {
   $('#catalog').innerHTML = shown.length ? shown.map(s => `<li class="scard${s === cur ? ' is-selected' : ''}">
       <h3><a class="stretch" href="${wsHref(primarySurvey(s, rq.c), { c: rq.c, p: rq.p, curated: rq.curated, from: rq.c ? null : rq.from })}"${s === cur ? ' aria-current="true"' : ''}>${esc(s.name)}</a></h3>
       <p class="line">${catGlyph(s.cat)} ${esc(s.region)} · ${CAT[s.cat].name}</p>
-      <div class="svs">${methodsOf(s).map(m => `<span data-lib-host="${METHOD[m].lib || ''}">${esc(METHOD[m].name)} ${METHOD[m].lib ? xref(METHOD[m].lib, METHOD[m].name) : ''}<em>${s.surveys.filter(v => v.m === m).map(v => v.label).join(', ')}</em></span>`).join('')}</div>
+      <div class="svs">${methodsOf(s).map(m => `<span data-lib-host="${METHOD[m].lib || ''}">${methodHref(m) ? `<a class="mlink" href="${methodHref(m)}" target="_blank" rel="noopener">${esc(METHOD[m].name)}</a>` : esc(METHOD[m].name)} ${METHOD[m].lib ? xref(METHOD[m].lib, METHOD[m].name) : ''}<em>${s.surveys.filter(v => v.m === m).map(v => v.label).join(', ')}</em></span>`).join('')}</div>
       <div class="chips"><span class="chip">${meter(s.q)}Quality: ${QLEV[s.q]}</span><span class="chip">${meter(s.md)}Metadata: ${MLEV[s.md]}</span>${srcGroups(s).map(g => `<span class="chip chip-src${g.lic.block ? ' is-blocked' : ''}">Source: ${esc(g.arc)} · ${g.lic.name}${srcGroups(s).length > 1 ? ` (${g.ids.join(', ')})` : ''}</span>`).join('')}</div>
       ${productLicense(s).blocked ? `<p class="lic-note">Deposit blocked: the provider allows these surveys to be used but not redistributed, so products made from them cannot be deposited.</p>` : ''}
     </li>`).join('') : '<li class="empty">No sites match.</li>';
@@ -2579,6 +2827,12 @@ function patchWorkspace(patch, anchor) {
 }
 document.addEventListener('click', e => {
   const t = e.target;
+  const gt = t.closest('[data-goto]');
+  if (gt) { e.preventDefault(); gotoSection(gt.dataset.goto); return; }
+  const cp = t.closest('[data-copy]');
+  if (cp) { const txt = cp.dataset.copy, done = () => { cp.textContent = 'Copied'; cp.classList.add('done'); $('#live').textContent = 'Copied to the clipboard'; setTimeout(() => { cp.textContent = 'Copy'; cp.classList.remove('done'); }, 1600); };
+    const fallback = () => { const ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (_) { ok = false; } ta.remove(); if (ok) done(); else $('#live').textContent = 'Copy is not available here; select the command instead.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback(); return; }
   if (t.closest('.skip')) { e.preventDefault(); const m = $('#main'); m.setAttribute('tabindex', '-1'); m.focus(); return; }
   const c = t.closest('.cite');
   if (c) { e.preventDefault(); if (pinned && popFor === c) { hidePop(); return; } showPop(c); pinned = true; return; }
