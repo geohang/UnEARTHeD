@@ -198,6 +198,9 @@ a:hover{text-decoration:underline}
 .about{max-width:720px}
 .about h1{font:600 48px/1.08 var(--font-display);letter-spacing:-.035em}
 .about .lede{font-size:15px;color:var(--text-2);margin-top:12px}
+.static-intro{padding-bottom:0}
+.static-name{display:flex;align-items:center;gap:10px;font:600 22px/1.2 var(--font-display);letter-spacing:-.015em}
+.static-intro .lede{max-width:40em;margin-top:12px;font-size:17px;line-height:1.5;color:var(--text-2)}
 .about p.body{font:400 19px/1.6 var(--font-text);letter-spacing:-.005em;max-width:34em;margin-top:24px}
 .about .links{display:flex;flex-direction:column;gap:8px;margin-top:40px;padding-top:24px;border-top:1px solid var(--hairline);font-size:15px}
 
@@ -250,8 +253,8 @@ a:hover{text-decoration:underline}
 .pillbtn.req{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);cursor:default}
 .pillbtn.req em{color:inherit;opacity:.75}
 .ag-group{display:flex;flex-direction:column;gap:8px}
-.ag-label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:600;color:var(--text-2)}
-.ag-hint{font-weight:400;color:var(--text-3);text-align:right}
+.ag-label{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px;font-size:13px;font-weight:600;color:var(--text-2)}
+.ag-hint{flex:1 1 12em;min-width:0;font-weight:400;color:var(--text-3);text-align:right;overflow-wrap:anywhere}
 .ag-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .ag-tier{position:relative;display:block;cursor:pointer}
 .ag-tier input{position:absolute;opacity:0;pointer-events:none}
@@ -406,6 +409,10 @@ a.tchip:hover{border-color:var(--accent);color:var(--accent);text-decoration:non
 .scard .svs em{font-style:normal;color:var(--text-2)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;line-height:1;color:var(--text-2);background:var(--fill);border-radius:999px;padding:4px 8px 4px 7px;white-space:nowrap}
+.chip-src{white-space:normal;line-height:1.3;max-width:100%}
+.chip-src.is-blocked{color:var(--text);box-shadow:inset 0 0 0 1px var(--text-2)}
+.svsrc{color:var(--text-2)}
+.lic-note{margin-top:6px;font-size:12px;line-height:1.4;color:var(--text)}
 .meter{display:inline-flex;gap:2px}
 .meter i{width:5px;height:5px;border-radius:50%;background:var(--text-2)}
 .meter i.off{background:transparent;box-shadow:inset 0 0 0 1px var(--text-3)}
@@ -666,6 +673,96 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:1ms!important;transition-duration:1ms!important}
 }
+
+/* ==================================================================
+   FIGURE MODE (#figure/agent-trace, #figure/entry)
+   The same sample data laid out for print, reachable by URL only.
+   Every rule is scoped to :root.figmode or .fig-panel, so the product views are untouched.
+   Light theme only, fixed 862 px width, 12 px minimum type, no hover,
+   no motion. Text keeps at least 4.5:1 contrast on white.
+   ================================================================== */
+:root.figmode{
+  color-scheme:light;
+  --bg:#ffffff;--surface:#ffffff;--surface-2:#ffffff;
+  --fill:rgba(118,118,128,.12);--fill-strong:rgba(118,118,128,.2);
+  --text:#000000;--text-2:#5f5f64;--text-3:#5f5f64;
+  --hairline:rgba(0,0,0,.1);--hairline-strong:rgba(0,0,0,.18);
+  --accent:#0062c4;--accent-fill:#0071e3;--accent-soft:rgba(0,113,227,.08);--accent-ring:rgba(0,113,227,.35);
+  --map-land:#f7f7f5;--map-nbr:#ececee;--map-water:#dde8f3;--map-state:rgba(60,60,67,.3);--map-halo:#ffffff;
+  --cat-multi:#0071e3;--cat-seis:#e8830c;--cat-unres:#8e8e93;
+}
+:root.figmode body{background:#ffffff}
+:root.figmode .topbar,:root.figmode .crumbs,:root.figmode .skip{display:none}
+:root.figmode *,:root.figmode *::before,:root.figmode *::after{animation:none!important;transition:none!important}
+.fig-panel{width:862px;margin:0 auto;padding:16px 18px 0;background:#ffffff;color:var(--text);font-size:13px;line-height:1.38}
+.fig-foot{margin-top:8px;padding:6px 0 8px;border-top:1px solid var(--hairline);font-size:12px;color:var(--text-2)}
+/* agent trace */
+.fig-cols{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,7fr);column-gap:18px}
+.fig-left{display:flex;flex-direction:column;gap:14px;min-width:0}
+.fig-right{min-width:0;padding-left:18px;border-left:1px solid var(--hairline)}
+.fig-panel .ag-label{font-size:13px}
+.fig-panel .ag-hint{font-size:12px;text-align:left;flex-basis:100%}
+.fig-req{padding:10px 12px;border:1px solid var(--hairline-strong);border-radius:12px;font-size:13px;line-height:1.45}
+.fig-on{font-size:12px;font-weight:600;color:var(--accent)}
+.fig-src{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.fig-panel .pillbtn{font-size:12px;padding:3px 9px;cursor:default}
+.fig-panel .pillbtn em{font-size:12px;color:var(--text-2)}
+.fig-panel .pillbtn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.fig-panel .pillbtn.on em,.fig-panel .pillbtn.req em{color:var(--accent);opacity:1}
+.fig-panel .pillbtn.skill.on svg,.fig-panel .pillbtn.req svg{opacity:1;width:11px;margin-left:-2px}
+.fig-panel .ag-list > div{grid-template-columns:minmax(0,1fr);gap:5px;padding:7px 10px}
+.fig-panel .ag-list .sk-m{padding-top:0;font-size:12px}
+.fig-panel .ag-chips{gap:4px}
+.fig-panel .ag-trace-h{font-size:13px;margin-bottom:8px}
+.fig-panel .ag-trace-h .sub{font-size:12px;color:var(--text-2)}
+.fig-panel .trace li{padding-bottom:6px;gap:10px;grid-template-columns:20px minmax(0,1fr)}
+.fig-panel .trace li::after{left:9.5px;top:24px}
+.fig-panel .tdot{width:20px;height:20px}
+.fig-panel .tt{font-size:13px;padding-top:1px;align-items:baseline}
+.fig-panel .tt em{font-size:12px}
+.fig-panel .tb{font-size:13px;margin-top:1px;line-height:1.38}
+.fig-panel .fig-quiet .tb{font-size:12.5px}
+.fig-panel .tq{margin-top:3px}
+.fig-panel .tsrc{font-size:12px}
+.fig-panel .tskill{font-size:12px;margin:1px 4px 1px 0}
+.fig-panel .tchip{font-size:12px}
+.fig-panel .tchain i{font-size:12px}
+.fig-panel .fig-strong .tt{font-weight:600;color:var(--text)}
+.fig-panel .fig-strong .tb{color:var(--text)}
+.fig-panel .fig-quiet .tt{font-weight:400;color:var(--text-2)}
+.fig-panel .fig-quiet .tdot{background:var(--surface);color:var(--text-2);box-shadow:inset 0 0 0 1.5px var(--text-2)}
+.fig-panel .fig-quiet .tskill{background:none;box-shadow:inset 0 0 0 1px var(--hairline-strong);color:var(--text-2)}
+.fig-vals{display:flex;align-items:flex-start;gap:10px;margin-top:2px}
+.fig-sample{flex:none;font-size:12px;font-weight:700;color:var(--text);padding:1px 8px;border:1.5px solid var(--text);border-radius:6px;letter-spacing:.01em}
+.fig-vlist{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;font-size:13px;color:var(--text-2)}
+.fig-vals b{font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.fig-gate{margin-top:5px}
+.fig-gate .pillbtn{padding:1px 8px}
+.fig-panel .tdep{margin:2px 0 0;font-size:12.5px;color:var(--text-2)}
+.fig-panel .textlink{font-size:12.5px;font-weight:500}
+.fig-panel .tt .textlink{white-space:nowrap}
+/* entry */
+.fig-entry-cols{display:grid;grid-template-columns:minmax(0,9fr) minmax(0,11fr);column-gap:18px;align-items:start}
+.fig-panel .mapcard{box-shadow:none;border-radius:12px}
+.fig-panel .mapcard svg{display:block}
+.fig-panel .mapcard .m-label,.fig-panel .mapcard .m-sea,.fig-panel .mapcard text.m-note[x="12"]{display:none}
+.fig-panel .mapcard text.m-note{font-size:34px;fill:var(--text-2)}
+.fig-panel .mapcard .m-code{display:none;font-size:34px;stroke-width:8px}
+.fig-panel .mapcard .mk.lab .m-code{display:inline}
+.fig-panel .mapcard .mk .sym,.fig-panel .mapcard .mk .ring{transform:scale(1.8)}
+.fig-panel .mapcard .m-code{transform:translateX(17px)}
+.fig-panel .mapcard text.m-code[text-anchor="end"]{transform:translateX(-17px)}
+.fig-panel .mapcard .mk.sel .ring{stroke:var(--accent);stroke-width:2.5}
+.fig-panel .mapcard .mk.sel .m-code{font-weight:700;fill:var(--accent)}
+.fig-panel .map-legend{font-size:12px;padding:6px 10px;gap:2px 12px}
+.fig-attr{margin-top:4px;font-size:12px;color:var(--text-2)}
+.fig-cards{display:flex;flex-direction:column;gap:5px}
+.fig-cards li{padding:5px 12px 6px;border:1px solid var(--hairline-strong);border-radius:10px}
+.fig-cards li.is-on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.fig-cards .cn{display:block;font-size:12px;font-weight:600;color:var(--text-2)}
+.fig-cards li.is-on .cn{color:var(--accent)}
+.fig-cards .cq{display:block;font-size:13px;font-weight:600;line-height:1.35}
+.fig-cards .cy{font-weight:400;color:var(--text-2)}
 </style>
 </head>
 <body>
@@ -685,10 +782,31 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
 <nav class="crumbs" id="crumbs" aria-label="Breadcrumb" hidden></nav>
 
 <main id="main">
-  <noscript><p style="padding:24px">This design preview needs JavaScript to show its sample content.</p></noscript>
+  <section class="view" id="v-intro">
+    <div class="page static-intro">
+      <p class="static-name">UnEARTHeD <span class="pill">Design preview</span></p>
+      <p class="lede">UnEARTHeD is a proposed service that would turn near-surface geophysical surveys already held in public archives into the subsurface quantities Earth scientists use, each with its uncertainty and a record of how it was made. This page is a non-functional design preview: all of its content is sample data, and it performs no computation. Its interactive catalog, map and workspace need JavaScript; the description below does not.</p>
+    </div>
+  </section>
   <section class="view" id="v-door" hidden></section>
-  <section class="view" id="v-about" hidden></section>
+  <section class="view" id="v-about">
+    <div class="page"><article class="about">
+      <h1>About this preview</h1>
+      <p class="lede">A non-functional design preview, made for a proposal figure. It holds sample data and performs no computation.</p>
+      <p class="body">PyHydroGeophysX is an open-source Python package that connects near-surface geophysics with hydrology. It reads field data from common instruments; runs forward models and inversions for electrical resistivity, seismic refraction, ground-penetrating radar, electromagnetic and magnetotelluric surveys; and converts the results to water content through petrophysical relationships, carrying the uncertainty through each step. It also turns the output of hydrological models such as MODFLOW and ParFlow into the geophysical data they predict.</p>
+      <p class="body">Today the package is used from Python, from a desktop studio and from a web app. A run can keep a provenance record: the input files with their hashes, the sequence of calls, the warnings raised and the quality of the fit.</p>
+      <p class="body">UnEARTHeD would add a curated catalog of archived surveys, entry by place or by a question in a community’s own terms, products defined the same way at every site, and deposit of each product with its record. It is agentic by design: a language model plans each analysis, grounded by retrieval in the library and the catalog and guided by skills, the written procedures it reads when a task calls for them. Its output is structured, decoded against a plan schema and limited to registered tools; the validated plan then runs deterministically in a pinned environment, with no model in the loop.</p>
+      <p class="body">The sites shown are those of the WYCEHG geophysical dataset compilation, with their codes and states, at approximate positions. The map groups them by the methods they hold: multi-method sites, which the compilation lists as having both ERT and seismic data; seismic only, which includes the compilation’s seismic-associated BCZN sites; and sites whose survey format is not yet identified. Their survey records, and every value derived from them here, are sample content.</p>
+      <div class="links">
+        <a href="https://doi.org/10.1016/j.softx.2026.102710" target="_blank" rel="noopener">Chen, Niu and Wu (2026), PyHydroGeophysX, SoftwareX 34, 102710 ↗</a>
+        <a href="https://github.com/geohang/PyHydroGeophysX" target="_blank" rel="noopener">Source code: github.com/geohang/PyHydroGeophysX ↗</a>
+        <a href="https://geohang.github.io/PyHydroGeophysX/" target="_blank" rel="noopener">Documentation ↗</a>
+        <a href="#/">Back to the front page</a>
+      </div>
+    </article></div>
+  </section>
   <section class="view" id="v-community" hidden></section>
+  <section class="view" id="v-figure" hidden></section>
   <section class="view" id="v-workspace" hidden>
     <div class="workspace">
       <aside class="col col-left" id="left" aria-label="Sites in the catalog">
@@ -810,7 +928,7 @@ const CAT = {
   seis: { name: 'Seismic only', shape: 'triangle' },
   unres: { name: 'Survey format not yet identified', shape: 'square' }
 };
-const sv = (id, m, label) => ({ id, m, label });
+const sv = (id, m, label, o) => ({ id, m, label, ...o });
 const UNRES = { q: 1, md: 1, L: 60, D: 10, sp: 2, topo: 'not identified', boreholes: null, cores: null,
   meta: 'Survey files archived; method and geometry not yet identified',
   f: { base: 3, a1: 0.6, l1: 50, p1: 0.5, a2: 0.2, l2: 15, p2: 1, w: 0.3, t0: 0.15, tg: 0.02, dry: 0.04, lat: 0.02, latL: 40, b0: 0.12, bg: -0.004, lens: [], doi: 8, sb: 0.02, sd: 0.04, se: 0.035, soil: 0.5, phiA: 0.4, phiB: 0.2 } };
@@ -818,82 +936,99 @@ const UNRES = { q: 1, md: 1, L: 60, D: 10, sp: 2, topo: 'not identified', boreho
    (see CAT); map positions follow its figure.
    Survey records and every value derived from them are sample content. */
 const SITES = [
-  { id: 'rcczo', name: 'RCCZO', region: 'Idaho', cat: 'multi', x: 160.0, y: 159.4, q: 3, md: 3, L: 96, D: 16, sp: 2,
-    surveys: [sv('SRV-0139', 'srt', 'Aug 2018'), sv('SRV-0142', 'ert', 'Apr 2019'), sv('SRV-0143', 'ert', 'Sep 2019'), sv('SRV-0145', 'em', 'Sep 2019'), sv('SRV-0147', 'bh', 'Jun 2019')],
+  { id: 'rcczo', name: 'RCCZO', region: 'Idaho', cat: 'multi', arc: 'HydroShare', lic: 'by', x: 160.0, y: 159.4, q: 3, md: 3, L: 96, D: 16, sp: 2,
+    surveys: [sv('SRV-0139', 'srt', 'Aug 2018', { arc: 'ScienceBase', lic: 'cc0' }), sv('SRV-0142', 'ert', 'Apr 2019'), sv('SRV-0143', 'ert', 'Sep 2019'), sv('SRV-0145', 'em', 'Sep 2019'), sv('SRV-0147', 'bh', 'Jun 2019')],
     repeat: ['12 Apr 2019', '19 Sep 2019'], topo: 'RTK survey', boreholes: 'BH-1, 12 m', cores: 'six cores',
     meta: 'Loamy soil over weathered granite · porosity 0.38–0.46 from six cores · borehole BH-1 to 12 m · temperature logger at 1 m',
     header: 'ERT dipole–dipole, 49 electrodes at 2 m · SRT 47 geophones at 2 m, 24 shots · TEM 8 soundings along the line · BH-1 lithology and natural-gamma log to 12 m',
     f: { base: 4.4, a1: 1.4, l1: 80, p1: 0.4, a2: 0.5, l2: 26, p2: 2.0, w: 0.22, t0: 0.18, tg: 0.02, dry: 0.06, lat: 0.025, latL: 60, b0: 0.13, bg: -0.004, lens: [{ x: 64, z: 2.6, rx: 8, rz: 1.2, a: 0.06 }, { x: 22, z: 3.0, rx: 7, rz: 1.3, a: 0.035 }, { x: 44, z: 9, rx: 14, rz: 3, a: -0.03 }], doi: 13, sb: 0.010, sd: 0.030, se: 0.030, soil: 1.1, phiA: 0.44, phiB: 0.15, slope: 22, elev0: 1650 } },
-  { id: 'wind', name: 'WIND', region: 'Wyoming', cat: 'multi', x: 273.3, y: 180.0, q: 3, md: 3, L: 100, D: 8, sp: 1,
+  { id: 'wind', name: 'WIND', region: 'Wyoming', cat: 'multi', arc: 'ESS-DIVE', lic: 'by', x: 273.3, y: 180.0, q: 3, md: 3, L: 100, D: 8, sp: 1,
     surveys: [sv('SRV-0201', 'ert', 'May 2018'), sv('SRV-0202', 'ert', 'Jul 2018'), sv('SRV-0203', 'ert', 'Sep 2018'), sv('SRV-0204', 'ert', 'Oct 2018'), sv('SRV-0205', 'srt', 'Jul 2018'), sv('SRV-0206', 'gpr', 'Jul 2018')],
     repeat: ['May 2018', 'Oct 2018'], topo: 'RTK survey', boreholes: 'piezometers P1–P4', cores: 'two cores',
     meta: 'Meadow soil over glacial till · porosity from two cores · pore-water chemistry at four piezometers',
     header: 'ERT 81 electrodes at 1 m, four surveys May to October (first 80 m) · SRT 41 geophones at 2.5 m · GPR 250 MHz along 100 m',
     f: { base: 2.6, a1: 0.4, l1: 90, p1: 0.8, a2: 0.2, l2: 23, p2: 2.2, w: 0.25, t0: 0.20, tg: 0.03, dry: 0.05, lat: 0.02, latL: 50, b0: 0.36, bg: -0.006, lens: [], doi: 7, sb: 0.012, sd: 0.030, se: 0.030, soil: 0.3, phiA: 0.48, phiB: 0.40, wt: 1.9, repeatTo: 80 } },
-  { id: 'eel', name: 'EEL', region: 'California', cat: 'unres', x: 22.4, y: 202.3, ...UNRES,
+  { id: 'eel', name: 'EEL', region: 'California', cat: 'unres', arc: 'HydroShare', lic: 'by', x: 22.4, y: 202.3, ...UNRES,
     surveys: [sv('SRV-0119', 'unk', 'Sep 2017')], header: 'Three files; vendor format not recognised from the header' },
-  { id: 'ssczo', name: 'SSCZO', region: 'California', cat: 'multi', x: 87.3, y: 291.0, q: 3, md: 3, L: 80, D: 12, sp: 1,
+  { id: 'ssczo', name: 'SSCZO', region: 'California', cat: 'multi', arc: 'HydroShare', lic: 'by', x: 87.3, y: 291.0, q: 3, md: 3, L: 80, D: 12, sp: 1,
     surveys: [sv('SRV-0312', 'ert', 'Apr 2019'), sv('SRV-0313', 'ert', 'Jul 2019'), sv('SRV-0314', 'ert', 'Sep 2019'), sv('SRV-0315', 'srt', 'Apr 2019'), sv('SRV-0316', 'gpr', 'Jul 2019')],
     repeat: ['Apr 2019', 'Sep 2019'], topo: 'RTK survey', boreholes: null, cores: 'soil-pit texture',
     meta: 'Sandy loam over saprolite · wilting point 0.07 from soil texture · rooting depth logged in two soil pits',
     header: 'ERT 81 electrodes at 1 m (April, July, September) · SRT 41 geophones at 2 m · GPR 500 MHz along the line',
     f: { base: 2.3, a1: 0.6, l1: 55, p1: 1.1, a2: 0.25, l2: 17, p2: 0.4, w: 0.25, t0: 0.16, tg: 0.035, dry: 0.05, lat: 0.025, latL: 45, b0: 0.12, bg: -0.004, lens: [{ x: 30, z: 1.2, rx: 9, rz: 0.8, a: 0.04 }], doi: 10, sb: 0.010, sd: 0.028, se: 0.030, soil: 0.4, phiA: 0.42, phiB: 0.25, wp: 0.07 } },
-  { id: 'bw', name: 'BW', region: 'Wyoming', cat: 'multi', x: 324.6, y: 236.6, q: 3, md: 3, L: 115, D: 25, sp: 2.5, la: 'left',
+  { id: 'bw', name: 'BW', region: 'Wyoming', cat: 'multi', arc: 'HydroShare', lic: 'bync', x: 324.6, y: 236.6, q: 3, md: 3, L: 115, D: 25, sp: 2.5, la: 'left',
     surveys: [sv('SRV-0175', 'srt', 'Jul 2018'), sv('SRV-0176', 'ert', 'Jul 2018'), sv('SRV-0177', 'bh', 'Aug 2018'), sv('SRV-0178', 'em', 'Jul 2018')], topo: 'total-station survey', boreholes: 'BW-1 and BW-2', cores: 'core samples',
     meta: 'Weathered granite under a forested ridge · porosity 0.30–0.42 from core · boreholes BW-1 and BW-2',
     header: 'SRT 47 geophones at 2.5 m, 24 shots · ERT Wenner, 24 electrodes at 5 m · BW-1 and BW-2 lithology, gamma and resistivity logs · TEM 10 soundings',
     f: { base: 7.5, a1: 2.2, l1: 100, p1: 0.8, a2: 0.8, l2: 33, p2: 2.6, w: 0.4, t0: 0.12, tg: 0.012, dry: 0.04, lat: 0.02, latL: 70, b0: 0.09, bg: -0.002, lens: [], doi: 20, sb: 0.015, sd: 0.035, se: 0.030, soil: 1.4, phiA: 0.40, phiB: 0.12 } },
-  { id: 'snow', name: 'SNOW', region: 'Wyoming', cat: 'seis', x: 347.0, y: 218.7, q: 2, md: 2, L: 96, D: 20, sp: 2,
+  { id: 'snow', name: 'SNOW', region: 'Wyoming', cat: 'seis', arc: 'Zenodo', lic: 'by', x: 347.0, y: 218.7, q: 2, md: 2, L: 96, D: 20, sp: 2,
     surveys: [sv('SRV-0263', 'srt', 'Jun 2022')], topo: 'RTK survey', boreholes: null, cores: 'soil pits',
     meta: 'Glacial deposits over crystalline bedrock · soil pits · no boreholes',
     header: 'SRT 49 geophones at 2 m, 25 shots',
     f: { base: 5.5, a1: 1.6, l1: 90, p1: 2.8, a2: 0.6, l2: 21, p2: 0.2, w: 0.35, t0: 0.20, tg: 0.015, dry: 0.03, lat: 0.03, latL: 48, b0: 0.10, bg: -0.003, lens: [], doi: 17, sb: 0.016, sd: 0.035, se: 0.030, soil: 0.9, phiA: 0.42, phiB: 0.14, slope: 12, elev0: 3150 } },
-  { id: 'out', name: 'OUT', region: 'Wyoming', cat: 'seis', x: 347.5, y: 237.7, q: 2, md: 2, L: 72, D: 16, sp: 2,
+  { id: 'out', name: 'OUT', region: 'Wyoming', cat: 'seis', arc: 'Zenodo', lic: 'cc0', x: 347.5, y: 237.7, q: 2, md: 2, L: 72, D: 16, sp: 2,
     surveys: [sv('SRV-0271', 'srt', 'Aug 2021')], topo: 'RTK survey', boreholes: null, cores: null,
     meta: 'Weathered crystalline bedrock · no boreholes',
     header: 'SRT 37 geophones at 2 m, 19 shots',
     f: { base: 4.8, a1: 1.2, l1: 70, p1: 1.4, a2: 0.4, l2: 19, p2: 0.6, w: 0.3, t0: 0.15, tg: 0.015, dry: 0.04, lat: 0.02, latL: 40, b0: 0.10, bg: -0.003, lens: [], doi: 13, sb: 0.015, sd: 0.035, se: 0.030, soil: 0.7, phiA: 0.40, phiB: 0.13, slope: 15, elev0: 2400 } },
-  { id: 'tlv', name: 'TLV', region: 'Colorado', cat: 'seis', x: 340.8, y: 258.4, q: 2, md: 2, L: 80, D: 18, sp: 2,
+  { id: 'tlv', name: 'TLV', region: 'Colorado', cat: 'seis', arc: 'ScienceBase', lic: 'cc0', x: 340.8, y: 258.4, q: 2, md: 2, L: 80, D: 18, sp: 2,
     surveys: [sv('SRV-0284', 'srt', 'Jul 2019')], topo: 'total-station survey', boreholes: null, cores: null,
     meta: 'Colluvium over crystalline bedrock · no boreholes',
     header: 'SRT 41 geophones at 2 m, 21 shots',
     f: { base: 5.0, a1: 1.3, l1: 75, p1: 0.9, a2: 0.5, l2: 22, p2: 1.9, w: 0.3, t0: 0.16, tg: 0.015, dry: 0.04, lat: 0.02, latL: 45, b0: 0.10, bg: -0.003, lens: [], doi: 14, sb: 0.015, sd: 0.035, se: 0.030, soil: 0.8, phiA: 0.40, phiB: 0.13, slope: 18, elev0: 2600 } },
-  { id: 'bc', name: 'BC', region: 'Colorado', cat: 'seis', net: 'BCZN', x: 334.1, y: 277.5, q: 3, md: 2, L: 110, D: 20, sp: 2.5,
+  { id: 'bc', name: 'BC', region: 'Colorado', cat: 'seis', net: 'BCZN', arc: 'HydroShare', lic: 'by', x: 334.1, y: 277.5, q: 3, md: 2, L: 110, D: 20, sp: 2.5,
     surveys: [sv('SRV-0088', 'srt', 'Jul 2016')], topo: 'total-station survey', boreholes: null, cores: null,
     meta: 'Weathered granite and gneiss on a forested slope · no boreholes',
     header: 'SRT 45 geophones at 2.5 m, 23 shots',
     f: { base: 6.0, a1: 1.8, l1: 95, p1: 0.2, a2: 0.6, l2: 27, p2: 1.3, w: 0.35, t0: 0.15, tg: 0.015, dry: 0.04, lat: 0.02, latL: 55, b0: 0.10, bg: -0.003, lens: [], doi: 16, sb: 0.015, sd: 0.035, se: 0.030, soil: 0.8, phiA: 0.40, phiB: 0.13, slope: 20, elev0: 2700 } },
-  { id: 'sgm', name: 'SGM', region: 'California', cat: 'seis', net: 'BCZN', x: 95.8, y: 354.0, q: 3, md: 2, L: 120, D: 10, sp: 2.5,
+  { id: 'sgm', name: 'SGM', region: 'California', cat: 'seis', net: 'BCZN', arc: 'Project data portal', lic: 'noredist', x: 95.8, y: 354.0, q: 3, md: 2, L: 120, D: 10, sp: 2.5,
     surveys: [sv('SRV-0305', 'srt', 'Jun 2020')], topo: 'total-station survey', boreholes: null, cores: null,
     meta: 'Colluvium over fractured gneiss · mean slope 28° · no boreholes',
     header: 'SRT 49 geophones at 2.5 m, 25 shots',
     f: { base: 2.9, a1: 0.9, l1: 70, p1: 0.3, a2: 0.4, l2: 19, p2: 1.7, w: 0.3, t0: 0.14, tg: 0.02, dry: 0.04, lat: 0.02, latL: 40, b0: 0.08, bg: -0.003, lens: [], doi: 8, sb: 0.014, sd: 0.030, se: 0.030, soil: 0.4, phiA: 0.36, phiB: 0.10, step: { x: 98, w: 1.6, a: -1.7 }, slope: 28, elev0: 1460, masks: [[0, 7], [54, 66], [113, 120]] } },
-  { id: 'sjm', name: 'SJM', region: 'California', cat: 'seis', net: 'BCZN', x: 110.4, y: 368.5, q: 1, md: 1, L: 64, D: 10, sp: 2,
+  { id: 'sjm', name: 'SJM', region: 'California', cat: 'seis', net: 'BCZN', arc: 'HydroShare', lic: 'by', x: 110.4, y: 368.5, q: 1, md: 1, L: 64, D: 10, sp: 2,
     surveys: [sv('SRV-0290', 'srt', 'Aug 2017')], topo: 'none recorded', boreholes: null, cores: null,
     meta: 'Steep granitic slope · mean slope 35° · no survey geometry recorded',
     header: 'SRT 33 geophones, nominal 2 m spacing, 9 shots',
     f: { base: 2.5, a1: 0.8, l1: 50, p1: 0.2, a2: 0.3, l2: 14, p2: 1.1, w: 0.3, t0: 0.12, tg: 0.02, dry: 0.03, lat: 0.02, latL: 30, b0: 0.08, bg: -0.003, lens: [], doi: 6, sb: 0.02, sd: 0.04, se: 0.035, soil: 0.4, phiA: 0.36, phiB: 0.10, slope: 35, elev0: 1500 } },
-  { id: 'jem', name: 'JEM', region: 'New Mexico', cat: 'unres', x: 305.8, y: 355.7, ...UNRES,
+  { id: 'jem', name: 'JEM', region: 'New Mexico', cat: 'unres', arc: 'Zenodo', lic: 'by', x: 305.8, y: 355.7, ...UNRES,
     surveys: [sv('SRV-0224', 'unk', 'Jun 2022')], header: 'Two files; header fields present but not matched to a reader' },
-  { id: 'gar', name: 'GAR', region: 'Pennsylvania', cat: 'seis', x: 832.7, y: 216.8, q: 3, md: 2, L: 90, D: 14, sp: 2,
+  { id: 'gar', name: 'GAR', region: 'Pennsylvania', cat: 'seis', arc: 'ESS-DIVE', lic: 'by', x: 832.7, y: 216.8, q: 3, md: 2, L: 90, D: 14, sp: 2,
     surveys: [sv('SRV-0217', 'srt', 'May 2021')], topo: 'RTK survey', boreholes: null, cores: null,
     meta: 'Sandstone ridge with colluvial valley fill · no boreholes',
     header: 'SRT 46 geophones at 2 m, 23 shots',
     f: { base: 3.6, a1: 0.9, l1: 85, p1: 1.2, a2: 0.3, l2: 24, p2: 0.3, w: 0.3, t0: 0.18, tg: 0.02, dry: 0.04, lat: 0.02, latL: 50, b0: 0.12, bg: -0.003, lens: [], doi: 11, sb: 0.014, sd: 0.032, se: 0.030, soil: 0.6, phiA: 0.40, phiB: 0.15, slope: 14, elev0: 520 } },
-  { id: 'cole', name: 'COLE', region: 'Pennsylvania', cat: 'seis', x: 851.6, y: 231.2, q: 1, md: 2, L: 72, D: 15, sp: 3,
+  { id: 'cole', name: 'COLE', region: 'Pennsylvania', cat: 'seis', arc: 'Zenodo', lic: 'by', x: 851.6, y: 231.2, q: 1, md: 2, L: 72, D: 15, sp: 3,
     surveys: [sv('SRV-0031', 'srt', 'Oct 2014')], topo: 'file header', boreholes: null, cores: null,
     meta: 'Shale-derived soil under cropland · no core data',
     header: 'SRT 25 geophones at 3 m, 13 shots',
     f: { base: 5.2, a1: 0.5, l1: 140, p1: 0, a2: 0.15, l2: 18, p2: 1.0, w: 0.3, t0: 0.10, tg: 0.012, dry: 0.03, lat: 0.015, latL: 50, b0: 0.34, bg: -0.004, lens: [], doi: 6, sb: 0.020, sd: 0.040, se: 0.035, soil: 0.7, phiA: 0.38, phiB: 0.36 } },
-  { id: 'pb', name: 'PB', region: 'Maryland', cat: 'seis', net: 'BCZN', x: 847.7, y: 247.4, q: 2, md: 2, L: 120, D: 30, sp: 2.5,
+  { id: 'pb', name: 'PB', region: 'Maryland', cat: 'seis', net: 'BCZN', arc: 'HydroShare', lic: 'by', x: 847.7, y: 247.4, q: 2, md: 2, L: 120, D: 30, sp: 2.5,
     surveys: [sv('SRV-0241', 'srt', 'Aug 2020')], topo: 'RTK survey', boreholes: null, cores: null,
     meta: 'Deep saprolite over schist · no boreholes',
     header: 'SRT 49 geophones at 2.5 m, 25 shots',
     f: { base: 13, a1: 2.5, l1: 110, p1: 1.0, a2: 0.8, l2: 30, p2: 2.1, w: 0.5, t0: 0.20, tg: 0.008, dry: 0.04, lat: 0.02, latL: 60, b0: 0.14, bg: -0.002, lens: [], doi: 21, sb: 0.015, sd: 0.035, se: 0.030, soil: 1.0, phiA: 0.45, phiB: 0.12, slope: 10, elev0: 120 } },
-  { id: 'scp', name: 'SCP', region: 'South Carolina', cat: 'unres', x: 786.4, y: 381.8, ...UNRES,
+  { id: 'scp', name: 'SCP', region: 'South Carolina', cat: 'unres', arc: 'ScienceBase', lic: 'cc0', x: 786.4, y: 381.8, ...UNRES,
     surveys: [sv('SRV-0328', 'unk', 'Jul 2021')], header: 'Four files; two candidate readers, neither confirmed' }
 ];
 const SITE = Object.fromEntries(SITES.map(s => [s.id, s]));
+/* Each survey's source archive and licence: the site's unless the survey names its own. Sample content. */
+SITES.forEach(s => s.surveys.forEach(v => { v.arc = v.arc || s.arc; v.lic = v.lic || s.lic; }));
+const LIC = {
+  cc0: { name: 'CC0 1.0', rank: 0 },
+  by: { name: 'CC BY 4.0', rank: 1 },
+  bync: { name: 'CC BY-NC 4.0', rank: 2, note: 'non-commercial use only' },
+  noredist: { name: 'Use only, no redistribution', rank: 3, block: 'its provider allows the survey to be used but not redistributed, and that covers products derived from it' }
+};
+/* A derived product inherits the strictest licence among the surveys it is made from. */
+function productLicence(s) {
+  const src = s.surveys, top = src.reduce((a, v) => LIC[v.lic].rank > LIC[a.lic].rank ? v : a);
+  const strict = src.filter(v => v.lic === top.lic).map(v => v.id), mixed = new Set(src.map(v => v.lic)).size > 1;
+  const lic = LIC[top.lic];
+  if (lic.block) return { blocked: true, lic, ids: strict, text: `None. It cannot be deposited: for ${listJoin(strict)}, ${lic.block}. The product stays in the workspace.` };
+  return { blocked: false, lic, ids: strict, text: `${lic.name}, inherited from ${mixed ? 'the strictest of its source surveys' : 'its source surveys'}${lic.note ? `: ${lic.note}, as ${listJoin(strict)} require${strict.length > 1 ? '' : 's'}` : ''}.` };
+}
+const srcGroups = s => { const g = new Map(); s.surveys.forEach(v => { const k = v.arc + '|' + v.lic; if (!g.has(k)) g.set(k, { arc: v.arc, lic: LIC[v.lic], ids: [] }); g.get(k).ids.push(v.id); }); return [...g.values()]; };
 const SURVEY = {};
 SITES.forEach(s => s.surveys.forEach(v => { SURVEY[v.id] = { ...v, site: s }; }));
 
@@ -1166,6 +1301,7 @@ const xref = (k, label) => `<a class="xref" href="${libUrl(k)}" target="_blank" 
 const meter = n => `<span class="meter" aria-hidden="true">${[1, 2, 3].map(i => `<i class="${i <= n ? '' : 'off'}"></i>`).join('')}</span>`;
 const QWORD = ['', 'Low quality', 'Fair quality', 'High quality'];
 const MWORD = ['', 'Metadata sparse', 'Metadata partial', 'Metadata complete'];
+const QLEV = ['', 'low', 'fair', 'high'], MLEV = ['', 'sparse', 'partial', 'complete'];
 const STWORD = { ready: 'Ready', partial: 'Partial', none: 'Not supported' };
 const statusChip = s => `<span class="status st-${s}"><i aria-hidden="true"></i>${STWORD[s]}</span>`;
 const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -1820,7 +1956,7 @@ function placePop(a) {
 }
 function showPop(t) { const html = popHTML(t); if (!html) return; popFor = t; pop.innerHTML = html; pop.classList.add('show'); placePop(anchorOf(t)); anchorOf(t).setAttribute('aria-describedby', 'pop'); }
 function hidePop() { if (popFor) anchorOf(popFor).removeAttribute('aria-describedby'); popFor = null; pinned = false; pop.classList.remove('show'); }
-const popTarget = el => el && el.closest ? el.closest('.xref,.cite,[data-tip],[data-tip-key],[data-site],[data-lib-host]:not([data-lib-host=""])') : null;
+const popTarget = el => !document.documentElement.classList.contains('figmode') && el && el.closest ? el.closest('.xref,.cite,[data-tip],[data-tip-key],[data-site],[data-lib-host]:not([data-lib-host=""])') : null;
 document.addEventListener('mouseover', e => {
   if (pop.contains(e.target)) { clearTimeout(hideT); return; }
   const t = popTarget(e.target); if (!t) return;
@@ -1856,6 +1992,7 @@ function parseRoute() {
   const parts = path.split('/').filter(Boolean), q = Object.fromEntries(new URLSearchParams(qs || ''));
   if (!parts.length) return { view: 'door', q };
   if (parts[0] === 'about') return { view: 'about', q };
+  if (parts[0] === 'figure' && FIGS[parts[1]]) return { view: 'figure', fig: parts[1], q };
   if (parts[0] === 'community' && COMM[parts[1]]) return { view: 'community', cid: parts[1], q };
   if (parts[0] === 'workspace') return SURVEY[parts[1]] ? { view: 'workspace', srv: parts[1], q } : { redirect: wsHref(primarySurvey(SITES[0])) };
   return { redirect: '#/' };
@@ -1867,13 +2004,15 @@ function render() {
   if (r.redirect) { history.replaceState(null, '', r.redirect); return render(); }
   route = r;
   hidePop();
-  const key = r.view + (r.cid || '') + (r.srv || '');
+  const key = r.view + (r.cid || '') + (r.srv || '') + (r.fig || '');
+  document.documentElement.classList.toggle('figmode', r.view === 'figure');
   if (key !== lastKey) for (const g in probes) delete probes[g];
-  ['door', 'about', 'community', 'workspace'].forEach(v => { $('#v-' + v).hidden = v !== r.view; });
+  ['intro', 'door', 'about', 'community', 'workspace', 'figure'].forEach(v => { $('#v-' + v).hidden = v !== r.view; });
   $('#about-link').hidden = r.view === 'workspace';
   if (r.view === 'door') renderDoor();
-  else if (r.view === 'about') renderAbout();
+  else if (r.view === 'about') { /* static markup in the page */ }
   else if (r.view === 'community') renderCommunity(r.cid, r.q);
+  else if (r.view === 'figure') FIGS[r.fig].render();
   else renderWorkspace(r);
   renderCrumbs(r);
   if (key !== lastKey) {
@@ -1883,11 +2022,11 @@ function render() {
     if (h1 && lastKey) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
   }
   lastKey = key;
-  document.title = r.view === 'door' ? 'UnEARTHeD · Design preview' : r.view === 'about' ? 'About · UnEARTHeD' : r.view === 'community' ? `${COMM[r.cid].name} · UnEARTHeD` : `${curSite().name} · UnEARTHeD`;
+  document.title = r.view === 'door' ? 'UnEARTHeD · Design preview' : r.view === 'about' ? 'About · UnEARTHeD' : r.view === 'figure' ? `Figure: ${FIGS[r.fig].title} · UnEARTHeD` : r.view === 'community' ? `${COMM[r.cid].name} · UnEARTHeD` : `${curSite().name} · UnEARTHeD`;
 }
 function renderCrumbs(r) {
   const nav = $('#crumbs');
-  if (r.view === 'door' || r.view === 'about') { nav.hidden = true; nav.innerHTML = ''; return; }
+  if (r.view === 'door' || r.view === 'about' || r.view === 'figure') { nav.hidden = true; nav.innerHTML = ''; return; }
   nav.hidden = false;
   const sep = '<span class="sep" aria-hidden="true">/</span>';
   if (r.view === 'community') { nav.innerHTML = `<a class="back" href="#/">${ICON.back}Home</a><span class="trail"><a href="#/">Home</a>${sep}<span aria-current="page">${esc(COMM[r.cid].name)}</span></span>`; return; }
@@ -1955,7 +2094,7 @@ const OUTPUTS = [
   { k: 'figures', g: 'products', name: 'Figures', desc: 'Sections and profiles with their uncertainty, in metres or feet.' },
   { k: 'data', g: 'products', name: 'Data files', desc: 'The product on its grid, with one standard deviation for every value.' },
   { k: 'review', g: 'publish', name: 'Curator review', req: true, desc: 'Required. A curator checks the plan and the result before anything leaves the catalog.' },
-  { k: 'deposit', g: 'publish', name: 'Deposit to HydroShare', desc: 'Once a curator approves, deposits the product, its 1σ and its record as a new HydroShare resource under the source surveys’ licence (CC BY 4.0 for these samples), citing them and PyHydroGeophysX.' }
+  { k: 'deposit', g: 'publish', name: 'Deposit to HydroShare', desc: 'Once a curator approves, deposits the product, its 1σ and its record as a new HydroShare resource under the strictest licence of its source surveys, citing them and PyHydroGeophysX. A source that forbids redistribution holds the product back.' }
 ];
 const OUTPUT_GROUPS = [['products', 'Products'], ['publish', 'Publish']];
 const ag = { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), out: new Set(OUTPUTS.map(o => o.k)), play: true };
@@ -1967,7 +2106,7 @@ function agentTrace() {
   const loaded = ex.skills.filter(k => ag.skills.has(k)), missing = ex.skills.filter(k => !ag.skills.has(k)), extra = [...ag.skills].filter(k => !ex.skills.includes(k));
   const t = (x, k) => `${tier.name} · ${(LATENCY[tier.k] * x).toFixed(1)} s`;
   const outs = OUTPUTS.filter(o => o.g === 'products' && ag.out.has(o.k)).map(o => o.name.toLowerCase());
-  const pub = ag.out.has('deposit') ? 'After curator approval, deposit to HydroShare under the source surveys’ licence.' : 'Held for curator review; not deposited.';
+  const pl = productLicence(s), pub = !ag.out.has('deposit') ? 'Held for curator review; not deposited.' : pl.blocked ? `Not deposited: for ${listJoin(pl.ids)}, ${pl.lic.block}.` : `After curator approval, deposit to HydroShare under ${pl.lic.name}, inherited from the source surveys${pl.lic.note ? ` (${pl.lic.note})` : ''}.`;
   const chip = n => { const tl = TOOLS.find(x => x.name === n); return tl ? `<a class="tchip" href="${libUrl(tl.lib)}" target="_blank" rel="noopener" data-lib-host="${tl.lib}">${n}</a>` : `<span class="tchip">${n}</span>`; };
   const steps = [];
   steps.push({ st: 'ok', title: 'Understand the request', meta: t(0.3),
@@ -1986,8 +2125,9 @@ function agentTrace() {
   steps.push({ st: 'ok', title: 'Execute deterministically', meta: 'Pinned environment', body: `The validated plan runs in a pinned environment with no model in the loop, and writes ${outs.length ? `the ${listJoin(outs)} with a provenance record` : 'a provenance record'}.` });
   const st2 = figureFor(ex.cid, ex.pid, s, 1).stats, noChange = missing.includes('time-lapse');
   const vals = ex.stats.filter(i => !(noChange && i === 1)).map(i => st2[i]);
-  steps.push({ st: 'ok', title: 'Deliver', meta: 'Sample values', deliver: true,
-    body: `<span class="tvals">${vals.map(([k, v, sd, u]) => `<span><em>${esc(k)}</em><b>${v}${sd ? ` <small>± ${sd}</small>` : ''}</b><em>${esc(u)}</em></span>`).join('')}</span><span class="tdep">${pub}</span><a class="textlink" href="${wsHref(primarySurvey(s, ex.cid), { c: ex.cid, p: ex.pid })}">Open the result in the workspace ${ICON.arrow}</a>` });
+  const href = wsHref(primarySurvey(s, ex.cid), { c: ex.cid, p: ex.pid });
+  steps.push({ st: 'ok', title: 'Deliver', meta: 'Sample values', deliver: true, vals, pub, href,
+    body: `<span class="tvals">${vals.map(([k, v, sd, u]) => `<span><em>${esc(k)}</em><b>${v}${sd ? ` <small>± ${sd}</small>` : ''}</b><em>${esc(u)}</em></span>`).join('')}</span><span class="tdep">${pub}</span><a class="textlink" href="${href}">Open the result in the workspace ${ICON.arrow}</a>` });
   return { steps, tier, routed };
 }
 function traceHTML() {
@@ -2045,6 +2185,62 @@ function agentHTML() {
 function renderTrace(play) { ag.play = !!play; const el = $('#ag-trace'); if (el) el.innerHTML = traceHTML(); }
 
 /* ================================================================== */
+/* Figure mode: the same sample data laid out for print. URL only.     */
+/* ================================================================== */
+const FIG_FOOT = '<p class="fig-foot">Design preview. Values are illustrative and no computation is performed.</p>';
+const FIG_STRONG = ['Ground the request', 'Plan with structured output', 'Execute deterministically'];
+/* The figure always shows the console's default run, whatever a visitor has changed. */
+function withDefaultConsole(fn) {
+  const saved = { ...ag, src: { ...ag.src }, skills: new Set(ag.skills), out: new Set(ag.out) };
+  Object.assign(ag, { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), out: new Set(OUTPUTS.map(o => o.k)), play: false });
+  try { return fn(); } finally { Object.assign(ag, saved); }
+}
+function figAgentHTML() {
+  return withDefaultConsole(() => {
+    const ex = AGENT_EX[ag.ex], tr = agentTrace();
+    const steps = tr.steps.map(x => {
+      const strong = FIG_STRONG.includes(x.title);
+      const body = !x.deliver ? x.body
+        : `<div class="fig-vals"><span class="fig-sample">Sample values</span><span class="fig-vlist">${x.vals.map(([k, v, sd, u]) => `<span>${esc(k)}: <b>${v}${sd ? ` ± ${sd}` : ''}</b> ${esc(u)}</span>`).join('')}</span></div>
+          <p class="fig-gate"><span class="pillbtn skill req">${ICON.check}Curator review<em>required</em></span></p>
+          <p class="tdep">${x.pub}</p>`;
+      return `<li class="t-${x.st} ${strong ? 'fig-strong' : 'fig-quiet'}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : '!'}</span><div class="tbody"><div class="tt"><span>${x.title}</span>${x.deliver ? `<a class="textlink" href="${x.href}">Open the result in the workspace ${ICON.arrow}</a>` : `<em>${esc(x.meta)}</em>`}</div><div class="tb">${body}</div></div></li>`;
+    }).join('');
+    return `<article class="fig-panel fig-agent" aria-label="Figure: the agent's plan for one request, replayed with sample values">
+      <div class="fig-cols">
+        <div class="fig-left">
+          <div class="ag-group"><div class="ag-label">Request</div><p class="fig-req">${esc(ex.q)}</p></div>
+          <div class="ag-group"><div class="ag-label"><span>Retrieval (RAG)</span><span class="fig-on">On</span></div>
+            <div class="fig-src">${SOURCES.map(x => `<span class="pillbtn on">${esc(x.name)} <em>${fmtInt(x.chunks)}</em></span>`).join('')}</div></div>
+          <div class="ag-group"><div class="ag-label"><span>Skills</span><span class="ag-hint">Procedures the agent reads when a task calls for them</span></div>
+            <div class="ag-list">${SKILL_GROUPS.map(([m, label]) => `<div><span class="sk-m">${esc(label)}</span><span class="ag-chips">${SKILLS.filter(k => k.m === m).map(k => `<span class="pillbtn skill${ag.skills.has(k.k) ? ' on' : ''}">${ICON.check}${esc(k.name)}</span>`).join('')}</span></div>`).join('')}</div></div>
+        </div>
+        <div class="fig-right">
+          <div class="ag-trace-h"><span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Illustrative replay with sample values · nothing is computed</span><span class="linkbtn">Replay</span></div>
+          <ol class="trace">${steps}</ol>
+        </div>
+      </div>${FIG_FOOT}</article>`;
+  });
+}
+function figEntryHTML() {
+  return `<article class="fig-panel fig-entry" aria-label="Figure: entry by place and by question, with RCCZO selected">
+    <div class="fig-entry-cols">
+      <div>${mapHTML('fig')}<p class="fig-attr">Boundaries: Natural Earth · sites: WYCEHG compilation, positions approximate</p></div>
+      <ul class="fig-cards" aria-label="Community questions">${COMMUNITIES.map(c => `<li${c.example === 'rcczo' ? ' class="is-on"' : ''}><span class="cn">${esc(c.name)} <span class="cy">· ${esc(c.yields)}, ${esc(c.yieldsUnit)}</span></span><span class="cq">${esc(c.question)}</span></li>`).join('')}</ul>
+    </div>${FIG_FOOT}</article>`;
+}
+const FIGS = {
+  'agent-trace': { title: 'agent trace', render: () => { $('#v-figure').innerHTML = figAgentHTML(); } },
+  entry: { title: 'entry', render: () => {
+    $('#v-figure').innerHTML = figEntryHTML();
+    /* At print size only the five example sites are labelled, so no code overlaps another; every site keeps its point. */
+    COMMUNITIES.forEach(c => { const m = $(`#v-figure .mk[data-site="${c.example}"]`); if (m) m.classList.add('lab'); });
+    $('#v-figure .mk[data-site="rcczo"]').classList.add('sel');
+  } }
+};
+
+
+/* ================================================================== */
 /* LEVEL 1 · front door                                                 */
 /* ================================================================== */
 const CAT_ORDER = ['multi', 'seis', 'unres'];
@@ -2078,22 +2274,6 @@ function renderDoor() {
     <footer class="foot"><span>Design preview. Site codes and states follow the WYCEHG dataset compilation, and the map groups its sites by the methods they hold; survey records, the agent trace and every value are sample content, and nothing on this page is computed. Boundaries from Natural Earth.</span><a href="#/about">About this preview</a><a href="${REPO}" target="_blank" rel="noopener">Powered by PyHydroGeophysX</a></footer>
   </div>`;
   ag.play = false;
-}
-function renderAbout() {
-  $('#v-about').innerHTML = `<div class="page"><article class="about">
-    <h1>About this preview</h1>
-    <p class="lede">A non-functional design preview, made for a proposal figure. It holds sample data and performs no computation.</p>
-    <p class="body">PyHydroGeophysX is an open-source Python package that connects near-surface geophysics with hydrology. It reads field data from common instruments; runs forward models and inversions for electrical resistivity, seismic refraction, ground-penetrating radar, electromagnetic and magnetotelluric surveys; and converts the results to water content through petrophysical relationships, carrying the uncertainty through each step. It also turns the output of hydrological models such as MODFLOW and ParFlow into the geophysical data they predict.</p>
-    <p class="body">Today the package is used from Python, from a desktop studio and from a web app. A run can keep a provenance record: the input files with their hashes, the sequence of calls, the warnings raised and the quality of the fit.</p>
-    <p class="body">UnEARTHeD would add a curated catalog of archived surveys, entry by place or by a question in a community’s own terms, products defined the same way at every site, and deposit of each product with its record. It is agentic by design: a language model plans each analysis, grounded by retrieval in the library and the catalog and guided by skills, the written procedures it reads when a task calls for them. Its output is structured, decoded against a plan schema and limited to registered tools; the validated plan then runs deterministically in a pinned environment, with no model in the loop.</p>
-    <p class="body">The sites shown are those of the WYCEHG geophysical dataset compilation, with their codes and states, at approximate positions. The map groups them by the methods they hold: multi-method sites, which the compilation lists as having both ERT and seismic data; seismic only, which includes the compilation’s seismic-associated BCZN sites; and sites whose survey format is not yet identified. Their survey records, and every value derived from them here, are sample content.</p>
-    <div class="links">
-      <a href="${PAPER}" target="_blank" rel="noopener">Chen, Niu and Wu (2026), PyHydroGeophysX, SoftwareX 34, 102710 ↗</a>
-      <a href="${REPO}" target="_blank" rel="noopener">Source code: github.com/geohang/PyHydroGeophysX ↗</a>
-      <a href="https://geohang.github.io/PyHydroGeophysX/" target="_blank" rel="noopener">Documentation ↗</a>
-      <a href="#/">Back to the front page</a>
-    </div>
-  </article></div>`;
 }
 
 /* ================================================================== */
@@ -2218,7 +2398,8 @@ function renderWorkspaceCatalog() {
       <h3><a class="stretch" href="${wsHref(primarySurvey(s, rq.c), { c: rq.c, p: rq.p, curated: rq.curated, from: rq.c ? null : rq.from })}"${s === cur ? ' aria-current="true"' : ''}>${esc(s.name)}</a></h3>
       <p class="line">${catGlyph(s.cat)} ${esc(s.region)} · ${CAT[s.cat].name}</p>
       <div class="svs">${methodsOf(s).map(m => `<span data-lib-host="${METHOD[m].lib || ''}">${esc(METHOD[m].name)} ${METHOD[m].lib ? xref(METHOD[m].lib, METHOD[m].name) : ''}<em>${s.surveys.filter(v => v.m === m).map(v => v.label).join(', ')}</em></span>`).join('')}</div>
-      <div class="chips"><span class="chip">${meter(s.q)}${QWORD[s.q]}</span><span class="chip">${meter(s.md)}${MWORD[s.md]}</span></div>
+      <div class="chips"><span class="chip">${meter(s.q)}Quality: ${QLEV[s.q]}</span><span class="chip">${meter(s.md)}Metadata: ${MLEV[s.md]}</span>${srcGroups(s).map(g => `<span class="chip chip-src${g.lic.block ? ' is-blocked' : ''}">Source: ${esc(g.arc)} · ${g.lic.name}${srcGroups(s).length > 1 ? ` (${g.ids.join(', ')})` : ''}</span>`).join('')}</div>
+      ${productLicence(s).blocked ? `<p class="lic-note">Deposit blocked: the provider allows these surveys to be used but not redistributed, so products made from them cannot be deposited.</p>` : ''}
     </li>`).join('') : '<li class="empty">No sites match.</li>';
   $('#cat-count').textContent = `${shown.length} of ${SITES.length} sites`;
 }
@@ -2386,10 +2567,11 @@ function renderRight(s, cid, pid, ps, curatedOn) {
     const prov = provFor(s, cid), unc = uncFor(s, cid, curatedOn), nProp = unc.filter(u => u[2] === 'prop').length;
     html += rcard('prov', 'Provenance', `${prov.length} steps`, `<ol class="steps">${prov.map(p => `<li><time>${p.t}</time><div class="sb"><b>${esc(p.b)}</b><span class="d">${esc(p.d)}</span>${p.code ? `<code>${esc(p.code)}</code>` : ''}</div></li>`).join('')}</ol><p class="rnote">Sample provenance record; times in UTC.</p>`, 'prov');
     html += rcard('unc', 'Uncertainty', `${nProp} propagated`, `<table class="ut"><caption class="vh">Error sources and how each is treated</caption><thead><tr><th scope="col">Source</th><th scope="col">Status</th></tr></thead><tbody>${unc.map(([a, b, c]) => `<tr><td>${esc(a)}<span class="tr">${esc(b)}</span></td><td><span class="status ${STAT[c][0]}"><i aria-hidden="true"></i>${STAT[c][1]}</span></td></tr>`).join('')}</tbody></table><p class="rnote">${nProp} of ${unc.length} sources propagated into the reported 1σ; the rest are listed so the product does not claim more than it knows.</p>`, 'unc_post');
-    html += rcard('pub', 'Publish', '', `<dl class="kv"><dt>Repository</dt><dd>HydroShare, as a new resource</dd><dt>Linked to</dt><dd>${s.surveys.map(v => v.id).join(', ')}</dd><dt>Contents</dt><dd>${esc(PROD[pid].name)} and its 1σ (NetCDF), provenance record (JSON), report (PDF)</dd><dt>Licence</dt><dd>CC BY 4.0, as the source surveys</dd><dt>Credit</dt><dd>Cites the source surveys and PyHydroGeophysX</dd></dl>
-      <button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why" data-tip="Design preview: nothing is deposited from this page.">Deposit to repository</button><p class="vh" id="dep-why">Unavailable: this is a design preview.</p>`, null);
+    const pl = productLicence(s);
+    html += rcard('pub', 'Publish', pl.blocked ? 'Blocked by licence' : '', `<dl class="kv"><dt>Repository</dt><dd>HydroShare, as a new resource</dd><dt>Linked to</dt><dd>${s.surveys.map(v => v.id).join(', ')}</dd><dt>Contents</dt><dd>${esc(PROD[pid].name)} and its 1σ (NetCDF), provenance record (JSON), report (PDF)</dd><dt>Source licences</dt><dd>${s.surveys.map(v => `<span class="mono">${v.id}</span> ${LIC[v.lic].name}, from ${esc(v.arc)}`).join('<br>')}</dd><dt>Product licence</dt><dd>${esc(pl.text)}</dd><dt>Credit</dt><dd>Cites the source surveys and PyHydroGeophysX</dd></dl>
+      ${pl.blocked ? `<p class="lic-note" id="dep-why">Not deposited. A product made from these surveys may be used in the workspace but not published.</p><button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why">Deposit blocked by licence</button>` : `<button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why" data-tip="Design preview: nothing is deposited from this page.">Deposit to repository</button><p class="vh" id="dep-why">Unavailable: this is a design preview.</p>`}`, null);
   }
-  html += rcard('site', 'Site record', `${s.surveys.length} survey${s.surveys.length > 1 ? 's' : ''}`, `<table class="svtable"><caption class="vh">Surveys at this site</caption><tbody>${s.surveys.map(v => `<tr><td><span class="mono">${v.id}</span><br>${esc(METHOD[v.m].name)}</td><td>${esc(v.label)}</td></tr>`).join('')}</tbody></table>
+  html += rcard('site', 'Site record', `${s.surveys.length} survey${s.surveys.length > 1 ? 's' : ''}`, `<table class="svtable"><caption class="vh">Surveys at this site</caption><tbody>${s.surveys.map(v => `<tr><td><span class="mono">${v.id}</span><br>${esc(METHOD[v.m].name)}</td><td>${esc(v.label)}<br><span class="svsrc">${esc(v.arc)} · ${LIC[v.lic].name}</span></td></tr>`).join('')}</tbody></table>
     <dl class="kv" style="margin-top:12px"><dt>Curated</dt><dd>${esc(s.meta)}</dd><dt>Headers</dt><dd>${esc(s.header)}</dd><dt>Quality</dt><dd>${QWORD[s.q]}, ${lc(MWORD[s.md])}</dd></dl>`, null);
   html += rcard('under', 'What runs underneath', '', `<p class="caps-intro">The interface shown here is a design preview. The capabilities listed below are implemented and openly available.</p>
     <div class="caps">${CAPS.map(([h, items]) => `<div><h3>${h}</h3><p>${items.map(([t, k]) => `<a href="${libUrl(k)}" target="_blank" rel="noopener" data-lib="${k}">${t}</a>`).join(', ')}</p></div>`).join('')}</div>`, 'repo');
