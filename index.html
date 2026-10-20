@@ -2432,7 +2432,7 @@ function scaleHTML() {
     <div class="scale">
       <div class="srow shead" aria-hidden="true"><span>Field</span><span>PyHydroGeophysX today</span><span>UnEARTHeD scales it to</span></div>
       ${SCALE.map(r => { const c = COMM[r.cid]; return `<div class="srow${r.live ? ' is-live' : ''}">
-        <div class="sfield"><a href="#/community/${c.id}"><b>${esc(c.name)}</b></a><span class="stag">${r.live ? 'Working today' : 'Building blocks today'}</span></div>
+        <div class="sfield"><a href="#/community/${c.id}"><b>${esc(c.name)}</b></a><span class="stag">${r.live ? 'Partly implemented' : 'Proposed work'}</span></div>
         <div class="stoday"><span class="slab">Today</span><p>${esc(r.today)}</p><p class="sdemos">${r.demos.map(demoLink).join('')}</p></div>
         <div class="sto"><span class="slab">UnEARTHeD</span><p class="sprods">${c.products.map(p => `<a class="prodchip" href="#/community/${c.id}?p=${p.id}">${esc(p.name)}</a>`).join('')}</p></div>
       </div>`; }).join('')}
@@ -2470,7 +2470,7 @@ function getHTML() {
 }
 function tryTodayHTML(cid) {
   const r = SCALE.find(x => x.cid === cid);
-  return `<div class="trytoday"><h3>${r.live ? 'Working today in PyHydroGeophysX' : 'Building blocks in PyHydroGeophysX today'}</h3><p>${esc(r.today)}</p><p class="sdemos">${r.demos.map(demoLink).join('')}</p></div>`;
+  return `<div class="trytoday"><h3>${r.live ? 'Partly implemented in PyHydroGeophysX' : 'Proposed work, building on PyHydroGeophysX'}</h3><p>${esc(r.today)}</p><p class="sdemos">${r.demos.map(demoLink).join('')}</p></div>`;
 }
 function gotoSection(id) {
   const go = () => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); };
