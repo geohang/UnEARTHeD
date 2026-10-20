@@ -8,7 +8,7 @@ UnEARTHeD is a proposed service that turns archived near-surface geophysical sur
 
 This repository shows the interaction design only. The sites are those of the WYCEHG geophysical dataset compilation (University of Wyoming), shown with their codes and states at approximate positions. The map groups them by the methods they hold, regrouping the compilation's four dataset categories into three: its "Both (ERT + Seismic)" sites are multi-method, its "Seismic only" and "Seismic-associated / BCZN" sites are seismic only (BCZN membership shows in each site's popup), and its "Unresolved" sites are those whose survey format is not yet identified. Their survey records, and every number, timestamp, token count, agent trace and evaluation result on the page, are illustrative. Nothing is uploaded, computed or deposited, and the page makes no network requests.
 
-## How the page is organised
+## How the page is organized
 
 The page has three levels, built for three readers: a first-time reviewer, a scientist who is not a geophysicist, and a geophysicist who wants the full catalog. The product comes first, the method second and the machinery last.
 
@@ -20,7 +20,7 @@ The disclosure "How this was produced" holds the machinery: the **Use curated si
 
 Turning curated metadata off is the key interaction: the reported uncertainty widens, and the parameters that came from curated metadata switch to inferred.
 
-Other interactions are presentation only: hovering or arrowing through a cross-section reads out position, depth and value; the length unit switches between metres and feet; cards open and close; and the page follows the system light or dark appearance. Browser back and forward work, and every view can be linked directly.
+Other interactions are presentation only: hovering or arrowing through a cross-section reads out position, depth and value; the length unit switches between meters and feet; cards open and close; and the page follows the system light or dark appearance. Browser back and forward work, and every view can be linked directly.
 
 ## The library underneath
 

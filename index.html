@@ -741,28 +741,20 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
 .fig-panel .tdep{margin:2px 0 0;font-size:12.5px;color:var(--text-2)}
 .fig-panel .textlink{font-size:12.5px;font-weight:500}
 .fig-panel .tt .textlink{white-space:nowrap}
-/* entry */
-.fig-entry-cols{display:grid;grid-template-columns:minmax(0,9fr) minmax(0,11fr);column-gap:18px;align-items:start}
-.fig-panel .mapcard{box-shadow:none;border-radius:12px}
-.fig-panel .mapcard svg{display:block}
-.fig-panel .mapcard .m-label,.fig-panel .mapcard .m-sea,.fig-panel .mapcard text.m-note[x="12"]{display:none}
-.fig-panel .mapcard text.m-note{font-size:34px;fill:var(--text-2)}
-.fig-panel .mapcard .m-code{display:none;font-size:34px;stroke-width:8px}
-.fig-panel .mapcard .mk.lab .m-code{display:inline}
-.fig-panel .mapcard .mk .sym,.fig-panel .mapcard .mk .ring{transform:scale(1.8)}
-.fig-panel .mapcard .m-code{transform:translateX(17px)}
-.fig-panel .mapcard text.m-code[text-anchor="end"]{transform:translateX(-17px)}
-.fig-panel .mapcard .mk.sel .ring{stroke:var(--accent);stroke-width:2.5}
-.fig-panel .mapcard .mk.sel .m-code{font-weight:700;fill:var(--accent)}
-.fig-panel .map-legend{font-size:12px;padding:6px 10px;gap:2px 12px}
-.fig-attr{margin-top:4px;font-size:12px;color:var(--text-2)}
-.fig-cards{display:flex;flex-direction:column;gap:5px}
-.fig-cards li{padding:5px 12px 6px;border:1px solid var(--hairline-strong);border-radius:10px}
-.fig-cards li.is-on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-.fig-cards .cn{display:block;font-size:12px;font-weight:600;color:var(--text-2)}
-.fig-cards li.is-on .cn{color:var(--accent)}
-.fig-cards .cq{display:block;font-size:13px;font-weight:600;line-height:1.35}
-.fig-cards .cy{font-weight:400;color:var(--text-2)}
+/* entry: the Hydrology view, what it can and cannot produce before anything runs */
+.fe-comm{font-size:12px;font-weight:600;color:var(--accent)}
+.fe-q{margin-top:2px;font:600 17px/1.3 var(--font-display);letter-spacing:-.01em}
+.fe-prods{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.fe-label{margin-top:14px;font-size:12px;font-weight:600;color:var(--text-2)}
+.fe-sites{margin-top:6px;border:1px solid var(--hairline-strong);border-radius:12px}
+.fe-sites li{display:grid;grid-template-columns:166px 58px minmax(0,1fr);align-items:baseline;gap:12px;padding:7px 14px}
+.fe-sites li + li{border-top:1px solid var(--hairline)}
+.fe-site{font-size:13px;font-weight:600}
+.fe-why{font-size:13px;color:var(--text-2)}
+.fig-panel .status{font-size:12.5px}
+.fig-panel .status i,.fig-panel .status .glyph{width:11px;height:11px}
+.fig-panel .st-unres{color:var(--text-2)}
+.fig-panel .st-unres .glyph{width:16px;height:16px;margin:0 -2.5px}
 </style>
 </head>
 <body>
@@ -949,7 +941,7 @@ const SITES = [
     header: 'ERT 81 electrodes at 1 m, four surveys May to October (first 80 m) · SRT 41 geophones at 2.5 m · GPR 250 MHz along 100 m',
     f: { base: 2.6, a1: 0.4, l1: 90, p1: 0.8, a2: 0.2, l2: 23, p2: 2.2, w: 0.25, t0: 0.20, tg: 0.03, dry: 0.05, lat: 0.02, latL: 50, b0: 0.36, bg: -0.006, lens: [], doi: 7, sb: 0.012, sd: 0.030, se: 0.030, soil: 0.3, phiA: 0.48, phiB: 0.40, wt: 1.9, repeatTo: 80 } },
   { id: 'eel', name: 'EEL', region: 'California', cat: 'unres', arc: 'HydroShare', lic: 'by', x: 22.4, y: 202.3, ...UNRES,
-    surveys: [sv('SRV-0119', 'unk', 'Sep 2017')], header: 'Three files; vendor format not recognised from the header' },
+    surveys: [sv('SRV-0119', 'unk', 'Sep 2017')], header: 'Three files; vendor format not recognized from the header' },
   { id: 'ssczo', name: 'SSCZO', region: 'California', cat: 'multi', arc: 'HydroShare', lic: 'by', x: 87.3, y: 291.0, q: 3, md: 3, L: 80, D: 12, sp: 1,
     surveys: [sv('SRV-0312', 'ert', 'Apr 2019'), sv('SRV-0313', 'ert', 'Jul 2019'), sv('SRV-0314', 'ert', 'Sep 2019'), sv('SRV-0315', 'srt', 'Apr 2019'), sv('SRV-0316', 'gpr', 'Jul 2019')],
     repeat: ['Apr 2019', 'Sep 2019'], topo: 'RTK survey', boreholes: null, cores: 'soil-pit texture',
@@ -1012,7 +1004,7 @@ const SITES = [
     surveys: [sv('SRV-0328', 'unk', 'Jul 2021')], header: 'Four files; two candidate readers, neither confirmed' }
 ];
 const SITE = Object.fromEntries(SITES.map(s => [s.id, s]));
-/* Each survey's source archive and licence: the site's unless the survey names its own. Sample content. */
+/* Each survey's source archive and license: the site's unless the survey names its own. Sample content. */
 SITES.forEach(s => s.surveys.forEach(v => { v.arc = v.arc || s.arc; v.lic = v.lic || s.lic; }));
 const LIC = {
   cc0: { name: 'CC0 1.0', rank: 0 },
@@ -1020,8 +1012,8 @@ const LIC = {
   bync: { name: 'CC BY-NC 4.0', rank: 2, note: 'non-commercial use only' },
   noredist: { name: 'Use only, no redistribution', rank: 3, block: 'its provider allows the survey to be used but not redistributed, and that covers products derived from it' }
 };
-/* A derived product inherits the strictest licence among the surveys it is made from. */
-function productLicence(s) {
+/* A derived product inherits the strictest license among the surveys it is made from. */
+function productLicense(s) {
   const src = s.surveys, top = src.reduce((a, v) => LIC[v.lic].rank > LIC[a.lic].rank ? v : a);
   const strict = src.filter(v => v.lic === top.lic).map(v => v.id), mixed = new Set(src.map(v => v.lic)).size > 1;
   const lic = LIC[top.lic];
@@ -1035,25 +1027,25 @@ SITES.forEach(s => s.surveys.forEach(v => { SURVEY[v.id] = { ...v, site: s }; })
 const COMMUNITIES = [
   { id: 'geomorphology', name: 'Geomorphology', fig: 'geomorph', example: 'bw',
     question: 'How thick is the weathered zone, and where is fresh rock?',
-    yields: 'Depth to unweathered bedrock', yieldsUnit: 'metres below ground',
-    lede: 'Two products from seismic refraction, checked against resistivity, reported in metres below the ground surface.',
+    yields: 'Depth to unweathered bedrock', yieldsUnit: 'meters below ground',
+    lede: 'Two products from seismic refraction, checked against resistivity, reported in meters below the ground surface.',
     products: [
       { id: 'bedrock-depth', name: 'Depth to unweathered bedrock', units: 'm below ground surface', range: 'Typically 2 to 40 m', methods: [['Seismic refraction', 'primary', 'srt_inv'], ['Electrical resistivity', 'secondary constraint', 'ert_inv'], ['Borehole logs', 'calibration', 'bh_load']] },
       { id: 'weathered-thickness', name: 'Weathered-zone thickness', units: 'm', range: 'Typically 1 to 30 m', methods: [['Seismic refraction', 'primary', 'srt_inv'], ['Electrical resistivity', 'secondary constraint', 'ert_inv'], ['Borehole logs', 'calibration', 'bh_load']] }
     ],
     needs: ['srt'],
-    comparability: 'Every site reports fresh rock at the same criterion, the 1,200 m/s velocity contour unless boreholes calibrate it, as depth below ground surface in metres along the survey line, at the geophone-spacing support. The depth uncertainty combines pick error, the inversion’s linearized posterior and the spread of the velocity criterion.' },
+    comparability: 'Every site reports fresh rock at the same criterion, the 1,200 m/s velocity contour unless boreholes calibrate it, as depth below ground surface in meters along the survey line, at the geophone-spacing support. The depth uncertainty combines pick error, the inversion’s linearized posterior and the spread of the velocity criterion.' },
   { id: 'hydrology', name: 'Hydrology', fig: 'hydro', example: 'rcczo',
     question: 'How much water is stored in the subsurface, and how did it change between surveys?',
     yields: 'Subsurface water storage', yieldsUnit: 'mm of water',
-    lede: 'Water storage and its seasonal change from resistivity surveys, reported in millimetres of water over a stated depth interval.',
+    lede: 'Water storage and its seasonal change from resistivity surveys, reported in millimeters of water over a stated depth interval.',
     products: [
       { id: 'storage', name: 'Subsurface water storage', units: 'mm of equivalent water depth', range: 'Integrated over 0 to 5 m', methods: [['Electrical resistivity', '', 'ert_inv'], ['Transient electromagnetics', '', 'tdem_inv']] },
       { id: 'storage-change', name: 'Seasonal storage change', units: 'mm', range: '0 to 5 m, between two surveys', methods: [['Time-lapse electrical resistivity', '', 'ert_tl']] },
       { id: 'saturated-geometry', name: 'Saturated-zone geometry', units: 'm', range: 'Typically 0 to 30 m', methods: [['Electrical resistivity', '', 'ert_inv'], ['Transient electromagnetics', '', 'tdem_inv'], ['Borehole logs', 'water levels', 'bh_load']] }
     ],
     needs: ['ert', 'em'],
-    comparability: 'Storage is the depth of water held between 0 and 5 m below ground, in millimetres, at the electrode-spacing support of each line. Its uncertainty carries measurement error, the linearized posterior and the petrophysical parameter ranges; temperature is corrected wherever a logger record exists, and stated as unconstrained where it does not.' },
+    comparability: 'Storage is the depth of water held between 0 and 5 m below ground, in millimeters, at the electrode-spacing support of each line. Its uncertainty carries measurement error, the linearized posterior and the petrophysical parameter ranges; temperature is corrected wherever a logger record exists, and stated as unconstrained where it does not.' },
   { id: 'forest-ecology', name: 'Forest ecology', fig: 'forest', example: 'ssczo',
     question: 'How much water can roots reach at this site?',
     yields: 'Root-accessible water capacity', yieldsUnit: 'mm',
@@ -1063,10 +1055,10 @@ const COMMUNITIES = [
       { id: 'root-limit', name: 'Depth to a root-limiting layer', units: 'm', range: 'Typically 0.5 to 5 m', methods: [['Seismic refraction', '', 'srt_iface'], ['Electrical resistivity', '', 'ert_inv']] }
     ],
     needs: ['ert'],
-    comparability: 'Capacity is plant-available water, water content above the wilting point, integrated from the surface down to the root-limiting layer and reported in millimetres. The layer is placed by the same velocity criterion at every site; the uncertainty carries the water-content posterior, the wilting-point range and the depth of the layer.' },
+    comparability: 'Capacity is plant-available water, water content above the wilting point, integrated from the surface down to the root-limiting layer and reported in millimeters. The layer is placed by the same velocity criterion at every site; the uncertainty carries the water-content posterior, the wilting-point range and the depth of the layer.' },
   { id: 'biogeochemistry', name: 'Biogeochemistry', fig: 'biogeo', example: 'wind',
     question: 'How thick is the reactive zone, and where does it stay saturated?',
-    yields: 'Reactive-zone thickness', yieldsUnit: 'metres',
+    yields: 'Reactive-zone thickness', yieldsUnit: 'meters',
     lede: 'Saturation as a redox proxy, and the interval where it changes through the surveyed season, from repeat resistivity surveys.',
     products: [
       { id: 'reactive-thickness', name: 'Reactive-zone thickness', units: 'm', range: 'Typically 0.5 to 5 m', methods: [['Electrical resistivity', '', 'ert_tl'], ['Ground-penetrating radar', 'shallow structure', 'gpr_read']] },
@@ -1076,14 +1068,14 @@ const COMMUNITIES = [
     comparability: 'Saturation is the fraction of pore space filled with water, so it compares across soils of different porosity. The reactive interval is bounded the same way at every site, between the seasonal high and low water tables, where saturation alternates through the surveyed season. Uncertainty includes porosity and the Archie exponents.' },
   { id: 'natural-hazards', name: 'Natural hazards', fig: 'hazards', example: 'sgm',
     question: 'Is regolith thickness laterally continuous across this slope?',
-    yields: 'Regolith thickness and a continuity flag', yieldsUnit: 'metres',
+    yields: 'Regolith thickness and a continuity flag', yieldsUnit: 'meters',
     lede: 'Regolith thickness along a slope profile, masked where the data cannot constrain it, with continuity stated only where they can.',
     products: [
       { id: 'regolith-thickness', name: 'Regolith thickness', units: 'm', range: 'Typically 0.5 to 10 m', methods: [['Seismic refraction', '', 'srt_inv'], ['Electrical resistivity', '', 'ert_inv'], ['Borehole logs', 'calibration where present', 'bh_load']] },
       { id: 'continuity', name: 'Lateral continuity', units: 'flag with a stated confidence', range: 'Along the survey line', methods: [['Seismic refraction', '', 'srt_iface']] }
     ],
     needs: ['srt'],
-    comparability: 'Thickness is measured vertically below the ground surface, in metres, to the same velocity criterion at every site. Where ray coverage or geometry cannot constrain it, the line is masked rather than interpolated, and continuity is stated only for unmasked segments, each with a confidence.' }
+    comparability: 'Thickness is measured vertically below the ground surface, in meters, to the same velocity criterion at every site. Where ray coverage or geometry cannot constrain it, the line is masked rather than interpolated, and continuity is stated only for unmasked segments, each with a confidence.' }
 ];
 const COMM = Object.fromEntries(COMMUNITIES.map(c => [c.id, c]));
 const PROD = {};
@@ -1384,7 +1376,7 @@ const mean = a => a.reduce((p, v) => p + v, 0) / (a.length || 1);
 const rangeOf = (s, fn) => { const a = sampleX(s).map(fn).filter(v => v != null); return [Math.min(...a), Math.max(...a)]; };
 
 /* ================================================================== */
-/* Colour ramps: one hue per quantity; anchors flip in dark mode        */
+/* Color ramps: one hue per quantity; anchors flip in dark mode         */
 /* ================================================================== */
 const hexRgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 function makeLut(stops) {
@@ -1719,7 +1711,7 @@ function figureFor(cid, pid, s, k) {
       kind: 'profile', site: s, ramp: 'paw', ymin: 0, ymax: capMax,
       line: M.cap, sd: x => M.capS(x, k), title: 'Root-accessible water capacity, with its 1σ band', sub: 'Plant-available water integrated above the limiting layer', lib: 'unc_mc',
       yTitle: () => 'Capacity (mm)', legend: `<span>${LEG.band(pc)}Capacity and 1σ</span>`,
-      alt: `Root-accessible water capacity along the line, ${s.name}`, desc: () => 'Sample data. Capacity in millimetres along the line with a shaded one-standard-deviation band.',
+      alt: `Root-accessible water capacity along the line, ${s.name}`, desc: () => 'Sample data. Capacity in millimeters along the line with a shaded one-standard-deviation band.',
       read: x => rd([['Distance', len(x)], ['Capacity', `${fmtInt(M.cap(x))} ± ${fmtInt(M.capS(x, k))} mm`]])
     };
     const xs = sampleX(s, 40), r = rangeOf(s, M.iface), ert = s.surveys.filter(v => v.m === 'ert');
@@ -1778,7 +1770,7 @@ function figureFor(cid, pid, s, k) {
   const main = {
     kind: 'section', site: s, ramp: 'thick', vmin: 0, vmax: 8, D: Math.max(hmax + 2, 8), slopeStrip: true, top: 58, backdrop: 'var(--rock)',
     columns: x => M.masked(x) ? null : { h: M.iface(x), c: M.iface(x) },
-    title: 'Regolith thickness along the slope profile', sub: 'Regolith coloured by its thickness over bedrock; poorly constrained segments masked, not interpolated', lib: 'srt_iface',
+    title: 'Regolith thickness along the slope profile', sub: 'Regolith colored by its thickness over bedrock; poorly constrained segments masked, not interpolated', lib: 'srt_iface',
     overlays: [{ t: 'mask', segs: masks, label: 'Masked' }],
     cbar: { ramp: 'thick', min: 0, max: 8, ticks: [0, 2, 4, 6, 8], fmt: v => lenN(v, 0), title: `Regolith thickness (${state.unit})` },
     legend: `<span>${LEG.hatch()}Masked: poorly constrained</span><span>${LEG.rock}Bedrock</span>`,
@@ -2091,10 +2083,10 @@ const LATENCY = { light: 1.1, mid: 2.9, frontier: 7.4 };
 /* What a run returns and where it goes. The provenance record is always written. */
 const OUTPUTS = [
   { k: 'report', g: 'products', name: 'Report', desc: 'A written report of the methods, the result and its uncertainty.' },
-  { k: 'figures', g: 'products', name: 'Figures', desc: 'Sections and profiles with their uncertainty, in metres or feet.' },
+  { k: 'figures', g: 'products', name: 'Figures', desc: 'Sections and profiles with their uncertainty, in meters or feet.' },
   { k: 'data', g: 'products', name: 'Data files', desc: 'The product on its grid, with one standard deviation for every value.' },
   { k: 'review', g: 'publish', name: 'Curator review', req: true, desc: 'Required. A curator checks the plan and the result before anything leaves the catalog.' },
-  { k: 'deposit', g: 'publish', name: 'Deposit to HydroShare', desc: 'Once a curator approves, deposits the product, its 1σ and its record as a new HydroShare resource under the strictest licence of its source surveys, citing them and PyHydroGeophysX. A source that forbids redistribution holds the product back.' }
+  { k: 'deposit', g: 'publish', name: 'Deposit to HydroShare', desc: 'Once a curator approves, deposits the product, its 1σ and its record as a new HydroShare resource under the strictest license of its source surveys, citing them and PyHydroGeophysX. A source that forbids redistribution holds the product back.' }
 ];
 const OUTPUT_GROUPS = [['products', 'Products'], ['publish', 'Publish']];
 const ag = { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), out: new Set(OUTPUTS.map(o => o.k)), play: true };
@@ -2106,7 +2098,7 @@ function agentTrace() {
   const loaded = ex.skills.filter(k => ag.skills.has(k)), missing = ex.skills.filter(k => !ag.skills.has(k)), extra = [...ag.skills].filter(k => !ex.skills.includes(k));
   const t = (x, k) => `${tier.name} · ${(LATENCY[tier.k] * x).toFixed(1)} s`;
   const outs = OUTPUTS.filter(o => o.g === 'products' && ag.out.has(o.k)).map(o => o.name.toLowerCase());
-  const pl = productLicence(s), pub = !ag.out.has('deposit') ? 'Held for curator review; not deposited.' : pl.blocked ? `Not deposited: for ${listJoin(pl.ids)}, ${pl.lic.block}.` : `After curator approval, deposit to HydroShare under ${pl.lic.name}, inherited from the source surveys${pl.lic.note ? ` (${pl.lic.note})` : ''}.`;
+  const pl = productLicense(s), pub = !ag.out.has('deposit') ? 'Held for curator review; not deposited.' : pl.blocked ? `Not deposited: for ${listJoin(pl.ids)}, ${pl.lic.block}.` : `After curator approval, deposit to HydroShare under ${pl.lic.name}, inherited from the source surveys${pl.lic.note ? ` (${pl.lic.note})` : ''}.`;
   const chip = n => { const tl = TOOLS.find(x => x.name === n); return tl ? `<a class="tchip" href="${libUrl(tl.lib)}" target="_blank" rel="noopener" data-lib-host="${tl.lib}">${n}</a>` : `<span class="tchip">${n}</span>`; };
   const steps = [];
   steps.push({ st: 'ok', title: 'Understand the request', meta: t(0.3),
@@ -2134,7 +2126,7 @@ function traceHTML() {
   const tr = agentTrace();
   return `<ol class="trace${ag.play ? ' play' : ''}">${tr.steps.map((x, i) => `<li class="t-${x.st}${x.deliver ? ' t-deliver' : ''}" style="--i:${i}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : x.st === 'warn' ? '!' : ''}</span><div class="tbody"><div class="tt"><span>${x.title}</span><em>${esc(x.meta)}</em></div><div class="tb">${x.body}</div></div></li>`).join('')}</ol>`;
 }
-/* Locator map of the example sites: every catalog site faint, the examples clickable, the chosen one labelled. */
+/* Locator map of the example sites: every catalog site faint, the examples clickable, the chosen one labeled. */
 function agentMapHTML() {
   const exSites = new Set(AGENT_EX.map(e => e.site));
   const others = SITES.filter(s => !exSites.has(s.id)).map(s => `<circle class="am-o" cx="${s.x}" cy="${s.y}" r="7"/>`).join('');
@@ -2222,21 +2214,24 @@ function figAgentHTML() {
       </div>${FIG_FOOT}</article>`;
   });
 }
+/* One Hydrology site per readiness state, with the reason the Hydrology status list gives. */
+const FIG_ENTRY_ROWS = [['rcczo', 'ready'], ['bw', 'partial'], ['gar', 'none'], ['jem', 'unres']];
 function figEntryHTML() {
-  return `<article class="fig-panel fig-entry" aria-label="Figure: entry by place and by question, with RCCZO selected">
-    <div class="fig-entry-cols">
-      <div>${mapHTML('fig')}<p class="fig-attr">Boundaries: Natural Earth · sites: WYCEHG compilation, positions approximate</p></div>
-      <ul class="fig-cards" aria-label="Community questions">${COMMUNITIES.map(c => `<li${c.example === 'rcczo' ? ' class="is-on"' : ''}><span class="cn">${esc(c.name)} <span class="cy">· ${esc(c.yields)}, ${esc(c.yieldsUnit)}</span></span><span class="cq">${esc(c.question)}</span></li>`).join('')}</ul>
-    </div>${FIG_FOOT}</article>`;
+  const c = COMM.hydrology;
+  const rows = FIG_ENTRY_ROWS.map(([id, state]) => {
+    const site = SITE[id], r = statusFor(site, c.id);
+    const marker = state === 'unres' ? `<span class="status st-unres">${catGlyph('unres')}Format not identified</span>` : statusChip(state);
+    return `<li><span>${marker}</span><span class="fe-site">${esc(site.name)}</span><span class="fe-why">${esc(r.effect)}</span></li>`;
+  }).join('');
+  return `<article class="fig-panel fig-entry" aria-label="Figure: what the Hydrology view can and cannot produce, before anything is run">
+    <header><p class="fe-comm">${esc(c.name)}</p><h2 class="fe-q">${esc(c.question)}</h2></header>
+    <div class="fe-prods" aria-label="Products">${['storage', 'storage-change'].map(pid => `<span class="pillbtn">${esc(PROD[pid].name)}, mm</span>`).join('')}</div>
+    <p class="fe-label">Where it can be produced</p>
+    <ul class="fe-sites" aria-label="Sites by readiness">${rows}</ul>${FIG_FOOT}</article>`;
 }
 const FIGS = {
   'agent-trace': { title: 'agent trace', render: () => { $('#v-figure').innerHTML = figAgentHTML(); } },
-  entry: { title: 'entry', render: () => {
-    $('#v-figure').innerHTML = figEntryHTML();
-    /* At print size only the five example sites are labelled, so no code overlaps another; every site keeps its point. */
-    COMMUNITIES.forEach(c => { const m = $(`#v-figure .mk[data-site="${c.example}"]`); if (m) m.classList.add('lab'); });
-    $('#v-figure .mk[data-site="rcczo"]').classList.add('sel');
-  } }
+  entry: { title: 'entry', render: () => { $('#v-figure').innerHTML = figEntryHTML(); } }
 };
 
 
@@ -2361,7 +2356,7 @@ function provFor(s, cid) {
     push(150, ert.length > 1 ? 'Time-lapse inversion' : 'Inversion', ert.length > 1 ? `${ert.length} surveys together, χ² 1.03` : '7 iterations, χ² 1.04', ert.length > 1 ? 'TimeLapseERTInversion' : 'run_ert_manager_inversion');
     push(40, 'Posterior covariance', 'Linearized, per cell', 'linearized_posterior');
     push(32, fig === 'biogeo' ? 'Saturation' : 'Water content', '500 Monte Carlo draws per cell', fig === 'biogeo' ? 'resistivity_to_saturation' : 'run_petrophysics_monte_carlo');
-    if (fig === 'hydro') push(2, 'Storage integrated', '0 to 5 m, millimetres of water', null);
+    if (fig === 'hydro') push(2, 'Storage integrated', '0 to 5 m, millimeters of water', null);
     if (fig === 'forest') push(2, 'Capacity integrated', 'Above the root-limiting layer', null);
     if (fig === 'biogeo') push(2, 'Reactive interval bounded', 'Between the seasonal high and low water tables', null);
   }
@@ -2399,7 +2394,7 @@ function renderWorkspaceCatalog() {
       <p class="line">${catGlyph(s.cat)} ${esc(s.region)} · ${CAT[s.cat].name}</p>
       <div class="svs">${methodsOf(s).map(m => `<span data-lib-host="${METHOD[m].lib || ''}">${esc(METHOD[m].name)} ${METHOD[m].lib ? xref(METHOD[m].lib, METHOD[m].name) : ''}<em>${s.surveys.filter(v => v.m === m).map(v => v.label).join(', ')}</em></span>`).join('')}</div>
       <div class="chips"><span class="chip">${meter(s.q)}Quality: ${QLEV[s.q]}</span><span class="chip">${meter(s.md)}Metadata: ${MLEV[s.md]}</span>${srcGroups(s).map(g => `<span class="chip chip-src${g.lic.block ? ' is-blocked' : ''}">Source: ${esc(g.arc)} · ${g.lic.name}${srcGroups(s).length > 1 ? ` (${g.ids.join(', ')})` : ''}</span>`).join('')}</div>
-      ${productLicence(s).blocked ? `<p class="lic-note">Deposit blocked: the provider allows these surveys to be used but not redistributed, so products made from them cannot be deposited.</p>` : ''}
+      ${productLicense(s).blocked ? `<p class="lic-note">Deposit blocked: the provider allows these surveys to be used but not redistributed, so products made from them cannot be deposited.</p>` : ''}
     </li>`).join('') : '<li class="empty">No sites match.</li>';
   $('#cat-count').textContent = `${shown.length} of ${SITES.length} sites`;
 }
@@ -2567,9 +2562,9 @@ function renderRight(s, cid, pid, ps, curatedOn) {
     const prov = provFor(s, cid), unc = uncFor(s, cid, curatedOn), nProp = unc.filter(u => u[2] === 'prop').length;
     html += rcard('prov', 'Provenance', `${prov.length} steps`, `<ol class="steps">${prov.map(p => `<li><time>${p.t}</time><div class="sb"><b>${esc(p.b)}</b><span class="d">${esc(p.d)}</span>${p.code ? `<code>${esc(p.code)}</code>` : ''}</div></li>`).join('')}</ol><p class="rnote">Sample provenance record; times in UTC.</p>`, 'prov');
     html += rcard('unc', 'Uncertainty', `${nProp} propagated`, `<table class="ut"><caption class="vh">Error sources and how each is treated</caption><thead><tr><th scope="col">Source</th><th scope="col">Status</th></tr></thead><tbody>${unc.map(([a, b, c]) => `<tr><td>${esc(a)}<span class="tr">${esc(b)}</span></td><td><span class="status ${STAT[c][0]}"><i aria-hidden="true"></i>${STAT[c][1]}</span></td></tr>`).join('')}</tbody></table><p class="rnote">${nProp} of ${unc.length} sources propagated into the reported 1σ; the rest are listed so the product does not claim more than it knows.</p>`, 'unc_post');
-    const pl = productLicence(s);
-    html += rcard('pub', 'Publish', pl.blocked ? 'Blocked by licence' : '', `<dl class="kv"><dt>Repository</dt><dd>HydroShare, as a new resource</dd><dt>Linked to</dt><dd>${s.surveys.map(v => v.id).join(', ')}</dd><dt>Contents</dt><dd>${esc(PROD[pid].name)} and its 1σ (NetCDF), provenance record (JSON), report (PDF)</dd><dt>Source licences</dt><dd>${s.surveys.map(v => `<span class="mono">${v.id}</span> ${LIC[v.lic].name}, from ${esc(v.arc)}`).join('<br>')}</dd><dt>Product licence</dt><dd>${esc(pl.text)}</dd><dt>Credit</dt><dd>Cites the source surveys and PyHydroGeophysX</dd></dl>
-      ${pl.blocked ? `<p class="lic-note" id="dep-why">Not deposited. A product made from these surveys may be used in the workspace but not published.</p><button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why">Deposit blocked by licence</button>` : `<button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why" data-tip="Design preview: nothing is deposited from this page.">Deposit to repository</button><p class="vh" id="dep-why">Unavailable: this is a design preview.</p>`}`, null);
+    const pl = productLicense(s);
+    html += rcard('pub', 'Publish', pl.blocked ? 'Blocked by license' : '', `<dl class="kv"><dt>Repository</dt><dd>HydroShare, as a new resource</dd><dt>Linked to</dt><dd>${s.surveys.map(v => v.id).join(', ')}</dd><dt>Contents</dt><dd>${esc(PROD[pid].name)} and its 1σ (NetCDF), provenance record (JSON), report (PDF)</dd><dt>Source licenses</dt><dd>${s.surveys.map(v => `<span class="mono">${v.id}</span> ${LIC[v.lic].name}, from ${esc(v.arc)}`).join('<br>')}</dd><dt>Product license</dt><dd>${esc(pl.text)}</dd><dt>Credit</dt><dd>Cites the source surveys and PyHydroGeophysX</dd></dl>
+      ${pl.blocked ? `<p class="lic-note" id="dep-why">Not deposited. A product made from these surveys may be used in the workspace but not published.</p><button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why">Deposit blocked by license</button>` : `<button class="btn btn-primary btn-full" type="button" aria-disabled="true" aria-describedby="dep-why" data-tip="Design preview: nothing is deposited from this page.">Deposit to repository</button><p class="vh" id="dep-why">Unavailable: this is a design preview.</p>`}`, null);
   }
   html += rcard('site', 'Site record', `${s.surveys.length} survey${s.surveys.length > 1 ? 's' : ''}`, `<table class="svtable"><caption class="vh">Surveys at this site</caption><tbody>${s.surveys.map(v => `<tr><td><span class="mono">${v.id}</span><br>${esc(METHOD[v.m].name)}</td><td>${esc(v.label)}<br><span class="svsrc">${esc(v.arc)} · ${LIC[v.lic].name}</span></td></tr>`).join('')}</tbody></table>
     <dl class="kv" style="margin-top:12px"><dt>Curated</dt><dd>${esc(s.meta)}</dd><dt>Headers</dt><dd>${esc(s.header)}</dd><dt>Quality</dt><dd>${QWORD[s.q]}, ${lc(MWORD[s.md])}</dd></dl>`, null);
