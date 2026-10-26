@@ -771,7 +771,7 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
 }
 
 /* ==================================================================
-   FIGURE MODE (#figure/agent-trace, #figure/entry)
+   FIGURE MODE (#figure/entry, #figure/agent-trace, #figure/interface)
    The same sample data laid out for print, reachable by URL only.
    Every rule is scoped to :root.figmode or .fig-panel, so the product views are untouched.
    Light theme only, fixed 862 px width, 12 px minimum type, no hover,
@@ -790,64 +790,67 @@ pre.json{margin:18px 0 0;padding:16px 18px;border-radius:12px;background:var(--s
 :root.figmode body{background:#ffffff}
 :root.figmode .topbar,:root.figmode .crumbs,:root.figmode .skip{display:none}
 :root.figmode *,:root.figmode *::before,:root.figmode *::after{animation:none!important;transition:none!important}
-.fig-panel{width:862px;margin:0 auto;padding:16px 18px 0;background:#ffffff;color:var(--text);font-size:13px;line-height:1.38}
+.fig-panel{width:862px;margin:0 auto;padding:11px 16px 0;background:#ffffff;color:var(--text);font-size:13px;line-height:1.36}
 .fig-foot{margin-top:8px;padding:6px 0 8px;border-top:1px solid var(--hairline);font-size:12px;color:var(--text-2)}
-/* agent trace */
-.fig-cols{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,7fr);column-gap:18px}
-.fig-left{display:flex;flex-direction:column;gap:14px;min-width:0}
-.fig-right{min-width:0;padding-left:18px;border-left:1px solid var(--hairline)}
-.fig-panel .ag-label{font-size:13px}
-.fig-panel .ag-hint{font-size:12px;text-align:left;flex-basis:100%}
-.fig-req{padding:10px 12px;border:1px solid var(--hairline-strong);border-radius:12px;font-size:13px;line-height:1.45}
-.fig-on{font-size:12px;font-weight:600;color:var(--accent)}
-.fig-src{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
-.fig-panel .pillbtn{font-size:12px;padding:3px 9px;cursor:default}
+.fig-panel > .fig-foot{margin-top:6px;padding:4px 0 6px}
+.fig-tag{margin-right:7px;font-size:13px;font-weight:700;color:var(--text)}
+/* combined (#figure/interface): panel (b) under panel (a), one footer for both */
+.fig-part + .fig-part{margin-top:10px;padding-top:9px;border-top:1px solid var(--hairline)}
+/* agent trace (Figure 6b): one column, the request under the header */
+.fig-panel .pillbtn{font-size:12px;padding:1px 8px;cursor:default}
 .fig-panel .pillbtn em{font-size:12px;color:var(--text-2)}
 .fig-panel .pillbtn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .fig-panel .pillbtn.on em,.fig-panel .pillbtn.req em{color:var(--accent);opacity:1}
-.fig-panel .pillbtn.skill.on svg,.fig-panel .pillbtn.req svg{opacity:1;width:11px;margin-left:-2px}
-.fig-panel .ag-list > div{grid-template-columns:minmax(0,1fr);gap:5px;padding:7px 10px}
-.fig-panel .ag-list .sk-m{padding-top:0;font-size:12px}
-.fig-panel .ag-chips{gap:4px}
-.fig-panel .ag-trace-h{font-size:13px;margin-bottom:8px}
+.fig-panel .pillbtn.req svg{opacity:1;width:11px;margin-left:-2px}
+.fig-panel .ag-trace-h{font-size:13px;gap:7px;margin-bottom:3px}
 .fig-panel .ag-trace-h .sub{font-size:12px;color:var(--text-2)}
-.fig-panel .trace li{padding-bottom:6px;gap:10px;grid-template-columns:20px minmax(0,1fr)}
-.fig-panel .trace li::after{left:9.5px;top:24px}
-.fig-panel .tdot{width:20px;height:20px}
-.fig-panel .tt{font-size:13px;padding-top:1px;align-items:baseline}
+.fig-reqline{margin-bottom:7px;font-size:13px;line-height:1.38;color:var(--text)}
+.fig-reqline b{font-weight:600}
+.fig-panel .trace li{padding-bottom:3px;gap:9px;grid-template-columns:18px minmax(0,1fr)}
+.fig-panel .trace li::after{left:8.5px;top:21px}
+.fig-panel .tdot{width:18px;height:18px}
+.fig-panel .tdot svg{width:10px;height:10px}
+.fig-panel .tt{font-size:13px;line-height:18px;padding-top:0;align-items:baseline}
 .fig-panel .tt em{font-size:12px}
-.fig-panel .tb{font-size:13px;margin-top:1px;line-height:1.38}
+.fig-panel .tb{font-size:13px;margin-top:0;line-height:1.36}
 .fig-panel .fig-quiet .tb{font-size:12.5px}
-.fig-panel .tq{margin-top:3px}
-.fig-panel .tsrc{font-size:12px}
-.fig-panel .tskill{font-size:12px;margin:1px 4px 1px 0}
-.fig-panel .tchip{font-size:12px}
+.fig-panel .tq{margin-top:2px}
+.fig-panel .tsrc{font-size:12px;margin-top:0}
+.fig-chips{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;margin:2px 0 3px}
+.fig-panel .tskill{margin:0;padding:0 8px;font-size:12px;line-height:1.5}
+.fig-def{margin-left:5px;font-size:12px;font-weight:400;color:var(--text-2)}
+.fig-panel .tt .fig-chips{margin:0 auto 0 9px}
+.fig-search{margin-left:5px}
+.fig-cite{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 12px;margin-top:2px}
+.fig-panel .fig-cite .tq,.fig-panel .fig-cite .tsrc{margin-top:0}
+.fig-panel .tchain{gap:2px}
+.fig-panel .tchip{font-size:12px;padding:0 4px}
 .fig-panel .tchain i{font-size:12px}
 .fig-panel .fig-strong .tt{font-weight:600;color:var(--text)}
 .fig-panel .fig-strong .tb{color:var(--text)}
 .fig-panel .fig-quiet .tt{font-weight:400;color:var(--text-2)}
 .fig-panel .fig-quiet .tdot{background:var(--surface);color:var(--text-2);box-shadow:inset 0 0 0 1.5px var(--text-2)}
 .fig-panel .fig-quiet .tskill{background:none;box-shadow:inset 0 0 0 1px var(--hairline-strong);color:var(--text-2)}
-.fig-vals{display:flex;align-items:flex-start;gap:10px;margin-top:2px}
-.fig-sample{flex:none;font-size:12px;font-weight:700;color:var(--text);padding:1px 8px;border:1.5px solid var(--text);border-radius:6px;letter-spacing:.01em}
-.fig-vlist{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;font-size:13px;color:var(--text-2)}
+.fig-vals{margin-top:1px}
+.fig-sample{display:inline-block;margin-left:8px;font-size:12px;font-weight:700;color:var(--text);padding:1px 8px;border:1.5px solid var(--text);border-radius:6px;letter-spacing:.01em}
+.fig-vlist{display:flex;flex-wrap:wrap;gap:0 16px;font-size:12.5px;color:var(--text-2)}
 .fig-vals b{font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
-.fig-gate{margin-top:5px}
+.fig-gate{display:flex;align-items:center;flex-wrap:wrap;gap:3px 9px;margin-top:3px}
 .fig-gate .pillbtn{padding:1px 8px}
-.fig-panel .tdep{margin:2px 0 0;font-size:12.5px;color:var(--text-2)}
+.fig-panel .fig-gate .tdep{margin:0;font-size:12.5px;color:var(--text-2)}
 .fig-panel .textlink{font-size:12.5px;font-weight:500}
 .fig-panel .tt .textlink{white-space:nowrap}
-/* entry (Figure 6a): where a researcher starts, built from the landing components */
-.fe-ask{padding:12px 16px;border:1px solid var(--hairline-strong);border-radius:14px;font:400 15px/1.45 var(--font-display);letter-spacing:-.005em;color:var(--text)}
-.fe-label{margin-top:14px;font-size:12.5px;font-weight:600;color:var(--text-2)}
-.fe-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:6px}
-.fe-card{display:flex;flex-direction:column;gap:2px;padding:10px 12px 11px;border:1px solid var(--hairline-strong);border-radius:12px}
+/* entry (Figure 6a): the five disciplines and the methods in the catalog, built from the landing components */
+.fe-label{font-size:12.5px;font-weight:600;color:var(--text-2)}
+.fe-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:5px}
+.fe-card{display:flex;flex-direction:column;gap:1px;padding:6px 10px 7px;border:1px solid var(--hairline-strong);border-radius:11px}
 .fe-card b{font:600 14px/1.25 var(--font-display);letter-spacing:-.01em}
-.fe-card span{font-size:12.5px;line-height:1.35;color:var(--text-2)}
+.fe-card span{font-size:12.5px;line-height:1.25;color:var(--text-2)}
 .fe-card.is-on{background:rgba(0,113,227,.12);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .fe-card.is-on b,.fe-card.is-on span{color:var(--accent)}
-.fe-methods{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.fe-methods .pillbtn{font-size:12.5px;padding:4px 11px}
+.fe-mrow{display:flex;flex-wrap:wrap;align-items:center;gap:5px 12px;margin-top:9px}
+.fe-methods{display:flex;flex-wrap:wrap;gap:6px}
+.fe-methods .pillbtn{font-size:12.5px;padding:2px 10px}
 </style>
 </head>
 <body>
@@ -2293,48 +2296,53 @@ function withDefaultConsole(fn) {
   Object.assign(ag, { ex: 0, tier: 'mid', rag: true, src: { lib: true, cat: true, pub: true }, skills: new Set(AGENT_EX[0].skills), out: new Set(OUTPUTS.map(o => o.k)), play: false });
   try { return fn(); } finally { Object.assign(ag, saved); }
 }
-function figAgentHTML() {
+/* Figure 6b: one full-width trace. The request sits under the header, and the retrieval sources and
+   skills sit inside the steps that use them. tag is the panel letter in the combined figure. */
+function figAgentBody(tag) {
   return withDefaultConsole(() => {
     const ex = AGENT_EX[ag.ex], tr = agentTrace();
     const steps = tr.steps.map(x => {
       const strong = FIG_STRONG.includes(x.title);
-      const body = x.title === 'Load skills' ? '' : !x.deliver ? x.body
-        : `<div class="fig-vals"><span class="fig-sample">Sample values</span><span class="fig-vlist">${x.vals.map(([k, v, sd, u]) => `<span>${esc(k)}: <b>${v}${sd ? ` ± ${sd}` : ''}</b> ${esc(u)}</span>`).join('')}</span></div>
-          <p class="fig-gate"><span class="pillbtn skill req">${ICON.check}Curator review<em>required</em></span></p>
-          <p class="tdep">${x.pub}</p>`;
-      return `<li class="t-${x.st} ${strong ? 'fig-strong' : 'fig-quiet'}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : '!'}</span><div class="tbody"><div class="tt"><span>${x.title}</span>${x.deliver ? `<a class="textlink" href="${x.href}">Open the result in the workspace ${ICON.arrow}</a>` : `<em>${esc(x.meta)}</em>`}</div>${body ? `<div class="tb">${body}</div>` : ''}</div></li>`;
+      const q = x.body.indexOf('<q class="tq">');
+      const body = x.title === 'Ground the request'
+          ? `<span class="fig-chips">${SOURCES.map(s => `<span class="pillbtn on">${esc(s.name)} <em>${fmtInt(s.chunks)}</em></span>`).join('')}<span class="fig-search">${q < 0 ? x.body : x.body.slice(0, q)}</span></span>${q < 0 ? '' : `<span class="fig-cite">${x.body.slice(q)}</span>`}`
+        : x.title === 'Load skills' || !x.deliver ? (x.title === 'Load skills' ? '' : x.body)
+        : `<div class="fig-vals"><span class="fig-vlist">${x.vals.map(([k, v, sd, u]) => `<span>${esc(k)}: <b>${v}${sd ? ` ± ${sd}` : ''}</b> ${esc(u)}</span>`).join('')}</span></div>
+          <p class="fig-gate"><span class="pillbtn skill req">${ICON.check}Curator review<em>required</em></span><span class="tdep">${x.pub}</span></p>`;
+      /* Load skills carries its chips on the title row; Deliver carries the sample label there. */
+      const skills = x.title === 'Load skills' ? `<span class="fig-chips">${ex.skills.filter(k => ag.skills.has(k)).map(k => `<span class="tskill">${esc(SKILL[k].name)}</span>`).join('')}<span class="fig-def">Procedures the agent reads when a task calls for them</span></span>` : '';
+      return `<li class="t-${x.st} ${strong ? 'fig-strong' : 'fig-quiet'}"><span class="tdot" aria-hidden="true">${x.st === 'ok' ? ICON.check : '!'}</span><div class="tbody"><div class="tt"><span>${x.title}${x.deliver ? '<span class="fig-sample">Sample values</span>' : ''}</span>${skills}${x.deliver ? `<a class="textlink" href="${x.href}">Open the result in the workspace ${ICON.arrow}</a>` : `<em>${esc(x.meta)}</em>`}</div>${body ? `<div class="tb">${body}</div>` : ''}</div></li>`;
     }).join('');
-    return `<article class="fig-panel fig-agent" aria-label="Figure: the agent's plan for one request, replayed with sample values">
-      <div class="fig-cols">
-        <div class="fig-left">
-          <div class="ag-group"><div class="ag-label">Request</div><p class="fig-req">${esc(ex.q)}</p></div>
-          <div class="ag-group"><div class="ag-label"><span>Retrieval (RAG)</span><span class="fig-on">On</span></div>
-            <div class="fig-src">${SOURCES.map(x => `<span class="pillbtn on">${esc(x.name)} <em>${fmtInt(x.chunks)}</em></span>`).join('')}</div></div>
-          <div class="ag-group"><div class="ag-label"><span>Skills</span><span class="ag-hint">Procedures the agent reads when a task calls for them</span></div>
-            <div class="ag-list">${SKILL_GROUPS.map(([m, label]) => `<div><span class="sk-m">${esc(label)}</span><span class="ag-chips">${SKILLS.filter(k => k.m === m).map(k => `<span class="pillbtn skill${ag.skills.has(k.k) ? ' on' : ''}">${ICON.check}${esc(k.name)}</span>`).join('')}</span></div>`).join('')}</div></div>
-        </div>
-        <div class="fig-right">
-          <div class="ag-trace-h"><span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Illustrative replay with sample values · nothing is computed</span><span class="linkbtn">Replay</span></div>
-          <ol class="trace">${steps}</ol>
-        </div>
-      </div>${FIG_FOOT}</article>`;
+    return `<div class="ag-trace-h">${tag ? `<b class="fig-tag">${tag}</b>` : ''}<span class="live" aria-hidden="true"></span><b>Agent trace</b><span class="sub">Illustrative replay with sample values · nothing is computed</span><span class="linkbtn">Replay</span></div>
+      <p class="fig-reqline"><b>Request:</b> “${esc(ex.q)}”</p>
+      <ol class="trace">${steps}</ol>`;
   });
 }
-/* Figure 6a: the request field, the five disciplines (Hydrology selected) and the five methods in the catalog.
+function figAgentHTML() {
+  return `<article class="fig-panel fig-agent" aria-label="Figure: the agent's plan for one request, replayed with sample values">${figAgentBody('')}${FIG_FOOT}</article>`;
+}
+/* Figure 6a: the five disciplines (Hydrology selected) and the five methods in the catalog.
    Short questions in each community's words; no sites, units or statuses. */
 const FIG_SHORT_Q = { geomorphology: 'Where is fresh rock?', hydrology: 'How much water is stored?', 'forest-ecology': 'How much water can roots reach?', biogeochemistry: 'How thick is the reactive zone?', 'natural-hazards': 'Is the regolith continuous?' };
 const FIG_METHODS = { ert: 'Electrical resistivity', srt: 'Seismic refraction', gpr: 'Ground-penetrating radar', em: 'Electromagnetics', bh: 'Borehole' };
-function figEntryHTML() {
-  return `<article class="fig-panel fig-entry" aria-label="Figure: where a researcher starts, a question in their own discipline">
-    <p class="fe-ask" aria-label="Request">${esc(AGENT_EX[0].q)}</p>
-    <p class="fe-label">Start from your discipline</p>
+function figEntryBody(tag) {
+  return `<p class="fe-label">${tag ? `<b class="fig-tag">${tag}</b>` : ''}Start from your discipline</p>
     <div class="fe-cards">${COMMUNITIES.map(c => `<div class="fe-card${c.id === 'hydrology' ? ' is-on' : ''}"${c.id === 'hydrology' ? ' aria-current="true"' : ''}><b>${esc(c.name)}</b><span>${esc(FIG_SHORT_Q[c.id])}</span></div>`).join('')}</div>
-    <p class="fe-label">Methods in the catalog</p>
-    <div class="fe-methods">${METHOD_KEYS.map(m => `<span class="pillbtn">${esc(FIG_METHODS[m])}</span>`).join('')}</div>${FIG_FOOT}</article>`;
+    <div class="fe-mrow"><p class="fe-label">Methods in the catalog</p><div class="fe-methods">${METHOD_KEYS.map(m => `<span class="pillbtn">${esc(FIG_METHODS[m])}</span>`).join('')}</div></div>`;
+}
+function figEntryHTML() {
+  return `<article class="fig-panel fig-entry" aria-label="Figure: where a researcher starts, a question in their own discipline">${figEntryBody('')}${FIG_FOOT}</article>`;
+}
+/* Figure 6, both panels at the same width with one shared footer. */
+function figInterfaceHTML() {
+  return `<article class="fig-panel fig-interface" aria-label="Figure: (a) where a researcher starts; (b) the agent's plan for one request, replayed with sample values">
+    <section class="fig-part fig-entry" aria-label="Panel a">${figEntryBody('(a)')}</section>
+    <section class="fig-part fig-agent" aria-label="Panel b">${figAgentBody('(b)')}</section>${FIG_FOOT}</article>`;
 }
 const FIGS = {
   'agent-trace': { title: 'agent trace', render: () => { $('#v-figure').innerHTML = figAgentHTML(); } },
-  entry: { title: 'entry', render: () => { $('#v-figure').innerHTML = figEntryHTML(); } }
+  entry: { title: 'entry', render: () => { $('#v-figure').innerHTML = figEntryHTML(); } },
+  interface: { title: 'interface', render: () => { $('#v-figure').innerHTML = figInterfaceHTML(); } }
 };
 
 

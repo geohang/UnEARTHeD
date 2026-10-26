@@ -1,8 +1,9 @@
-"""Capture the two figure-mode panels of index.html for print.
+"""Capture the figure-mode panels of index.html for print.
 
-A development tool: the page never loads it. It renders #figure/agent-trace
-and #figure/entry at 862 logical pixels wide and writes, for each panel, to
-figures/:
+A development tool: the page never loads it. It renders #figure/entry
+(panel a), #figure/agent-trace (panel b) and #figure/interface (both panels
+stacked, with one footer) at 862 logical pixels wide and writes, for each,
+to figures/:
 
   <name>.png  raster at a device scale factor of 3 (about 2,590 pixels across,
               enough for print at 6.5 inches; --scale raises it)
@@ -34,7 +35,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGE = (ROOT / "index.html").as_uri()
 OUT = ROOT / "figures"
 WIDTH = 862
-ROUTES = {"agent-trace": "#figure/agent-trace", "entry": "#figure/entry"}
+ROUTES = {"entry": "#figure/entry", "agent-trace": "#figure/agent-trace", "interface": "#figure/interface"}
 
 
 def png_size(path: Path) -> tuple[int, int]:
